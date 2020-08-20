@@ -1,0 +1,80 @@
+{
+  "name": "catcher",
+  "version": "0.0.1",
+  "description": "Проектная работа (игра) для Яндекс.Практикум",
+  "dependencies": {
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "3.9.1",
+    "@typescript-eslint/parser": "3.9.1",
+    "clean-webpack-plugin": "3.0.0",
+    "eslint": "7.7.0",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "ts-loader": "8.0.2",
+    "typescript": "3.9.7",
+    "webpack": "4.44.1"
+  },
+  "scripts": {
+    "build:prod": "webpack --mode=production",
+    "start": "webpack-dev-server",
+    "test": "jest",
+    "test:clear": "jest --clearCache",
+    "lint:all": "eslint ./src/**/*.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run lint:all"
+    }
+  },
+  "jest": {
+    "globals": {
+      "handlebars-jest": {
+        "helperDirs": [
+          "<rootDir>/src/helpers"
+        ],
+        "partialDirs": [
+          "<rootDir>/src/partials"
+        ],
+        "partialExtensions": [
+          ".hbs",
+          ".html"
+        ]
+      }
+    },
+    "roots": [
+      "<rootDir>/src/"
+    ],
+    "preset": "ts-jest",
+    "modulePaths": [
+      "./src/utils",
+      "./node_modules",
+      "<rootDir>/src"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "hbs"
+    ],
+    "transform": {
+      "^.+\\.js?$": "babel-jest",
+      "^.+\\.ts?$": "ts-jest",
+      "^.+\\.hbs$": "<rootDir>/src/utils/pre.ts",
+      ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/praktikum-beta-team/catcher"
+  },
+  "author": "https://github.com/praktikum-beta-team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/praktikum-beta-team/catcher/issues"
+  },
+  "homepage": "https://github.com/praktikum-beta-team/catcher#readme"
+}

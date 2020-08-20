@@ -1,0 +1,29 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".ts"]
+      }
+    }
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  }
+}
