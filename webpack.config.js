@@ -28,7 +28,17 @@ module.exports = {
       },
       {
         test: /\.(s*)css$/,
-        use: [MiniCss.loader, "css-loader", "sass-loader"],
+        use: [
+          MiniCss.loader,
+          "css-loader",
+          "sass-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: [autoprefixer],
+            },
+          },
+        ],
       },
     ],
   },
