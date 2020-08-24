@@ -2,6 +2,7 @@ const path = require("path");
 const MiniCss = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const autoprefixer = require("autoprefixer");
 
 module.exports = {
   entry: "./src/index.tsx",
