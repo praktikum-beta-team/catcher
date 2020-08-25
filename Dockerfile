@@ -1,6 +1,7 @@
 FROM node:12.18.3-alpine3.9 as build-stage
 WORKDIR /app
 COPY package*.json /app/
+ENV HUSKY_SKIP_INSTALL=1
 RUN npm install
 COPY ./ /app/
 RUN CI=true npm test
