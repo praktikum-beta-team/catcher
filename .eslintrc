@@ -23,15 +23,19 @@
       "error",
       "ignorePackages",
       {
-        "tsx": "never",
-        "scss": "never"
+        "ts": "never",
+        "tsx": "never"
       }
-    ]
+    ],
+    "react/prop-types": "off"
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".tsx", ".scss"]
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ]
       }
     },
     "react": {

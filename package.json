@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Проектная работа (игра) для Яндекс.Практикум",
   "dependencies": {
+    "bem-react-classname": "^1.2.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
@@ -30,6 +31,7 @@
     "jest": "26.4.2",
     "mini-css-extract-plugin": "0.10.0",
     "node-sass": "4.14.1",
+    "postcss-custom-properties": "^9.1.1",
     "postcss-loader": "3.0.0",
     "sass-loader": "9.0.3",
     "ts-jest": "26.2.0",
@@ -61,5 +63,9 @@
   "bugs": {
     "url": "https://github.com/praktikum-beta-team/catcher/issues"
   },
-  "homepage": "https://github.com/praktikum-beta-team/catcher#readme"
+  "homepage": "https://github.com/praktikum-beta-team/catcher#readme",
+  "browserslist": [
+    "> 1%",
+    "last 3 version"
+  ]
 }
