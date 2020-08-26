@@ -18,6 +18,7 @@ module.exports = {
     port: 3000,
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -28,12 +29,7 @@ module.exports = {
       },
       {
         test: /\.(s*)css$/,
-        use: [
-          MiniCss.loader,
-          "css-loader",
-          "postcss-loader",
-          "sass-loader"
-        ],
+        use: [MiniCss.loader, "css-loader", "postcss-loader", "sass-loader"],
       },
     ],
   },
