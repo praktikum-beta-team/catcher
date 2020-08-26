@@ -31,7 +31,8 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".tsx", ".scss"]
+        "paths": ["src"],
+        "extensions": [".ts", ".tsx", ".scss"]
       }
     },
     "react": {
