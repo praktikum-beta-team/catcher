@@ -1,8 +1,12 @@
-.wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: var(--common-background-secondary);
-  background-size: cover;
+.signup {
+  /* Элементы */
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--common-background-secondary);
+    background-size: cover;
+  }
 }

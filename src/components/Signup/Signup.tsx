@@ -9,7 +9,7 @@ export const Signup: FC = () => {
   const { push } = useHistory();
 
   return (
-    <div className="wrapper">
+    <div className="signup__wrapper">
       <Modal title="Регистрация">
         <Form>
           <div className="form-field">

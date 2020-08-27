@@ -4,8 +4,17 @@ import { createCn } from "bem-react-classname";
 import "./Avatar.scss";
 
 interface IAvatarProps {
+  /**
+   * Ссылка на изображение
+   */
   src?: string;
+  /**
+   * Альтернативный текст
+   */
   alt?: string;
+  /**
+   * Размер аватара
+   */
   size: "s" | "m" | "xl";
 }
 

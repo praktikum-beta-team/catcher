@@ -4,8 +4,10 @@ import { createCn } from "bem-react-classname";
 import "./Button.scss";
 
 interface IButtonProps {
+  /**
+   * Внешний вид кнопки
+   */
   view: "plain" | "action" | "pseudo";
-  to?: string;
 }
 
 export const Button: FC<IButtonProps & HTMLAttributes<HTMLButtonElement>> = (props) => {

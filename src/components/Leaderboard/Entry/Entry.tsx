@@ -3,8 +3,17 @@ import React, { FC } from "react";
 import { Avatar } from "../../index";
 
 interface IEntryProps {
+  /**
+   * Место в рейтинге
+   */
   place: number;
+  /**
+   * Имя игрока
+   */
   name: string;
+  /**
+   * Счет игрока
+   */
   score: number;
 }
 

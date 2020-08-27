@@ -4,6 +4,9 @@ import { createCn } from "bem-react-classname";
 import "./Input.scss";
 
 interface IInputProps {
+  /**
+   * Сообщение об ошибке
+   */
   error?: string;
 }
 
