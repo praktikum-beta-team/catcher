@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Header, Form, Input, Avatar, Button } from "../index";
+import { Header, Form, Input, AvatarInput, Button } from "../index";
 
 import "./Settings.scss";
 import mockData from "./mockData";
@@ -17,7 +17,7 @@ export const Settings: FC = () => {
             <h1 className="settings__title">Профиль</h1>
             <Form className="settings-form">
               <div className="settings-form__column">
-                <Avatar size="xl" />
+                <AvatarInput />
               </div>
               <div className="settings-form__column">
                 <div className="form-field">
