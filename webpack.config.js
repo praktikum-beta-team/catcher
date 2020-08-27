@@ -11,6 +11,7 @@ module.exports = {
     filename: "[name].[hash].bundle.js",
   },
   resolve: {
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
     extensions: [".tsx", ".ts", ".js"],
   },
   devServer: {
