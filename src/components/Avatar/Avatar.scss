@@ -1,0 +1,36 @@
+.avatar {
+  position: relative;
+  background-color: #ccc;
+  overflow: hidden;
+
+  /* Элементы */
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Модификаторы */
+
+  &_size {
+    @mixin avatar-size($size) {
+      width: $size;
+      height: $size;
+      border-radius: $size / 2;
+    }
+
+    &_s {
+      @include avatar-size(32px);
+    }
+
+    &_m {
+      @include avatar-size(40px);
+    }
+
+    &_xl {
+      @include avatar-size(220px);
+    }
+  }
+}

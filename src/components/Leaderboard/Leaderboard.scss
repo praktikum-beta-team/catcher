@@ -1,0 +1,50 @@
+.leaderboard {
+  /* Элементы */
+
+  &__wrapper {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 760px;
+  }
+
+  &__inner {
+    padding: 40px 44px 40px 68px;
+  }
+
+  &__title {
+    display: block;
+    margin: 0 0 40px;
+    font-size: 36px;
+    font-weight: normal;
+  }
+}
+
+.board {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+  border-width: 0 0 1px;
+  border-color: var(--common-border);
+  border-style: solid;
+
+  /* Элементы */
+
+  &__header {
+    border-width: 1px 0;
+    border-color: var(--common-border);
+    border-style: solid;
+  }
+
+  &__column-title {
+    text-align: left;
+    font-weight: normal;
+  }
+
+  &__cell {
+    padding: 12px 8px;
+  }
+
+  &__score {
+    font-weight: bold;
+  }
+}

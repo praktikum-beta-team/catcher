@@ -11,7 +11,7 @@
   <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 
-<body>
+<body class="body">
   <div id="root"></div>
   <% for (var js in htmlWebpackPlugin.files.js) { %>
   <script src="<%= htmlWebpackPlugin.files.js[js] %>"></script>

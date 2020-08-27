@@ -1,0 +1,16 @@
+.modal {
+  background-color: var(--common-background-primary);
+  padding: 30px;
+  width: 360px;
+  box-sizing: border-box;
+
+  /* Элементы */
+
+  &__header {
+    margin-bottom: 108px;
+  }
+
+  &__content {
+    margin-top: 13px;
+  }
+}
