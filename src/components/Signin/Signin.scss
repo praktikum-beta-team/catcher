@@ -1,12 +1,11 @@
+@import "styles/abstracts/placeholders";
+
 .signin {
   /* Элементы */
 
   &__wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @extend %flex-centered;
     min-height: 100vh;
     background-color: #222;
-    background-size: cover;
   }
 }

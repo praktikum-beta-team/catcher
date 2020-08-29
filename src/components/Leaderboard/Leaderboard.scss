@@ -1,3 +1,5 @@
+@import "styles/abstracts/mixins";
+
 .leaderboard {
   /* Элементы */
 
@@ -25,9 +27,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 40px;
-  border-width: 0 0 1px;
-  border-color: var(--common-border);
-  border-style: solid;
+  @include border-bottom();
 
   /* Элементы */
 

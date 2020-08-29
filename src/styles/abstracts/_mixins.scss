@@ -1,0 +1,11 @@
+@mixin border-bottom($width: 1px, $color: var(--common-border), $style: solid) {
+  border-width: 0 0 $width;
+  border-color: var(--common-border);
+  border-style: $style;
+}
+
+@mixin circle($size) {
+  width: $size;
+  height: $size;
+  border-radius: $size / 2;
+}

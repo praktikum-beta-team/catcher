@@ -1,4 +1,7 @@
+@import "styles/abstracts/mixins";
+
 .input {
+  $this: &;
   /* Элементы */
 
   &__control {
@@ -10,10 +13,7 @@
     margin-bottom: 5px;
     background: 0 0;
     color: currentColor;
-    border: 0;
-    border-width: 0 0 1px;
-    border-color: var(--common-border);
-    border-style: solid;
+    @include border-bottom;
     outline: none;
     font-size: 16px;
     font-family: inherit;
@@ -34,7 +34,7 @@
 
   /* Модификаторы */
 
-  &_invalid .input__control {
+  &_invalid #{$this}__control {
     border-color: var(--common-alert);
     border-width: 0 0 2px;
     padding-bottom: 0;

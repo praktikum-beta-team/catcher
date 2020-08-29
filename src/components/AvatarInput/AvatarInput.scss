@@ -1,17 +1,22 @@
-.avatar-input:hover::after {
-  content: "Изменить\0aфото\0aпрофиля";
-  position: absolute;
-  display: flex;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.45);
-  white-space: pre;
-  cursor: pointer;
-  backdrop-filter: blur(5px) saturate(70%);
-  text-align: center;
+@import "styles/abstracts/placeholders";
+
+.avatar-input {
+  $hover-overlay-opacity: 0.45;
+  $hover-text: "Изменить\0aфото\0aпрофиля";
+
+  &:hover::after {
+    @extend %flex-centered;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    white-space: pre;
+    content: $hover-text;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(0, 0, 0, $hover-overlay-opacity);
+    backdrop-filter: blur(5px) saturate(70%);
+    cursor: pointer;
+  }
 }

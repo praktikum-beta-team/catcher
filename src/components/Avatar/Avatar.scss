@@ -1,3 +1,5 @@
+@import "styles/abstracts/mixins";
+
 .avatar {
   position: relative;
   background-color: #ccc;
@@ -15,22 +17,16 @@
   /* Модификаторы */
 
   &_size {
-    @mixin avatar-size($size) {
-      width: $size;
-      height: $size;
-      border-radius: $size / 2;
-    }
-
     &_s {
-      @include avatar-size(32px);
+      @include circle(32px);
     }
 
     &_m {
-      @include avatar-size(40px);
+      @include circle(40px);
     }
 
     &_xl {
-      @include avatar-size(220px);
+      @include circle(220px);
     }
   }
 }
