@@ -33,7 +33,7 @@ export const Signup: FC = () => {
           <div className="form-field">
             <Button view="action">Зарегистрироваться</Button>
           </div>
-          <div className="ford-field">
+          <div className="form-field">
             <Button view="pseudo" onClick={() => push("/")}>
               Войти с паролем
             </Button>

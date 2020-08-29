@@ -21,7 +21,7 @@ export const Signin: FC = () => {
           <div className="form-field">
             <Button view="action">Войти</Button>
           </div>
-          <div className="ford-field">
+          <div className="form-field">
             <Button view="pseudo" onClick={() => push("/signup")}>
               Зарегистрироваться
             </Button>
