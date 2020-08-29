@@ -11,9 +11,8 @@ interface IButtonProps {
 }
 
 export const Button: FC<IButtonProps & HTMLAttributes<HTMLButtonElement>> = (props) => {
-  const cn = createCn("button");
   const { view, className, ...restButtonProps } = props;
-  const buttonClassName = cn({ view }) + (className ? ` ${className}` : "");
+  const cn = createCn("button", className);
 
-  return <button className={buttonClassName} {...restButtonProps} />;
+  return <button className={cn({ view })} {...restButtonProps} />;
 };

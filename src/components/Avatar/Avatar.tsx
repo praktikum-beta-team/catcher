@@ -20,11 +20,10 @@ interface IAvatarProps {
 
 export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props) => {
   const { src, alt, size, className, ...restAvatarProps } = props;
-  const cn = createCn("avatar");
-  const avatarClassName = cn({ size }) + (className ? ` ${className}` : "");
+  const cn = createCn("avatar", className);
 
   return (
-    <div className={avatarClassName} {...restAvatarProps}>
+    <div className={cn({ size })} {...restAvatarProps}>
       {src && <img className="avatar__image" src={src} alt={alt} />}
     </div>
   );
