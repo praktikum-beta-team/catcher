@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Header, Button } from "../index";
+import { Header, Button } from "components";
 import { Entry } from "./Entry";
 
 import "./Leaderboard.scss";

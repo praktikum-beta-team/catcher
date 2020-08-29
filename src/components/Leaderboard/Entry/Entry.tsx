@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Avatar } from "../../index";
+import { Avatar } from "components";
 
 interface IEntryProps {
   /**

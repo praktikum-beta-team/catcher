@@ -1,1 +1,1 @@
-export * from "./AvatarInput";
+export { AvatarInput } from "./AvatarInput";

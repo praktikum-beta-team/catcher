@@ -1,7 +1,7 @@
-export * from "./Input";
-export * from "./Button";
-export * from "./Form";
-export * from "./Modal";
-export * from "./Avatar";
-export * from "./AvatarInput";
-export * from "./Header";
+export { Input } from "./Input";
+export { Button } from "./Button";
+export { Form } from "./Form";
+export { Modal } from "./Modal";
+export { Avatar } from "./Avatar";
+export { AvatarInput } from "./AvatarInput";
+export { Header } from "./Header";

@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import { Signin } from "../Signin";
-import { Signup } from "../Signup";
-import { Settings } from "../Settings";
-import { Leaderboard } from "../Leaderboard";
+import { Signin } from "components/Signin";
+import { Signup } from "components/Signup";
+import { Settings } from "components/Settings";
+import { Leaderboard } from "components/Leaderboard";
 
 export const App: FC = () => (
   <BrowserRouter>

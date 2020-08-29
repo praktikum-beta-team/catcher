@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useHistory } from "react-router";
 
-import { Button, Input, Form, Modal } from "../index";
+import { Button, Input, Form, Modal } from "components";
 
 import "./Signin.scss";
 

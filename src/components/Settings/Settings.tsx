@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Header, Form, Input, AvatarInput, Button } from "../index";
+import { Header, Form, Input, AvatarInput, Button } from "components";
 
 import "./Settings.scss";
 import mockData from "./mockData";
