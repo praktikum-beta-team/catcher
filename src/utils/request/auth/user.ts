@@ -2,4 +2,4 @@ import { AUTH_USER } from "consts";
 
 import { request } from "../request";
 
-export const user = request(AUTH_USER, "GET");
+export const user = request<Record<string, unknown>>(AUTH_USER, "GET");

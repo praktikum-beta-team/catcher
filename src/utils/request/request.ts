@@ -2,7 +2,7 @@ import axios, { Method, AxiosResponse, AxiosError } from "axios";
 
 import { BASE_URL } from "consts";
 
-export function request<T>(rqUrl: string, method: Method = "POST") {
+export function request<T>(reqUrl: string, method: Method = "POST") {
   return async (
     data: T,
     cb: (data: AxiosResponse) => void,
@@ -10,9 +10,11 @@ export function request<T>(rqUrl: string, method: Method = "POST") {
   ): Promise<void | AxiosResponse> => {
     try {
       const res = await axios({
-        method,
-        url: `${BASE_URL}${rqUrl}`,
         data,
+        method,
+        url: reqUrl,
+        baseURL: BASE_URL,
+        withCredentials: true,
       });
       return cb(res);
     } catch (e) {

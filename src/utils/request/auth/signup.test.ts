@@ -1,15 +1,10 @@
-import { signUp } from "./signup";
+import { auth } from "utils/request";
+
+import { info } from "./models/user";
 
 it("signup", async () => {
-  await signUp(
-    {
-      firstName: "qw",
-      secondName: "qw",
-      login: "qw",
-      email: "qw@mail.ru",
-      password: "qw",
-      phone: "+7495777777",
-    },
+  await auth.signup(
+    info,
     (data) => {
       expect(data.status).toEqual(200);
     },

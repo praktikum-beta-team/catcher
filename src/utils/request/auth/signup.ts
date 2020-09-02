@@ -2,7 +2,7 @@ import { AUTH_SIGNUP } from "consts";
 
 import { request } from "../request";
 
-interface ISignUp {
+interface ISignup {
   firstName: string;
   secondName: string;
   login: string;
@@ -11,4 +11,4 @@ interface ISignUp {
   phone: string;
 }
 
-export const signUp = request<ISignUp>(AUTH_SIGNUP);
+export const signup = request<ISignup>(AUTH_SIGNUP);
