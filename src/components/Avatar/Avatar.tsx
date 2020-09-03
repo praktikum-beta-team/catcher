@@ -1,5 +1,5 @@
 import React, { FC, HTMLAttributes } from "react";
-import { createCn } from "bem-react-classname";
+import { cn } from "@bem-react/classname";
 
 import "./Avatar.scss";
 
@@ -18,12 +18,13 @@ interface IAvatarProps {
   size: "s" | "m" | "xl";
 }
 
+const cnAvatar = cn("avatar");
+
 export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props) => {
   const { src, alt, size, className, ...restAvatarProps } = props;
-  const cn = createCn("avatar", className);
 
   return (
-    <div className={cn({ size })} {...restAvatarProps}>
+    <div className={cnAvatar({ size }, [className])} {...restAvatarProps}>
       {src && <img className="avatar__image" src={src} alt={alt} />}
     </div>
   );

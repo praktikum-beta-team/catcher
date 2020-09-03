@@ -1,5 +1,5 @@
 import React, { FC, HTMLAttributes } from "react";
-import { createCn } from "bem-react-classname";
+import { cn } from "@bem-react/classname";
 
 import "./Button.scss";
 
@@ -10,9 +10,10 @@ interface IButtonProps {
   view: "plain" | "action" | "pseudo";
 }
 
+const cnButton = cn("button");
+
 export const Button: FC<IButtonProps & HTMLAttributes<HTMLButtonElement>> = (props) => {
   const { view, className, ...restButtonProps } = props;
-  const cn = createCn("button", className);
 
-  return <button className={cn({ view })} {...restButtonProps} />;
+  return <button className={cnButton({ view }, [className])} {...restButtonProps} />;
 };

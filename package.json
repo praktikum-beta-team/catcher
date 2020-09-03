@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Проектная работа (игра) для Яндекс.Практикум",
   "dependencies": {
-    "bem-react-classname": "^1.2.1",
+    "@bem-react/classname": "^1.5.8",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-router": "^5.2.0",
