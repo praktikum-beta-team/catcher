@@ -1,33 +1,21 @@
 import React, { FC } from "react";
-import { useHistory } from "react-router";
 
-import { Button, Input, Form, Modal } from "components";
+import { cn } from "helpers/classname";
+import { Modal } from "components/UI";
+import { SigninForm as Form } from "components/SigninForm";
 
 import "./Signin.scss";
 
-export const Signin: FC = () => {
-  const { push } = useHistory();
-
-  return (
-    <div className="signin__wrapper">
-      <Modal title="Вход">
-        <Form>
-          <div className="form-field">
-            <Input placeholder="Введите логин" />
-          </div>
-          <div className="form-field">
-            <Input type="password" placeholder="Введите пароль" />
-          </div>
-          <div className="form-field">
-            <Button view="action">Войти</Button>
-          </div>
-          <div className="form-field">
-            <Button view="pseudo" onClick={() => push("/signup")}>
-              Зарегистрироваться
-            </Button>
-          </div>
-        </Form>
-      </Modal>
-    </div>
-  );
+const TEXT = {
+  TITLE: "Вход",
 };
+
+const cnSignin = cn("signin");
+
+export const Signin: FC = () => (
+  <div className={cnSignin("wrapper")}>
+    <Modal title={TEXT.TITLE}>
+      <Form />
+    </Modal>
+  </div>
+);

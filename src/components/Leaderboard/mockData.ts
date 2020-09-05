@@ -1,7 +1,7 @@
 export default [
   {
-    name: "Константин Константинопольский",
-    avatar: null,
+    name: "Дэн",
+    avatar: "https://bit.ly/dan-abramov",
     score: 1500,
   },
   {

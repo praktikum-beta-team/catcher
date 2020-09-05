@@ -1,0 +1,11 @@
+.settings-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  /* Элементы */
+
+  &__column {
+    flex-basis: 50%;
+  }
+}

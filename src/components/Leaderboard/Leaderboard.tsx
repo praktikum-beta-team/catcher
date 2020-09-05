@@ -1,36 +1,52 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 
-import { Header, Button } from "components";
-import { Entry } from "./Entry";
+import { cn } from "helpers/classname";
+import { Header, Button, Loading } from "components/UI";
+import { Board, BoardEntries } from "components/Board";
 
 import "./Leaderboard.scss";
 import mockData from "./mockData";
 
+const TEXT = {
+  TITLE: "Лучшие игроки",
+  CALL_TO_ACTION: "Я могу больше!",
+};
+
+const cnLeaderboard = cn("leaderboard");
+
+const loadEntries = (): Promise<BoardEntries> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(mockData);
+    }, 1500);
+  });
+
 export const Leaderboard: FC = () => {
-  const boardEntries = mockData.map((entry, index) => (
-    <Entry key={index} place={index + 1} {...entry} />
-  ));
+  const [loading, setLoading] = useState(true);
+  const [entries, setEntries] = useState<BoardEntries>([]);
+
+  useEffect(() => {
+    loadEntries().then((data) => {
+      setEntries(data);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <>
       <Header />
-      <div className="leaderboard">
-        <div className="leaderboard__wrapper">
-          <div className="leaderboard__inner">
-            <h1 className="leaderboard__title">Лучшие игроки</h1>
-            <table className="board">
-              <thead className="board__header">
-                <tr>
-                  <th></th>
-                  <th className="board__cell board__column-title" colSpan={2}>
-                    Игрок
-                  </th>
-                  <th className="board__cell board__column-title">Счет</th>
-                </tr>
-              </thead>
-              <tbody>{boardEntries}</tbody>
-            </table>
-            <Button view="action">Я могу больше!</Button>
+      <div className={cnLeaderboard()}>
+        <div className={cnLeaderboard("wrapper")}>
+          <div className={cnLeaderboard("inner")}>
+            <h1 className={cnLeaderboard("title")}>{TEXT.TITLE}</h1>
+            {loading ? (
+              <Loading />
+            ) : (
+              <>
+                <Board entries={entries} />
+                <Button view="action">{TEXT.CALL_TO_ACTION}</Button>
+              </>
+            )}
           </div>
         </div>
       </div>
