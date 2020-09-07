@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import { cn } from "helpers/classname";
 import { Header } from "components/UI";
-import { SettingsForm as Form } from "components/SettingsForm";
+import { SettingsForm } from "components/SettingsForm";
 
 import "./Settings.scss";
 
@@ -15,12 +15,10 @@ const cnSettings = cn("settings");
 export const Settings: FC = () => (
   <>
     <Header />
-    <div className={cnSettings()}>
-      <div className={cnSettings("wrapper")}>
-        <div className={cnSettings("inner")}>
-          <h1 className={cnSettings("title")}>{TEXT.TITLE}</h1>
-          <Form />
-        </div>
+    <div className={cnSettings("wrapper")}>
+      <div className={cnSettings("inner")}>
+        <h1 className={cnSettings("title")}>{TEXT.TITLE}</h1>
+        <SettingsForm />
       </div>
     </div>
   </>
