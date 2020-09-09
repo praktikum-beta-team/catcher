@@ -24,8 +24,7 @@
       "ignorePackages",
       {
         "ts": "never",
-        "tsx": "never",
-        "scss": "never"
+        "tsx": "never"
       }
     ],
     "react/prop-types": "off",
