@@ -2,7 +2,6 @@ const path = require("path");
 const MiniCss = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const autoprefixer = require("autoprefixer");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -20,6 +19,7 @@ module.exports = {
     port: 3000,
     hot: true,
     open: true,
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -30,17 +30,7 @@ module.exports = {
       },
       {
         test: /\.(s*)css$/,
-        use: [
-          MiniCss.loader,
-          "css-loader",
-          "sass-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              plugins: [autoprefixer],
-            },
-          },
-        ],
+        use: [MiniCss.loader, "css-loader", "postcss-loader", "sass-loader"],
       },
     ],
   },

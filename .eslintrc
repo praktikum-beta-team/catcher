@@ -28,6 +28,7 @@
         "scss": "never"
       }
     ],
+    "react/prop-types": "off",
     "class-methods-use-this": [
       "error",
       {
@@ -50,6 +51,7 @@
   "settings": {
     "import/resolver": {
       "node": {
+        "moduleDirectory": ["node_modules", "src/"],
         "paths": ["src"],
         "extensions": [".ts", ".tsx", ".scss"]
       }

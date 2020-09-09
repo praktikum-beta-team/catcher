@@ -1,0 +1,7 @@
+.form {
+  &__error {
+    display: block;
+    margin-bottom: 20px;
+    color: var(--common-alert);
+  }
+}

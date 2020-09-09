@@ -1,0 +1,7 @@
+@import "styles/abstracts/placeholders";
+
+.signin {
+  @extend %flex-centered;
+  min-height: 100vh;
+  background-color: #222;
+}

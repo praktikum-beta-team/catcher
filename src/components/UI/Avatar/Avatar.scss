@@ -1,0 +1,28 @@
+@import "styles/abstracts/mixins";
+
+.avatar {
+  position: relative;
+  background-color: #ccc;
+  background: {
+    size: cover;
+    repeat: no-repeat;
+    position: center;
+  }
+  overflow: hidden;
+
+  /* Модификаторы */
+
+  &_size {
+    &_s {
+      @include circle(32px);
+    }
+
+    &_m {
+      @include circle(40px);
+    }
+
+    &_xl {
+      @include circle(220px);
+    }
+  }
+}
