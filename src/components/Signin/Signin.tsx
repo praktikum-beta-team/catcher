@@ -13,7 +13,7 @@ const TEXT = {
 const cnSignin = cn("signin");
 
 export const Signin: FC = () => (
-  <div className={cnSignin("wrapper")}>
+  <div className={cnSignin()}>
     <Modal title={TEXT.TITLE}>
       <SigninForm />
     </Modal>

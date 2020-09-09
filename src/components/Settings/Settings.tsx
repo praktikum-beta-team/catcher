@@ -15,7 +15,7 @@ const cnSettings = cn("settings");
 export const Settings: FC = () => (
   <>
     <Header />
-    <div className={cnSettings("wrapper")}>
+    <div className={cnSettings()}>
       <div className={cnSettings("inner")}>
         <h1 className={cnSettings("title")}>{TEXT.TITLE}</h1>
         <SettingsForm />

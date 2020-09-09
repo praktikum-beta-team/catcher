@@ -36,18 +36,16 @@ export const Leaderboard: FC = () => {
     <>
       <Header />
       <div className={cnLeaderboard()}>
-        <div className={cnLeaderboard("wrapper")}>
-          <div className={cnLeaderboard("inner")}>
-            <h1 className={cnLeaderboard("title")}>{TEXT.TITLE}</h1>
-            {loading ? (
-              <Loading />
-            ) : (
-              <>
-                <Board entries={entries} />
-                <Button view="action">{TEXT.CALL_TO_ACTION}</Button>
-              </>
-            )}
-          </div>
+        <div className={cnLeaderboard("inner")}>
+          <h1 className={cnLeaderboard("title")}>{TEXT.TITLE}</h1>
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              <Board entries={entries} />
+              <Button view="action">{TEXT.CALL_TO_ACTION}</Button>
+            </>
+          )}
         </div>
       </div>
     </>

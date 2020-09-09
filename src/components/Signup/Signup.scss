@@ -1,11 +1,7 @@
 @import "styles/abstracts/placeholders";
 
 .signup {
-  /* Элементы */
-
-  &__wrapper {
-    @extend %flex-centered;
-    min-height: 100vh;
-    background-color: var(--common-background-secondary);
-  }
+  @extend %flex-centered;
+  min-height: 100vh;
+  background-color: var(--common-background-secondary);
 }
