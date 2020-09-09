@@ -22,7 +22,7 @@
 - Redux,
 - Canvas,
 - TypeScript,
-- SASS,
+- SCSS,
 - Webpack,
 - ESLint,
 - Jest,
