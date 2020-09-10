@@ -1,39 +1,36 @@
 import React, { Component, ErrorInfo } from "react";
 
-/**
- * Пока реализован как классовый компонент,
- * в следующих спринтах возможно нужно будет написать хук (или хук и хок)
- */
-
-interface IErrorBoundaryState {
-  hasError: boolean;
-  error?: Error;
+interface IErrorHandlerState {
+  error: null | Error;
   errorInfo?: ErrorInfo;
 }
 
-export class ErrorBoundary extends Component {
-  state: IErrorBoundaryState = {
-    hasError: false,
-  };
+const TEXT = {
+  TITLE: "Что-то пошло не так",
+};
 
-  static getDerivedStateFromError(error: Error): Partial<IErrorBoundaryState> {
-    return { hasError: true, error };
-  }
+export class ErrorBoundary extends Component {
+  state: IErrorHandlerState = {
+    error: null,
+  };
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     this.setState({
+      error,
       errorInfo,
     });
   }
 
   render(): React.ReactNode {
-    if (this.state.hasError) {
+    const { error, errorInfo } = this.state;
+
+    if (error) {
       return (
         <>
-          <h1>Что-то пошло не так</h1>
+          <h1>{TEXT.TITLE}</h1>
           <details>
-            <p>{this.state.error && this.state.error.toString()}</p>
-            <p>{this.state.errorInfo && this.state.errorInfo.componentStack}</p>
+            <summary>{error && error.toString()}</summary>
+            {errorInfo && errorInfo.componentStack}
           </details>
         </>
       );
