@@ -6,23 +6,29 @@ import { ErrorBoundary } from "./ErrorBoundary";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("ErrorHandler", () => {
+describe("ErrorBoundary", () => {
   const Child = () => null;
-  const wrapper = shallow(
-    <ErrorBoundary>
-      <Child />
-    </ErrorBoundary>
-  );
-  const error = new Error("Foo");
-  const throwError = () => {
-    wrapper.find(Child).simulateError(error);
-  };
 
-  it("Перехватывает ошибку", () => {
-    expect(throwError).not.toThrow();
+  it("Выводит дочерние компоненты, если исключение не выброшено", () => {
+    const wrapper = shallow(
+      <ErrorBoundary>
+        <Child />
+      </ErrorBoundary>
+    );
+
+    expect(wrapper.find(Child).exists()).toBe(true);
   });
 
-  it("Выводит текст ошибки", () => {
-    expect(wrapper.find("summary").text()).toEqual(error.toString());
+  it("вызывает componentDidCatch, если выброшено исключение", () => {
+    const wrapper = shallow(
+      <ErrorBoundary>
+        <Child />
+      </ErrorBoundary>
+    );
+
+    jest.spyOn(ErrorBoundary.prototype, "componentDidCatch");
+    wrapper.find(Child).simulateError(new Error());
+
+    expect(ErrorBoundary.prototype.componentDidCatch).toHaveBeenCalledTimes(1);
   });
 });

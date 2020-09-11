@@ -23,6 +23,7 @@ export class ErrorBoundary extends Component {
 
   render(): React.ReactNode {
     const { error, errorInfo } = this.state;
+    const { children } = this.props;
 
     if (error) {
       return (
@@ -36,6 +37,6 @@ export class ErrorBoundary extends Component {
       );
     }
 
-    return this.props.children;
+    return children;
   }
 }
