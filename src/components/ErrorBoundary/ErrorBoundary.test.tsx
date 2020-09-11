@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe("ErrorBoundary", () => {
   const Child = () => null;
 
-  it("Выводит дочерние компоненты, если исключение не выброшено", () => {
+  it("выводит дочерние компоненты, если исключение не выброшено", () => {
     const wrapper = shallow(
       <ErrorBoundary>
         <Child />

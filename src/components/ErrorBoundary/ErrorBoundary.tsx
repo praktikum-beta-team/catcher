@@ -1,6 +1,6 @@
 import React, { Component, ErrorInfo } from "react";
 
-interface IErrorHandlerState {
+interface IErrorBoundaryState {
   error: null | Error;
   errorInfo?: ErrorInfo;
 }
@@ -10,7 +10,7 @@ const TEXT = {
 };
 
 export class ErrorBoundary extends Component {
-  state: IErrorHandlerState = {
+  state: IErrorBoundaryState = {
     error: null,
   };
 
