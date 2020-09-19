@@ -45,14 +45,22 @@
           "componentWillUnmount"
         ]
       }
-    ]
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "camelcase": "off"
   },
   "settings": {
     "import/resolver": {
       "node": {
         "moduleDirectory": ["node_modules", "src/"],
         "paths": ["src"],
-        "extensions": [".ts", ".tsx", ".scss"]
+        "extensions": [".ts", ".tsx"]
       }
     },
     "react": {
