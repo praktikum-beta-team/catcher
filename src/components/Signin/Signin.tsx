@@ -1,10 +1,13 @@
 import React, { FC } from "react";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
+import { isAuthenticatedSelector } from "services/auth/selectors";
 import { cn } from "helpers/classname";
 import { Modal } from "components/UI";
 import { SigninForm } from "components/SigninForm";
 
-import "./Signin.scss";
+import "./Signin.css";
 
 const TEXT = {
   TITLE: "Вход",
@@ -12,10 +15,16 @@ const TEXT = {
 
 const cnSignin = cn("signin");
 
-export const Signin: FC = () => (
-  <div className={cnSignin()}>
-    <Modal title={TEXT.TITLE}>
-      <SigninForm />
-    </Modal>
-  </div>
-);
+export const Signin: FC = () => {
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
+
+  return isAuthenticated ? (
+    <Redirect to="/leaderboard" />
+  ) : (
+    <div className={cnSignin()}>
+      <Modal title={TEXT.TITLE}>
+        <SigninForm />
+      </Modal>
+    </div>
+  );
+};

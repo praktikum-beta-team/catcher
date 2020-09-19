@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { Form, AvatarInput, Input, Button, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
 
-import "./SettingsForm.scss";
+import "./SettingsForm.css";
 import mockData from "./mockData";
 
 const TEXT = {

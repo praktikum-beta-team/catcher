@@ -3,7 +3,7 @@ import React, { FC, useRef, HTMLProps, ChangeEvent, useState } from "react";
 import { cn } from "helpers/classname";
 import { Avatar } from "components/UI";
 
-import "./AvatarInput.scss";
+import "./AvatarInput.css";
 
 const MIME_TYPES = "image/*";
 

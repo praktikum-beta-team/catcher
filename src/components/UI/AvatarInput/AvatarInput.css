@@ -15,7 +15,7 @@
     cursor: pointer;
   }
 
-  &:hover #{$this}__overlay {
+  &:hover $(this)__overlay {
     display: flex;
   }
 

@@ -2,7 +2,7 @@ import React, { FC, HTMLProps } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./Loading.scss";
+import "./Loading.css";
 
 const TEXT = {
   LOADING: "Загрузка...",

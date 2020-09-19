@@ -2,7 +2,7 @@ import React, { FC, HTMLProps } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./Header.scss";
+import "./Header.css";
 
 const cnHeader = cn("header");
 

@@ -1,8 +1,8 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes, FC } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./Button.scss";
+import "./Button.css";
 
 interface IButtonProps {
   /**
@@ -17,7 +17,7 @@ interface IButtonProps {
 
 const cnButton = cn("button");
 
-export const Button: FC<IButtonProps & Omit<HTMLAttributes<HTMLButtonElement>, "width">> = (
+export const Button: FC<IButtonProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "width">> = (
   props
 ) => {
   const { children, view, width, className, ...restButtonProps } = props;

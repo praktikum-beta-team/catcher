@@ -4,7 +4,7 @@ import { cn } from "helpers/classname";
 import { Header } from "components/UI";
 import { SettingsForm } from "components/SettingsForm";
 
-import "./Settings.scss";
+import "./Settings.css";
 
 export const TEXT = {
   TITLE: "Профиль",

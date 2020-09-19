@@ -29,8 +29,8 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(s*)css$/,
-        use: [MiniCss.loader, "css-loader", "postcss-loader", "sass-loader"],
+        test: /\.css$/,
+        use: [MiniCss.loader, "css-loader", "postcss-loader"],
       },
     ],
   },

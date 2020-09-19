@@ -4,7 +4,7 @@ import { cn } from "helpers/classname";
 import { Header, Button, Loading } from "components/UI";
 import { Board, BoardEntries } from "components/Board";
 
-import "./Leaderboard.scss";
+import "./Leaderboard.css";
 import mockData from "./mockData";
 
 const TEXT = {

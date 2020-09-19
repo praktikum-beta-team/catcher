@@ -2,7 +2,7 @@ import React, { FC, HTMLProps } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./Modal.scss";
+import "./Modal.css";
 
 interface IModalProps {
   /**

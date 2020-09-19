@@ -2,7 +2,7 @@ import React, { FC, HTMLProps } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./Form.scss";
+import "./Form.css";
 
 interface IFormProps {
   /**

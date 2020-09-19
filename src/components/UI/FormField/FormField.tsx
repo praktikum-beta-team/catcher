@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./FormField.scss";
+import "./FormField.css";
 
 const cnFormField = cn("form-field");
 

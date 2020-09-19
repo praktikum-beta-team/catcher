@@ -2,7 +2,7 @@ import React, { FC, HTMLAttributes } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./Avatar.scss";
+import "./Avatar.css";
 
 const DEFAULT_SRC = "https://api.adorable.io/avatars/220/abott@adorable.png"; // В дальнейшем заменим на собственное изображение
 

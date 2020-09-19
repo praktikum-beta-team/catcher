@@ -1,10 +1,8 @@
-@import "styles/abstracts/mixins";
-
 .board {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 40px;
-  @include border-bottom();
+  @mixin border-bottom;
 
   /* Элементы */
 

@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { cn } from "helpers/classname";
 import { BoardEntry as Entry, IBoardEntryProps } from "./Entry";
 
-import "./Board.scss";
+import "./Board.css";
 
 const TEXT = {
   PLAYER: "Игрок",

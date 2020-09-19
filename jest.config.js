@@ -7,6 +7,6 @@ module.exports = {
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
   moduleNameMapper: {
-    "\\.scss$": "identity-obj-proxy"
-  }
+    "\\.css$": "identity-obj-proxy",
+  },
 };

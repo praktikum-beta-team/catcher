@@ -4,7 +4,7 @@ import { cn } from "helpers/classname";
 import { Modal } from "components/UI";
 import { SignupForm } from "components/SignupForm";
 
-import "./Signup.scss";
+import "./Signup.css";
 
 const TEXT = {
   TITLE: "Регистрация",
