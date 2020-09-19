@@ -1,4 +1,4 @@
-import { AUTH_SIGNIN } from "consts";
+import { AUTH_SIGNIN } from "constants/api";
 
 import { request } from "../request";
 

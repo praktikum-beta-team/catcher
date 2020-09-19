@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 
 import { Button, Input, Form, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
+import { ROUTES } from "constants/routes";
 
 const TEXT = {
   FIRST_NAME: "Имя",
@@ -99,7 +100,7 @@ export const SignupForm: FC = () => {
         </Button>
       </FormField>
       <FormField>
-        <Button view="pseudo" width="max" onClick={() => push("/")}>
+        <Button view="pseudo" width="max" type="button" onClick={() => push(ROUTES.SIGNIN)}>
           {TEXT.SIGNIN}
         </Button>
       </FormField>

@@ -1,4 +1,4 @@
-import { AUTH_LOGOUT } from "consts";
+import { AUTH_LOGOUT } from "constants/api";
 
 import { request } from "../request";
 
