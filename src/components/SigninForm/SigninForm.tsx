@@ -60,7 +60,7 @@ export const SigninForm: FC = () => {
           width="max"
           type="button"
           onClick={() => {
-            push(ROUTES.SIGNIN);
+            push(ROUTES.SIGNUP);
           }}
         >
           {TEXT.REGISTER}
