@@ -1,9 +1,14 @@
 import React, { FC } from "react";
 import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button, Input, Form, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
 import { ROUTES } from "constants/routes";
+import { errorSelector } from "services/auth/selectors";
+import { signupRequest } from "services/auth/actions";
+import { clearAuthError } from "services/auth/slice";
+import { ISignupRequest } from "utils/request/auth";
 
 const TEXT = {
   FIRST_NAME: "Имя",
@@ -12,50 +17,54 @@ const TEXT = {
   EMAIL: "Адрес электронной почты",
   PASSWORD: "Придумайте пароль",
   PASSWORD_CONFIRM: "Повторите пароль",
+  PHONE: "Номер мобильного телефона",
   SUBMIT: "Зарегистрироваться",
   SIGNIN: "Войти с паролем",
 };
 
-interface ISignupForm {
-  firstName: string;
-  secondName: string;
-  login: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
+interface ISignupForm extends ISignupRequest {
+  password_confirm: string;
 }
 
 const initialValues: ISignupForm = {
-  firstName: "",
-  secondName: "",
+  first_name: "",
+  second_name: "",
   login: "",
   email: "",
   password: "",
-  passwordConfirm: "",
-};
-
-const cb = (data: ISignupForm) => {
-  console.log(data);
+  password_confirm: "",
+  phone: "",
 };
 
 export const SignupForm: FC = () => {
   const { push } = useHistory();
   const [data, handleSubmit, handleChange] = useForm(initialValues);
+  const error = useSelector(errorSelector);
+  const dispatch = useDispatch();
+
+  const onSubmit = (values: ISignupForm) => {
+    dispatch(signupRequest(values));
+  };
+
+  const handleSigninButtonClick = () => {
+    dispatch(clearAuthError());
+    push(ROUTES.SIGNIN);
+  };
 
   return (
-    <Form onSubmit={handleSubmit(cb)}>
+    <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
         <Input
-          name="firstName"
-          value={data.firstName}
+          name="first_name"
+          value={data.first_name}
           placeholder={TEXT.FIRST_NAME}
           onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="secondName"
-          value={data.secondName}
+          name="second_name"
+          value={data.second_name}
           placeholder={TEXT.SECOND_NAME}
           onChange={handleChange}
         />
@@ -79,18 +88,23 @@ export const SignupForm: FC = () => {
         />
       </FormField>
       <FormField>
+        <Input name="phone" value={data.phone} placeholder={TEXT.PHONE} onChange={handleChange} />
+      </FormField>
+      <FormField>
         <Input
           name="password"
           value={data.password}
           placeholder={TEXT.PASSWORD}
+          type="password"
           onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="passwordConfirm"
-          value={data.passwordConfirm}
+          name="password_confirm"
+          value={data.password_confirm}
           placeholder={TEXT.PASSWORD_CONFIRM}
+          type="password"
           onChange={handleChange}
         />
       </FormField>
@@ -100,7 +114,7 @@ export const SignupForm: FC = () => {
         </Button>
       </FormField>
       <FormField>
-        <Button view="pseudo" width="max" type="button" onClick={() => push(ROUTES.SIGNIN)}>
+        <Button view="pseudo" width="max" type="button" onClick={handleSigninButtonClick}>
           {TEXT.SIGNIN}
         </Button>
       </FormField>

@@ -2,7 +2,7 @@ import { AUTH_USER } from "constants/api";
 
 import { request } from "../request";
 
-interface IUserResponse {
+export interface IUserResponse {
   id: number;
   first_name: string;
   second_name: string;

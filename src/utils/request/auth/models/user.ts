@@ -3,8 +3,8 @@ const password = "qw";
 
 export const creditionals = { login, password };
 export const info = {
-  firstName: "qw",
-  secondName: "qw",
+  first_name: "qw",
+  second_name: "qw",
   login,
   email: "qw@mail.ru",
   password,

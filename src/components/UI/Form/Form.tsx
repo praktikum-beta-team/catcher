@@ -8,7 +8,7 @@ interface IFormProps {
   /**
    * Сообщение об ошибке
    */
-  error?: string;
+  error?: null | string;
 }
 
 const cnForm = cn("form");

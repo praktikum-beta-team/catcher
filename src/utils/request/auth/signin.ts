@@ -2,9 +2,13 @@ import { AUTH_SIGNIN } from "constants/api";
 
 import { request } from "../request";
 
-interface ISignin {
+export interface ISigninRequest {
   login: string;
   password: string;
 }
 
-export const signin = request<ISignin>(AUTH_SIGNIN);
+interface ISigninError {
+  reason: string;
+}
+
+export const signin = request<ISigninRequest, Record<string, undefined>, ISigninError>(AUTH_SIGNIN);

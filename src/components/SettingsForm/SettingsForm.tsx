@@ -1,10 +1,12 @@
-import React, { FC } from "react";
+import React, { ChangeEvent, FC } from "react";
+import { useSelector } from "react-redux";
 
 import { Form, AvatarInput, Input, Button, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
+import { userSelector } from "services/auth";
+import { IUserResponse } from "utils/request/auth";
 
 import "./SettingsForm.css";
-import mockData from "./mockData";
 
 const TEXT = {
   FIRST_NAME: "Введите имя",
@@ -16,97 +18,76 @@ const TEXT = {
   SUBMIT: "Сохранить",
 };
 
-interface ISettingsForm {
-  firstName: string;
-  secondName: string;
+/**
+ * TODO:
+ * - унести интерфейсы в utils/request
+ * - реализовать смену пароля (возможно, на отдельной странице)
+ */
+
+interface IChangeUserRequest {
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  login: string;
   email: string;
-  oldPassword: string;
-  newPassword: string;
-  newPasswordConfirm: string;
 }
 
-const { firstName, secondName, email } = mockData;
-
-const initialValues: ISettingsForm = {
-  firstName,
-  secondName,
-  email,
-  oldPassword: "",
-  newPassword: "",
-  newPasswordConfirm: "",
-};
-
-const cb = (data: ISettingsForm) => {
+const handleSettingsFormSubmit = (data: IChangeUserRequest) => {
   console.log(data);
 };
 
+const handleAvatarChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const uploadFile = event.target.value;
+  /**
+   * Диспатчим экшен
+   */
+  console.info(uploadFile);
+};
+
 export const SettingsForm: FC = () => {
-  const [data, handleSubmit, handleChange] = useForm(initialValues);
+  const user = useSelector(userSelector);
+
+  const [data, handleSubmit, handleChange] = useForm(user as IUserResponse);
 
   return (
-    <Form className="settings-form" onSubmit={handleSubmit(cb)}>
-      <div className="settings-form__column">
-        <AvatarInput name="avatar" onChange={handleChange} />
+    <div className="settings-layout">
+      <div className="settings-layout__column">
+        <AvatarInput name="avatar" src={user?.avatar} onChange={handleAvatarChange} />
       </div>
-      <div className="settings-form__column">
-        <FormField>
-          <Input
-            name="firstName"
-            value={data.firstName}
-            placeholder={TEXT.FIRST_NAME}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="secondName"
-            value={data.secondName}
-            placeholder={TEXT.SECOND_NAME}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="email"
-            value={data.email}
-            placeholder={TEXT.EMAIL}
-            type="text"
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="oldPassword"
-            value={data.oldPassword}
-            placeholder={TEXT.CURRENT_PASSWORD}
-            type="password"
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="newPassword"
-            value={data.newPassword}
-            placeholder={TEXT.NEW_PASSWORD}
-            type="password"
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="newPasswordConfirm"
-            value={data.newPasswordConfirm}
-            placeholder={TEXT.NEW_PASSWORD_CONFIRM}
-            type="password"
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Button view="action" width="max">
-            {TEXT.SUBMIT}
-          </Button>
-        </FormField>
+      <div className="settings-layout__column">
+        <Form onSubmit={handleSubmit(handleSettingsFormSubmit)}>
+          <FormField>
+            <Input
+              name="first_name"
+              value={data.first_name}
+              placeholder={TEXT.FIRST_NAME}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField>
+            <Input
+              name="second_name"
+              value={data.second_name}
+              placeholder={TEXT.SECOND_NAME}
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField>
+            <Input
+              name="email"
+              value={data.email}
+              placeholder={TEXT.EMAIL}
+              type="text"
+              onChange={handleChange}
+            />
+          </FormField>
+          <FormField>
+            <Button view="action" width="max">
+              {TEXT.SUBMIT}
+            </Button>
+          </FormField>
+        </Form>
       </div>
-    </Form>
+    </div>
   );
 };

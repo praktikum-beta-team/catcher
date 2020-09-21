@@ -3,24 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Form, FormField, Input, Button } from "components/UI";
 import { useForm } from "hooks/useForm";
-import { signinRequest } from "services/auth/actions";
-import { errorSelector } from "services/auth/selectors";
+import { signinRequest, clearAuthError, errorSelector } from "services/auth/";
 import { useHistory } from "react-router";
 import { ROUTES } from "constants/routes";
+import { ISigninRequest } from "utils/request/auth";
 
 const TEXT = {
   LOGIN: "Введите логин",
   PASSWORD: "Введите пароль",
   SUBMIT: "Войти",
-  REGISTER: "Зарегистрироваться",
+  SIGNUP: "Зарегистрироваться",
 };
 
-interface ISigninForm {
-  login: string;
-  password: string;
-}
-
-const initialValues: ISigninForm = {
+const initialValues: ISigninRequest = {
   login: "",
   password: "",
 };
@@ -31,8 +26,13 @@ export const SigninForm: FC = () => {
   const error = useSelector(errorSelector);
   const { push } = useHistory();
 
-  const onSubmit = (values: ISigninForm) => {
+  const onSubmit = (values: ISigninRequest) => {
     dispatch(signinRequest(values));
+  };
+
+  const handleSignupButtonClick = () => {
+    dispatch(clearAuthError());
+    push(ROUTES.SIGNUP);
   };
 
   return (
@@ -55,15 +55,8 @@ export const SigninForm: FC = () => {
         </Button>
       </FormField>
       <FormField>
-        <Button
-          view="pseudo"
-          width="max"
-          type="button"
-          onClick={() => {
-            push(ROUTES.SIGNUP);
-          }}
-        >
-          {TEXT.REGISTER}
+        <Button view="pseudo" width="max" type="button" onClick={handleSignupButtonClick}>
+          {TEXT.SIGNUP}
         </Button>
       </FormField>
     </Form>
