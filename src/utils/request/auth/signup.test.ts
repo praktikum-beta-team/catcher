@@ -2,7 +2,7 @@ import { auth } from "utils/request";
 
 import { info } from "./models/user";
 
-it("signup", async () => {
+it.skip("signup", async () => {
   await auth.signup(
     info,
     (data) => {
