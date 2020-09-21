@@ -1,0 +1,5 @@
+.game-screen {
+  @mixin flex-centered;
+  min-height: 100vh;
+  background-color: #000;
+}

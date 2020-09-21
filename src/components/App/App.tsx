@@ -10,6 +10,7 @@ import { ErrorBoundary } from "components/ErrorBoundary";
 import { NotFound } from "components/NotFound";
 import { Logout } from "components/Logout";
 import { ROUTES } from "constants/routes";
+import { GameScreen } from "components/GameScreen";
 import { Startup } from "components/Startup";
 
 export const App: FC = () => (
@@ -31,6 +32,11 @@ export const App: FC = () => (
             <Settings />
           </ErrorBoundary>
         </PrivateRoute>
+        <Route path={ROUTES.GAME}>
+          <ErrorBoundary>
+            <GameScreen />
+          </ErrorBoundary>
+        </Route>
         <Route path={ROUTES.LEADERBOARD}>
           <ErrorBoundary>
             <Leaderboard />
