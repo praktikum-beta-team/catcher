@@ -1,12 +1,12 @@
 import { user, auth } from "utils/request";
-import { AnyAction, Dispatch } from "redux";
+import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "store";
 
 import { ISigninRequest, ISignupRequest } from "utils/request/auth";
 import { authSuccess, authFailure, logoutSuccess, fetchUserSuccess } from "./slice";
 
-export const fetchUserRequest = () => (dispatch: Dispatch) => {
+export const fetchUserRequest = (): ThunkAction<void, RootState, null, AnyAction> => (dispatch) => {
   auth.user(
     {},
     ({ data }) => {
@@ -22,12 +22,14 @@ export const fetchUserRequest = () => (dispatch: Dispatch) => {
   );
 };
 
-export const signinRequest = (params: ISigninRequest) => (dispatch: Dispatch) => {
+export const signinRequest = (
+  params: ISigninRequest
+): ThunkAction<void, RootState, null, AnyAction> => (dispatch) => {
   auth.signin(
     params,
     () => {
       dispatch(authSuccess());
-      fetchUserRequest();
+      dispatch(fetchUserRequest());
       localStorage.setItem("isAuthenticated", "true");
     },
     ({ message, response }) => {
@@ -37,7 +39,7 @@ export const signinRequest = (params: ISigninRequest) => (dispatch: Dispatch) =>
   );
 };
 
-export const logoutRequest = () => (dispatch: Dispatch) => {
+export const logoutRequest = (): ThunkAction<void, RootState, null, AnyAction> => (dispatch) => {
   auth.logout(
     {},
     () => {
@@ -51,7 +53,9 @@ export const logoutRequest = () => (dispatch: Dispatch) => {
   );
 };
 
-export const signupRequest = (params: ISignupRequest) => (dispatch: Dispatch) => {
+export const signupRequest = (
+  params: ISignupRequest
+): ThunkAction<void, RootState, null, AnyAction> => (dispatch) => {
   auth.signup(
     params,
     () => {
