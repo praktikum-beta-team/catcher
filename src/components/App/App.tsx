@@ -11,45 +11,43 @@ import { NotFound } from "components/NotFound";
 import { Logout } from "components/Logout";
 import { ROUTES } from "constants/routes";
 import { GameScreen } from "components/GameScreen";
-import { Startup } from "components/Startup";
+import { withStartup } from "components/withStartup";
 
-export const App: FC = () => (
-  <Startup>
-    <Router>
-      <Switch>
-        <Route path={ROUTES.SIGNIN} exact>
-          <ErrorBoundary>
-            <Signin />
-          </ErrorBoundary>
-        </Route>
-        <Route path={ROUTES.SIGNUP}>
-          <ErrorBoundary>
-            <Signup />
-          </ErrorBoundary>
-        </Route>
-        <PrivateRoute path={ROUTES.SETTINGS}>
-          <ErrorBoundary>
-            <Settings />
-          </ErrorBoundary>
-        </PrivateRoute>
-        <Route path={ROUTES.GAME}>
-          <ErrorBoundary>
-            <GameScreen />
-          </ErrorBoundary>
-        </Route>
-        <Route path={ROUTES.LEADERBOARD}>
-          <ErrorBoundary>
-            <Leaderboard />
-          </ErrorBoundary>
-        </Route>
-        <Route path={ROUTES.LOGOUT}>
-          <Logout />
-        </Route>
-        <Route path={ROUTES.NOT_FOUND}>
-          <NotFound />
-        </Route>
-        <Redirect to={ROUTES.NOT_FOUND} />
-      </Switch>
-    </Router>
-  </Startup>
-);
+export const App: FC = withStartup(() => (
+  <Router>
+    <Switch>
+      <Route path={ROUTES.SIGNIN} exact>
+        <ErrorBoundary>
+          <Signin />
+        </ErrorBoundary>
+      </Route>
+      <Route path={ROUTES.SIGNUP}>
+        <ErrorBoundary>
+          <Signup />
+        </ErrorBoundary>
+      </Route>
+      <PrivateRoute path={ROUTES.SETTINGS}>
+        <ErrorBoundary>
+          <Settings />
+        </ErrorBoundary>
+      </PrivateRoute>
+      <Route path={ROUTES.GAME}>
+        <ErrorBoundary>
+          <GameScreen />
+        </ErrorBoundary>
+      </Route>
+      <Route path={ROUTES.LEADERBOARD}>
+        <ErrorBoundary>
+          <Leaderboard />
+        </ErrorBoundary>
+      </Route>
+      <Route path={ROUTES.LOGOUT}>
+        <Logout />
+      </Route>
+      <Route path={ROUTES.NOT_FOUND}>
+        <NotFound />
+      </Route>
+      <Redirect to={ROUTES.NOT_FOUND} />
+    </Switch>
+  </Router>
+));
