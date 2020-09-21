@@ -1,11 +1,13 @@
-import { auth as api } from "utils/request";
-import { Dispatch } from "redux";
+import { user, auth } from "utils/request";
+import { AnyAction, Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
+import { RootState } from "store";
 
 import { ISigninRequest, ISignupRequest } from "utils/request/auth";
 import { authSuccess, authFailure, logoutSuccess, fetchUserSuccess } from "./slice";
 
 export const fetchUserRequest = () => (dispatch: Dispatch) => {
-  api.user(
+  auth.user(
     {},
     ({ data }) => {
       dispatch(fetchUserSuccess(data));
@@ -21,7 +23,7 @@ export const fetchUserRequest = () => (dispatch: Dispatch) => {
 };
 
 export const signinRequest = (params: ISigninRequest) => (dispatch: Dispatch) => {
-  api.signin(
+  auth.signin(
     params,
     () => {
       dispatch(authSuccess());
@@ -36,7 +38,7 @@ export const signinRequest = (params: ISigninRequest) => (dispatch: Dispatch) =>
 };
 
 export const logoutRequest = () => (dispatch: Dispatch) => {
-  api.logout(
+  auth.logout(
     {},
     () => {
       dispatch(logoutSuccess());
@@ -50,7 +52,7 @@ export const logoutRequest = () => (dispatch: Dispatch) => {
 };
 
 export const signupRequest = (params: ISignupRequest) => (dispatch: Dispatch) => {
-  api.signup(
+  auth.signup(
     params,
     () => {
       dispatch(authSuccess());
@@ -59,6 +61,21 @@ export const signupRequest = (params: ISignupRequest) => (dispatch: Dispatch) =>
     ({ message, response }) => {
       const error = response ? response.data.reason : message;
       dispatch(authFailure(error));
+    }
+  );
+};
+
+export const changeAvatarRequest = (
+  params: FormData
+): ThunkAction<void, RootState, null, AnyAction> => (dispatch) => {
+  user.changeAvatar(
+    params,
+    () => {
+      dispatch(fetchUserRequest());
+    },
+    ({ message, response }) => {
+      const errorMessage = response ? response.data.reason : message;
+      console.error(errorMessage);
     }
   );
 };

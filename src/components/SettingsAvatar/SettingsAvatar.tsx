@@ -1,11 +1,11 @@
-import React, { FC, useRef, ChangeEvent } from "react";
+import React, { FC, useRef } from "react";
 
 import { cn } from "helpers/classname";
 import { Avatar } from "components/UI";
 
 import "./SettingsAvatar.css";
-import { useSelector } from "react-redux";
-import { avatarSelector } from "services/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { avatarSelector, changeAvatarRequest } from "services/auth";
 
 const MIME_TYPES = "image/*";
 
@@ -18,6 +18,7 @@ const cnSettingsAvatar = cn("settings-avatar");
 export const SettingsAvatar: FC = () => {
   const src = useSelector(avatarSelector);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const dispatch = useDispatch();
 
   const handleClick = (): void => {
     const input = inputRef.current;
@@ -27,7 +28,7 @@ export const SettingsAvatar: FC = () => {
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = () => {
     const input = inputRef.current;
 
     if (input && input.files?.length) {
@@ -35,7 +36,7 @@ export const SettingsAvatar: FC = () => {
       const formData = new FormData();
 
       formData.append("avatar", nextAvatarFile);
-      // dispatch(...(formData))
+      dispatch(changeAvatarRequest(formData));
     }
   };
 
