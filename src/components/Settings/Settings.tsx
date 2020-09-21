@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { cn } from "helpers/classname";
 import { Header, Loading } from "components/UI";
 import { SettingsForm } from "components/SettingsForm";
+import { SettingsAvatar } from "components/SettingsAvatar";
 import { userSelector } from "services/auth";
 
 import "./Settings.css";
@@ -23,7 +24,14 @@ export const Settings: FC = () => {
       <div className={cnSettings()}>
         <div className={cnSettings("inner")}>
           <h1 className={cnSettings("title")}>{TEXT.TITLE}</h1>
-          <SettingsForm />
+          <div className={cnSettings("layout")}>
+            <div className={cnSettings("column")}>
+              <SettingsAvatar />
+            </div>
+            <div className={cnSettings("column")}>
+              <SettingsForm />
+            </div>
+          </div>
         </div>
       </div>
     </>
