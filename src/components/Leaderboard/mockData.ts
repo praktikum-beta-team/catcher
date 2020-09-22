@@ -1,4 +1,6 @@
-export default [
+import { IBoardEntry } from "components/Board/Entry";
+
+const mockData: IBoardEntry[] = [
   {
     name: "Дэн",
     avatar: "https://bit.ly/dan-abramov",
@@ -10,3 +12,5 @@ export default [
     score: 900,
   },
 ];
+
+export default mockData;
