@@ -4,8 +4,8 @@ import { BASE_URL } from "constants/api";
 
 export function request<
   T = Record<string, unknown>,
-  R = Record<string, undefined>,
-  E = Record<string, undefined>
+  R = Record<string, unknown>,
+  E = Record<string, unknown>
 >(reqUrl: string, method: Method = "POST") {
   return async (
     data: T,
