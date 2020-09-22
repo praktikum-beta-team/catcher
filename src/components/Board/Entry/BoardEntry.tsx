@@ -3,11 +3,7 @@ import React, { FC } from "react";
 import { Avatar } from "components/UI";
 import { cnBoard } from "components/Board";
 
-export interface IBoardEntryProps {
-  /**
-   * Место в рейтинге
-   */
-  place: number;
+export interface IBoardEntry {
   /**
    * Имя игрока
    */
@@ -20,6 +16,13 @@ export interface IBoardEntryProps {
    * Счет игрока
    */
   score: number;
+}
+
+export interface IBoardEntryProps extends IBoardEntry {
+  /**
+   * Место в рейтинге
+   */
+  place: number;
 }
 
 export const BoardEntry: FC<IBoardEntryProps> = (props) => {

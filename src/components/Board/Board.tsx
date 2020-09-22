@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { cn } from "helpers/classname";
-import { BoardEntry as Entry, IBoardEntryProps } from "./Entry";
+import { BoardEntry as Entry, IBoardEntry } from "./Entry";
 
 import "./Board.css";
 
@@ -10,15 +10,13 @@ const TEXT = {
   SCORE: "Счет",
 };
 
-export type BoardEntries = Omit<IBoardEntryProps, "place">[];
-
 interface IBoardProps {
-  entries: BoardEntries;
+  entries: IBoardEntry[];
 }
 
 export const cnBoard = cn("board");
 
-const renderEntries = (entries: BoardEntries) =>
+const renderEntries = (entries: IBoardEntry[]) =>
   entries
     /**
      * TODO: продумать сортировку и вывод результатов:

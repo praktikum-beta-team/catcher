@@ -2,7 +2,8 @@ import React, { FC, useState, useEffect } from "react";
 
 import { cn } from "helpers/classname";
 import { Header, Button, Loading } from "components/UI";
-import { Board, BoardEntries } from "components/Board";
+import { Board } from "components/Board";
+import { IBoardEntry } from "components/Board/Entry";
 
 import "./Leaderboard.css";
 import mockData from "./mockData";
@@ -14,7 +15,7 @@ const TEXT = {
 
 const cnLeaderboard = cn("leaderboard");
 
-const loadEntries = (): Promise<BoardEntries> =>
+const loadEntries = (): Promise<IBoardEntry[]> =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockData);
@@ -23,7 +24,7 @@ const loadEntries = (): Promise<BoardEntries> =>
 
 export const Leaderboard: FC = () => {
   const [loading, setLoading] = useState(true);
-  const [entries, setEntries] = useState<BoardEntries>([]);
+  const [entries, setEntries] = useState<IBoardEntry[]>([]);
 
   useEffect(() => {
     loadEntries().then((data) => {

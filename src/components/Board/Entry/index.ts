@@ -1,1 +1,1 @@
-export { BoardEntry, IBoardEntryProps } from "./BoardEntry";
+export { BoardEntry, IBoardEntry } from "./BoardEntry";
