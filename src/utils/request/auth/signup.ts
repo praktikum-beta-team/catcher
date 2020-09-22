@@ -11,4 +11,8 @@ export interface ISignupRequest {
   phone: string;
 }
 
-export const signup = request<ISignupRequest>(AUTH_SIGNUP);
+interface ISignupError {
+  reason: string;
+}
+
+export const signup = request<ISignupRequest, null, ISignupError>(AUTH_SIGNUP);

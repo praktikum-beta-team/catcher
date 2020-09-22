@@ -11,4 +11,4 @@ interface ISigninError {
   reason: string;
 }
 
-export const signin = request<ISigninRequest, Record<string, undefined>, ISigninError>(AUTH_SIGNIN);
+export const signin = request<ISigninRequest, null, ISigninError>(AUTH_SIGNIN);

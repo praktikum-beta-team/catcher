@@ -2,7 +2,11 @@ import axios, { Method, AxiosResponse, AxiosError } from "axios";
 
 import { BASE_URL } from "constants/api";
 
-export function request<T, R = any, E = any>(reqUrl: string, method: Method = "POST") {
+export function request<
+  T = Record<string, unknown>,
+  R = Record<string, undefined>,
+  E = Record<string, undefined>
+>(reqUrl: string, method: Method = "POST") {
   return async (
     data: T,
     cb: (data: AxiosResponse<R>) => void,
