@@ -6,7 +6,7 @@ export function request<
   T = Record<string, unknown>,
   R = Record<string, unknown>,
   E = Record<string, unknown>
->(reqUrl: string, method: Method = "POST") {
+>(endpoint: string, method: Method = "POST") {
   return async (
     data: T,
     cb: (data: AxiosResponse<R>) => void,
@@ -16,7 +16,7 @@ export function request<
       const res = await axios({
         data,
         method,
-        url: reqUrl,
+        url: endpoint,
         baseURL: BASE_URL,
         withCredentials: true,
       });
