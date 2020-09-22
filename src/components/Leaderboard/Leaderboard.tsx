@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 
 import { cn } from "helpers/classname";
-import { Header, Button, Loading } from "components/UI";
+import { Button, Loading, Layout } from "components/UI";
 import { Board } from "components/Board";
 import { IBoardEntry } from "components/Board/Entry";
 
@@ -34,8 +34,7 @@ export const Leaderboard: FC = () => {
   }, []);
 
   return (
-    <>
-      <Header />
+    <Layout>
       <div className={cnLeaderboard()}>
         <div className={cnLeaderboard("inner")}>
           <h1 className={cnLeaderboard("title")}>{TEXT.TITLE}</h1>
@@ -49,6 +48,6 @@ export const Leaderboard: FC = () => {
           )}
         </div>
       </div>
-    </>
+    </Layout>
   );
 };
