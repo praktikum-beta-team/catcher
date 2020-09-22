@@ -8,14 +8,8 @@ const TEXT = {
   LOADING: "Загрузка...",
 };
 
-const cnLoading = cn("loading");
+const cnLoading = cn("loader");
 
-export const Loading: FC<HTMLProps<HTMLSpanElement>> = (props) => {
-  const { className, ...restLoadingProps } = props;
-
-  return (
-    <span className={cnLoading({}, [className])} {...restLoadingProps}>
-      {TEXT.LOADING}
-    </span>
-  );
+export const Loading: FC<HTMLProps<HTMLSpanElement>> = () => {
+  return <div className={cnLoading()}>{TEXT.LOADING}</div>;
 };
