@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { ComponentType, FC } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import { PrivateRoute } from "components/PrivateRoute";
@@ -13,41 +13,46 @@ import { ROUTES } from "constants/routes";
 import { GameScreen } from "components/GameScreen";
 import { withStartup } from "components/withStartup";
 
-export const App: FC = withStartup(() => (
-  <Router>
-    <Switch>
-      <Route path={ROUTES.SIGNIN} exact>
-        <ErrorBoundary>
-          <Signin />
-        </ErrorBoundary>
-      </Route>
-      <Route path={ROUTES.SIGNUP}>
-        <ErrorBoundary>
-          <Signup />
-        </ErrorBoundary>
-      </Route>
-      <PrivateRoute path={ROUTES.SETTINGS}>
-        <ErrorBoundary>
-          <Settings />
-        </ErrorBoundary>
-      </PrivateRoute>
-      <Route path={ROUTES.GAME}>
-        <ErrorBoundary>
-          <GameScreen />
-        </ErrorBoundary>
-      </Route>
-      <Route path={ROUTES.LEADERBOARD}>
-        <ErrorBoundary>
-          <Leaderboard />
-        </ErrorBoundary>
-      </Route>
-      <Route path={ROUTES.LOGOUT}>
-        <Logout />
-      </Route>
-      <Route path={ROUTES.NOT_FOUND}>
-        <NotFound />
-      </Route>
-      <Redirect to={ROUTES.NOT_FOUND} />
-    </Switch>
-  </Router>
-));
+interface IComponentMap {
+  path: string;
+  Component: ComponentType;
+  isPrivate?: boolean;
+  exact?: boolean;
+}
+
+const componentMap: IComponentMap[] = [
+  { path: ROUTES.SIGNIN, Component: Signin, exact: true },
+  { path: ROUTES.SIGNUP, Component: Signup },
+  { path: ROUTES.SETTINGS, Component: Settings, isPrivate: true },
+  { path: ROUTES.GAME, Component: GameScreen },
+  { path: ROUTES.LOGOUT, Component: Logout, isPrivate: true },
+  { path: ROUTES.NOT_FOUND, Component: NotFound },
+  { path: ROUTES.LEADERBOARD, Component: Leaderboard },
+];
+
+const routes = componentMap.map(({ path, Component, isPrivate, exact }, index) =>
+  isPrivate ? (
+    <PrivateRoute key={index} path={path} exact={exact}>
+      <ErrorBoundary>
+        <Component />
+      </ErrorBoundary>
+    </PrivateRoute>
+  ) : (
+    <Route key={index} path={path} exact>
+      <ErrorBoundary>
+        <Component />
+      </ErrorBoundary>
+    </Route>
+  )
+);
+
+export const App: FC = withStartup(() => {
+  return (
+    <Router>
+      <Switch>
+        {routes}
+        <Redirect to={ROUTES.NOT_FOUND} />
+      </Switch>
+    </Router>
+  );
+});
