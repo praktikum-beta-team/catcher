@@ -2,13 +2,13 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { isAuthenticatedSelector } from "services/auth/selectors";
+import { getAuthStatus } from "services/auth/selectors";
 import { cn } from "helpers/classname";
 import { Modal } from "components/UI";
-import { SigninForm } from "components/SigninForm";
+import { SigninForm } from "components";
+import { ROUTES } from "constants/routes";
 
 import "./Signin.css";
-import { ROUTES } from "constants/routes";
 
 const TEXT = {
   TITLE: "Вход",
@@ -17,7 +17,7 @@ const TEXT = {
 const cnSignin = cn("signin");
 
 export const Signin: FC = () => {
-  const isAuthenticated = useSelector(isAuthenticatedSelector);
+  const isAuthenticated = useSelector(getAuthStatus);
 
   return isAuthenticated ? (
     <Redirect to={ROUTES.GAME} />

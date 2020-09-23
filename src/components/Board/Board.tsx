@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 
 import { cn } from "helpers/classname";
-import { BoardEntry as Entry, IBoardEntry } from "./Entry";
+import { BoardEntry as Entry } from "./Entry";
+import type { IBoardEntry } from "./Entry";
 
 import "./Board.css";
 

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { IUserResponse } from "utils/request/auth";
-import { IChangeProfileRequest } from "utils/request/user";
+import type { IUserResponse, IUserRequest } from "utils/request/types";
 
 interface IAuthSliceState {
   isAuthenticated: boolean;
@@ -39,18 +38,10 @@ const authSlice = createSlice({
     fetchUserSuccess: (state, { payload: user }: PayloadAction<IUserResponse>) => {
       state.user = user;
     },
-    changeProfileSuccess: (state, { payload }: PayloadAction<IChangeProfileRequest>) => {
+    changeUserSuccess: (state, { payload }: PayloadAction<IUserRequest>) => {
       Object.assign(state, payload);
     },
   },
 });
 
-export const authReducer = authSlice.reducer;
-export const {
-  authFailure,
-  authSuccess,
-  logoutSuccess,
-  clearAuthError,
-  fetchUserSuccess,
-  changeProfileSuccess,
-} = authSlice.actions;
+export const { name, reducer, actions } = authSlice;

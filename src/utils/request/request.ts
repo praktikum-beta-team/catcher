@@ -1,12 +1,12 @@
 import axios, { Method, AxiosResponse, AxiosError } from "axios";
 
 import { BASE_URL } from "constants/api";
+import { IErrorResponse } from "./types/error";
 
-export function request<
-  T = Record<string, unknown>,
-  R = Record<string, unknown>,
-  E = Record<string, unknown>
->(endpoint: string, method: Method = "POST") {
+export function request<T = null, R = Record<string, unknown>, E = IErrorResponse>(
+  endpoint: string,
+  method: Method = "POST"
+) {
   return async (
     data: T,
     cb: (data: AxiosResponse<R>) => void,

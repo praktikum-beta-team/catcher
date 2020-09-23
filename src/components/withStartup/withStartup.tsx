@@ -1,17 +1,18 @@
 import React, { ComponentType, FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { fetchUserRequest } from "services/auth";
+import { authOperations, authSelectors } from "services/auth";
 
 export const withStartup = <P extends Record<string, unknown>>(
   Component: ComponentType<P>
 ): FC<P> => {
   const WrappedComponent = (props: P) => {
     const dispatch = useDispatch();
+    const isAuthenticated = useSelector(authSelectors.getAuthStatus);
 
     useEffect(() => {
-      if (localStorage.getItem("isAuthenticated")) {
-        dispatch(fetchUserRequest());
+      if (isAuthenticated) {
+        dispatch(authOperations.fetchUserData());
       }
     }, []);
 

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Error } from "components/Error";
+import { Error } from "components";
 
 const TEXT = {
   TITLE: "404",

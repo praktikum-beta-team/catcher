@@ -1,6 +1,6 @@
 import React, { ComponentType, FC } from "react";
 
-import { ErrorBoundary } from "components/ErrorBoundary";
+import { ErrorBoundary } from "components";
 
 export const withErrorBoundary = <P extends Record<string, unknown>>(
   Component: ComponentType<P>

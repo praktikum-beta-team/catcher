@@ -1,2 +1,2 @@
-export { changeAvatar } from "./changeAvatar";
-export { changeProfile, IChangeProfileRequest } from "./changeProfile";
+export { changeAvatar } from "./avatar";
+export { changeProfile } from "./user";

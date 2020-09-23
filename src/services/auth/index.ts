@@ -1,10 +1,5 @@
-export {
-  signinRequest,
-  signupRequest,
-  logoutRequest,
-  fetchUserRequest,
-  changeAvatarRequest,
-  changeProfileRequest,
-} from "./actions";
-export { clearAuthError } from "./slice";
-export { isAuthenticatedSelector, errorSelector, userSelector, avatarSelector } from "./selectors";
+import * as authOperations from "./operations";
+import * as authSelectors from "./selectors";
+
+export { authOperations, authSelectors };
+export { name, reducer, actions as authActions } from "./slice";

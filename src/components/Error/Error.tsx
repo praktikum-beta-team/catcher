@@ -1,5 +1,7 @@
 import React, { FC } from "react";
 
+import { cn } from "helpers/classname";
+
 import "./Error.css";
 
 interface IErrorProps {
@@ -7,11 +9,13 @@ interface IErrorProps {
   details?: string;
 }
 
+const cnError = cn("error");
+
 export const Error: FC<IErrorProps> = ({ title, details }) => {
   return (
-    <div className="error">
-      <span className="error__title">{title}</span>
-      <span className="error__details">{details}</span>
+    <div className={cnError()}>
+      <span className={cnError("title")}>{title}</span>
+      <span className={cnError("details")}>{details}</span>
     </div>
   );
 };

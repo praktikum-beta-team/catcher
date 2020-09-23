@@ -5,10 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Input, Form, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
 import { ROUTES } from "constants/routes";
-import { errorSelector } from "services/auth/selectors";
-import { signupRequest } from "services/auth/actions";
-import { clearAuthError } from "services/auth/slice";
-import { ISignupRequest } from "utils/request/auth";
+import { authOperations, authSelectors, authActions } from "services/auth";
+import type { ISignupRequest } from "utils/request/types";
 
 const TEXT = {
   FIRST_NAME: "Имя",
@@ -39,15 +37,15 @@ const initialValues: ISignupForm = {
 export const SignupForm: FC = () => {
   const { push } = useHistory();
   const [data, handleSubmit, handleChange] = useForm(initialValues);
-  const error = useSelector(errorSelector);
+  const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 
   const onSubmit = (values: ISignupForm) => {
-    dispatch(signupRequest(values));
+    dispatch(authOperations.signup(values));
   };
 
   const handleSigninButtonClick = () => {
-    dispatch(clearAuthError());
+    dispatch(authActions.clearAuthError());
     push(ROUTES.SIGNIN);
   };
 

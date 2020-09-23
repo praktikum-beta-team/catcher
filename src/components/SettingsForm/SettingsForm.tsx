@@ -1,15 +1,15 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import type { IUserRequest } from "utils/request/types";
 import { Form, Input, Button, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
-import { userSelector, changeProfileRequest } from "services/auth";
-import { IUserResponse } from "utils/request/auth";
-import { IChangeProfileRequest } from "utils/request/user";
+import { authOperations, authSelectors } from "services/auth";
 
 const TEXT = {
   FIRST_NAME: "Введите имя",
   SECOND_NAME: "Введите фамилию",
+  DISPLAY_NAME: "Введите певдоним",
   EMAIL: "Введите адрес электронной почты",
   CURRENT_PASSWORD: "Действующий пароль",
   NEW_PASSWORD: "Введите новый пароль",
@@ -17,19 +17,13 @@ const TEXT = {
   SUBMIT: "Сохранить",
 };
 
-/**
- * TODO:
- * - унести интерфейсы в utils/request
- * - реализовать смену пароля (возможно, на отдельной странице)
- */
-
 export const SettingsForm: FC = () => {
-  const user = useSelector(userSelector);
-  const [data, handleSubmit, handleChange] = useForm(user as IUserResponse);
+  const settings = useSelector(authSelectors.getCurrentSettings);
+  const [data, handleSubmit, handleChange] = useForm(settings);
   const dispatch = useDispatch();
 
-  const handleSettingsFormSubmit = (values: IChangeProfileRequest) => {
-    dispatch(changeProfileRequest(values));
+  const handleSettingsFormSubmit = (values: IUserRequest) => {
+    dispatch(authOperations.changeUserData(values));
   };
 
   return (
@@ -47,6 +41,14 @@ export const SettingsForm: FC = () => {
           name="second_name"
           value={data.second_name}
           placeholder={TEXT.SECOND_NAME}
+          onChange={handleChange}
+        />
+      </FormField>
+      <FormField>
+        <Input
+          name="display_name"
+          value={data.display_name ?? ""}
+          placeholder={TEXT.DISPLAY_NAME}
           onChange={handleChange}
         />
       </FormField>

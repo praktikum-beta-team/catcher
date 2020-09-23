@@ -1,1 +1,2 @@
-export { BoardEntry, IBoardEntry } from "./BoardEntry";
+export { BoardEntry } from "./BoardEntry";
+export type { IBoardEntry } from "./BoardEntry";

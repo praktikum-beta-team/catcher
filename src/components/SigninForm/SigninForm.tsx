@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Form, FormField, Input, Button } from "components/UI";
 import { useForm } from "hooks/useForm";
-import { signinRequest, clearAuthError, errorSelector } from "services/auth/";
+import { authOperations, authSelectors, authActions } from "services/auth";
 import { useHistory } from "react-router";
 import { ROUTES } from "constants/routes";
-import { ISigninRequest } from "utils/request/auth";
+import type { ISigninRequest } from "utils/request/types";
 
 const TEXT = {
   LOGIN: "Введите логин",
@@ -23,15 +23,15 @@ const initialValues: ISigninRequest = {
 export const SigninForm: FC = () => {
   const dispatch = useDispatch();
   const [data, handleSubmit, handleChange] = useForm(initialValues);
-  const error = useSelector(errorSelector);
+  const error = useSelector(authSelectors.getError);
   const { push } = useHistory();
 
   const onSubmit = (values: ISigninRequest) => {
-    dispatch(signinRequest(values));
+    dispatch(authOperations.signin(values));
   };
 
   const handleSignupButtonClick = () => {
-    dispatch(clearAuthError());
+    dispatch(authActions.clearAuthError());
     push(ROUTES.SIGNUP);
   };
 

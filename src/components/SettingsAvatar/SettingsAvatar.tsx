@@ -2,7 +2,7 @@ import React, { FC, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Avatar } from "components/UI";
-import { avatarSelector, changeAvatarRequest } from "services/auth";
+import { authOperations, authSelectors } from "services/auth";
 import { cn } from "helpers/classname";
 import { BASE_DOMAIN } from "constants/api";
 
@@ -17,7 +17,7 @@ const TEXT = {
 const cnSettingsAvatar = cn("settings-avatar");
 
 export const SettingsAvatar: FC = () => {
-  const src = useSelector(avatarSelector);
+  const src = useSelector(authSelectors.getAvatar);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ export const SettingsAvatar: FC = () => {
       const formData = new FormData();
 
       formData.append("avatar", nextAvatarFile);
-      dispatch(changeAvatarRequest(formData));
+      dispatch(authOperations.changeUserAvatar(formData));
     }
   };
 

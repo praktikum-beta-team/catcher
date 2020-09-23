@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 
 import { Avatar } from "components/UI";
-import { cnBoard } from "components/Board";
+import { cnBoard } from "../index";
 
 export interface IBoardEntry {
   /**

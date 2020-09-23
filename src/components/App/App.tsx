@@ -1,26 +1,28 @@
 import React, { ComponentType, FC } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
-import { PrivateRoute } from "components/PrivateRoute";
-import { Signin } from "components/Signin";
-import { Signup } from "components/Signup";
-import { Settings } from "components/Settings";
-import { Leaderboard } from "components/Leaderboard";
-import { NotFound } from "components/NotFound";
-import { Logout } from "components/Logout";
 import { ROUTES } from "constants/routes";
-import { GameScreen } from "components/GameScreen";
-import { withStartup } from "components/withStartup";
-import { withErrorBoundary } from "components/withErrorBoundary";
+import {
+  PrivateRoute,
+  Signin,
+  Signup,
+  Settings,
+  Leaderboard,
+  NotFound,
+  Logout,
+  GameScreen,
+  withErrorBoundary,
+  withStartup,
+} from "components";
 
-interface IComponentMap {
+type IComponentMap = {
   path: string;
   component: ComponentType;
   isPrivate?: boolean;
   exact?: boolean;
-}
+}[];
 
-const componentMap: IComponentMap[] = [
+const componentMap: IComponentMap = [
   { path: ROUTES.SIGNIN, component: Signin, exact: true },
   { path: ROUTES.SIGNUP, component: Signup },
   { path: ROUTES.SETTINGS, component: Settings, isPrivate: true },
@@ -30,11 +32,11 @@ const componentMap: IComponentMap[] = [
   { path: ROUTES.LEADERBOARD, component: Leaderboard },
 ];
 
-const routes = componentMap.map(({ path, component, isPrivate, exact }, index) => {
+const routes = componentMap.map(({ component, isPrivate, ...restRouteProps }, index) => {
   return isPrivate ? (
-    <PrivateRoute key={index} component={withErrorBoundary(component)} path={path} exact={exact} />
+    <PrivateRoute key={index} component={withErrorBoundary(component)} {...restRouteProps} />
   ) : (
-    <Route key={index} component={withErrorBoundary(component)} path={path} exact={exact} />
+    <Route key={index} component={withErrorBoundary(component)} {...restRouteProps} />
   );
 });
 

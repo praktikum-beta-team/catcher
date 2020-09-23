@@ -1,21 +1,9 @@
-import { AxiosError } from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 
 import { api } from "../__mocks__/api";
 import { request } from "../request";
 
 describe("request", () => {
-  it("отправляет данные", async () => {
-    const cb = jest.fn();
-    const requestData = {
-      foo: "buzz",
-    };
-
-    api.post("/endpoint", requestData).reply(200);
-
-    await request("/endpoint")(requestData, cb);
-    expect(cb).toBeCalled();
-  });
-
   /**
    * Если использовать expect внутри коллбэка на успешный запрос,
    * функция request перехватит исключение, выброшенное Jest
@@ -23,13 +11,15 @@ describe("request", () => {
    * Для тестов лучше использовать мок-функции.
    */
 
-  it("обрабатывает положительный ответ сервера", async () => {
-    const cb = jest.fn();
+  it("отправляет данные и обрабатывает положительный ответ", async () => {
+    const requestData = { foo: "buzz" };
+    const responseData = { buzz: "bar" };
+    const cb = jest.fn((response: AxiosResponse) => response.data);
 
-    api.post("/endpoint").reply(200);
+    api.post("/endpoint", requestData).reply(200, responseData);
 
-    await request("/endpoint")({}, cb);
-    expect(cb).toBeCalled();
+    await request<typeof requestData>("/endpoint")(requestData, cb);
+    expect(cb.mock.results[0].value).toEqual(responseData);
   });
 
   it("обрабатывает отрицательный ответ сервера", async () => {
@@ -41,7 +31,7 @@ describe("request", () => {
 
     api.post("/endpoint").reply(401, errResponse);
 
-    await request("/endpoint")({}, cb, errCb);
+    await request("/endpoint")(null, cb, errCb);
     expect(errCb.mock.results[0].value).toEqual(errResponse);
   });
 });

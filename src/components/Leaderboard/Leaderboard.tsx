@@ -3,7 +3,7 @@ import React, { FC, useState, useEffect } from "react";
 import { cn } from "helpers/classname";
 import { Button, Loading, Layout } from "components/UI";
 import { Board } from "components/Board";
-import { IBoardEntry } from "components/Board/Entry";
+import type { IBoardEntry } from "components/Board/Entry";
 
 import "./Leaderboard.css";
 import mockData from "./mockData";
