@@ -1,10 +1,11 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Form, Input, Button, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
-import { userSelector } from "services/auth";
+import { userSelector, changeProfileRequest } from "services/auth";
 import { IUserResponse } from "utils/request/auth";
+import { IChangeProfileRequest } from "utils/request/user";
 
 const TEXT = {
   FIRST_NAME: "Введите имя",
@@ -22,22 +23,14 @@ const TEXT = {
  * - реализовать смену пароля (возможно, на отдельной странице)
  */
 
-interface IChangeUserRequest {
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  login: string;
-  email: string;
-}
-
-const handleSettingsFormSubmit = (data: IChangeUserRequest) => {
-  console.log(data);
-};
-
 export const SettingsForm: FC = () => {
   const user = useSelector(userSelector);
-
   const [data, handleSubmit, handleChange] = useForm(user as IUserResponse);
+  const dispatch = useDispatch();
+
+  const handleSettingsFormSubmit = (values: IChangeProfileRequest) => {
+    dispatch(changeProfileRequest(values));
+  };
 
   return (
     <Form onSubmit={handleSubmit(handleSettingsFormSubmit)}>

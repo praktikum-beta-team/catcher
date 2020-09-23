@@ -4,7 +4,14 @@ import { ThunkAction } from "redux-thunk";
 import { RootState } from "store";
 
 import { ISigninRequest, ISignupRequest } from "utils/request/auth";
-import { authSuccess, authFailure, logoutSuccess, fetchUserSuccess } from "./slice";
+import { IChangeProfileRequest } from "utils/request/user";
+import {
+  authSuccess,
+  authFailure,
+  logoutSuccess,
+  fetchUserSuccess,
+  changeProfileSuccess,
+} from "./slice";
 
 export const fetchUserRequest = (): ThunkAction<void, RootState, null, AnyAction> => (dispatch) => {
   auth.user(
@@ -65,6 +72,19 @@ export const signupRequest = (
     ({ message, response }) => {
       const error = response ? response.data.reason : message;
       dispatch(authFailure(error));
+    }
+  );
+};
+
+export const changeProfileRequest = (
+  params: IChangeProfileRequest
+): ThunkAction<void, RootState, null, AnyAction> => (dispatch) => {
+  user.changeProfile(
+    params,
+    () => dispatch(changeProfileSuccess(params)),
+    ({ response, message }) => {
+      const errorMessage = response ? response.data.reason : message;
+      console.error(errorMessage);
     }
   );
 };
