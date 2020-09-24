@@ -11,6 +11,7 @@ const TEXT = {
   SECOND_NAME: "Введите фамилию",
   DISPLAY_NAME: "Введите певдоним",
   EMAIL: "Введите адрес электронной почты",
+  PHONE: "Введите номер мобильного телефона",
   CURRENT_PASSWORD: "Действующий пароль",
   NEW_PASSWORD: "Введите новый пароль",
   NEW_PASSWORD_CONFIRM: "Повторите новый пароль",
@@ -20,6 +21,7 @@ const TEXT = {
 export const SettingsForm: FC = () => {
   const settings = useSelector(authSelectors.getCurrentSettings);
   const [data, handleSubmit, handleChange] = useForm(settings);
+  const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 
   const handleSettingsFormSubmit = (values: IUserRequest) => {
@@ -27,7 +29,7 @@ export const SettingsForm: FC = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(handleSettingsFormSubmit)}>
+    <Form onSubmit={handleSubmit(handleSettingsFormSubmit)} error={error}>
       <FormField>
         <Input
           name="first_name"
@@ -58,6 +60,15 @@ export const SettingsForm: FC = () => {
           value={data.email}
           placeholder={TEXT.EMAIL}
           type="text"
+          onChange={handleChange}
+        />
+      </FormField>
+      <FormField>
+        <Input
+          name="phone"
+          value={data.phone}
+          placeholder={TEXT.PHONE}
+          type="tel"
           onChange={handleChange}
         />
       </FormField>

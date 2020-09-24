@@ -76,7 +76,7 @@ export const changeUserData = (
     () => dispatch(actions.changeUserSuccess(params)),
     ({ response, message }) => {
       const errorMessage = response ? response.data.reason : message;
-      console.error(errorMessage);
+      dispatch(actions.changeUserFailure(errorMessage));
     }
   );
 };
