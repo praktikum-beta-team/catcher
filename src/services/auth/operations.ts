@@ -12,11 +12,11 @@ export const fetchUserData = (): ThunkAction<void, unknown, null, AnyAction> => 
       dispatch(actions.fetchUserSuccess(data));
     },
     ({ message, response }) => {
-      const errorMessage = response ? response.data : message;
+      const errorMessage = response ? response.data.reason : message;
       /**
-       * TODO: продумать, что делать, если с бэкенда вернулась ошибка, возможно, разлогиниться
+       * TODO: обработать сетевую ошибку отлично от ошибки апи
        */
-      console.error(errorMessage);
+      dispatch(actions.authFailure(errorMessage));
     }
   );
 };
@@ -46,7 +46,7 @@ export const logout = (): ThunkAction<void, unknown, null, AnyAction> => (dispat
       localStorage.clear();
     },
     ({ message, response }) => {
-      const errorMessage = response ? response.data.message : message;
+      const errorMessage = response ? response.data.reason : message;
       console.error(errorMessage);
     }
   );
@@ -62,7 +62,7 @@ export const signup = (params: ISignupRequest): ThunkAction<void, unknown, null,
       localStorage.setItem("isAuthenticated", "true");
     },
     ({ message, response }) => {
-      const error = response ? response.data.message : message;
+      const error = response ? response.data.reason : message;
       dispatch(actions.authFailure(error));
     }
   );
@@ -90,7 +90,7 @@ export const changeUserAvatar = (params: FormData): ThunkAction<void, unknown, n
       dispatch(fetchUserData());
     },
     ({ message, response }) => {
-      const errorMessage = response ? response.data.body : message;
+      const errorMessage = response ? response.data.reason : message;
       console.error(errorMessage);
     }
   );
