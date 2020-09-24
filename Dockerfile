@@ -5,7 +5,7 @@ ENV HUSKY_SKIP_INSTALL=1
 RUN npm install
 COPY ./ /app/
 RUN CI=true npm test
-RUN npm run build:prod
+RUN npm run build
 
 FROM nginx:1.15
 COPY ./docker/nginx/default.conf.template /etc/nginx/conf.d/default.conf.template

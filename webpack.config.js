@@ -1,5 +1,5 @@
 const path = require("path");
-const MiniCss = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
@@ -25,12 +25,16 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: ["ts-loader", "eslint-loader"],
+        use: process.env.NODE_ENV === "production" ? "ts-loader" : ["ts-loader", "eslint-loader"],
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
-        use: [MiniCss.loader, "css-loader", "postcss-loader"],
+        use: [
+          process.env.NODE_ENV === "production" ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+          "postcss-loader",
+        ],
       },
     ],
   },
@@ -47,6 +51,10 @@ module.exports = {
       template: "./www/index.html",
     }),
     new CleanWebpackPlugin(),
-    new MiniCss({ filename: "style.[hash].bundle.css", disable: false, allChunks: true }),
+    new MiniCssExtractPlugin({
+      filename: "style.[hash].bundle.css",
+      disable: false,
+      allChunks: true,
+    }),
   ],
 };

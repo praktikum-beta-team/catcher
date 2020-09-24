@@ -29,6 +29,7 @@
     "autoprefixer": "9.8.6",
     "clean-webpack-plugin": "3.0.0",
     "css-loader": "4.2.1",
+    "cssnano": "4.1.10",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.4",
     "eslint": "7.7.0",
@@ -52,6 +53,7 @@
     "postcss-mixins": "7.0.0",
     "postcss-nested": "5.0.0",
     "postcss-simple-vars": "6.0.0",
+    "style-loader": "1.2.1",
     "ts-jest": "26.2.0",
     "ts-loader": "8.0.2",
     "typescript": "3.9.7",
@@ -60,7 +62,7 @@
     "webpack-dev-server": "3.11.0"
   },
   "scripts": {
-    "build:prod": "webpack --mode=production",
+    "build": "env NODE_ENV=production webpack",
     "start": "webpack-dev-server",
     "test": "jest",
     "test:watch": "jest --watch",
