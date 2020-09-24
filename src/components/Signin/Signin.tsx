@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import { getAuthStatus } from "services/auth/selectors";
 import { cn } from "helpers/classname";
 import { Modal } from "components/UI";
-import { SigninForm } from "components";
+import { SigninForm } from "components/SigninForm";
 import { ROUTES } from "constants/routes";
 
 import "./Signin.css";

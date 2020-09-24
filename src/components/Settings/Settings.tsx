@@ -3,7 +3,8 @@ import { useSelector } from "react-redux";
 
 import { cn } from "helpers/classname";
 import { Layout, Loading } from "components/UI";
-import { SettingsForm, SettingsAvatar } from "components";
+import { SettingsForm } from "components/SettingsForm";
+import { SettingsAvatar } from "components/SettingsAvatar";
 import { authSelectors } from "services/auth";
 
 import "./Settings.css";

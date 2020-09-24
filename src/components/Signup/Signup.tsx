@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 
 import { cn } from "helpers/classname";
 import { Modal } from "components/UI";
-import { SignupForm } from "components";
+import { SignupForm } from "components/SignupForm";
 import { authSelectors } from "services/auth";
 
 import "./Signup.css";

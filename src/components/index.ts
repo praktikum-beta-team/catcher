@@ -1,4 +1,3 @@
-export * from "./ErrorBoundary";
 export * from "./PrivateRoute";
 
 export * from "./withErrorBoundary";
@@ -11,9 +10,3 @@ export * from "./Signin";
 export * from "./Signup";
 export * from "./NotFound";
 export * from "./Leaderboard";
-
-export * from "./Error";
-export * from "./SettingsForm";
-export * from "./SettingsAvatar";
-export * from "./SignupForm";
-export * from "./SigninForm";
