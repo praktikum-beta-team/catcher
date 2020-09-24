@@ -1,6 +1,6 @@
 import { USER_PROFILE } from "constants/api";
 
 import { request } from "../request";
-import type { IUserRequest, IUserError } from "../types";
+import type { IUserRequest } from "../types";
 
-export const changeProfile = request<IUserRequest, null, IUserError>(USER_PROFILE, "PUT");
+export const changeProfile = request<IUserRequest>(USER_PROFILE, "PUT");

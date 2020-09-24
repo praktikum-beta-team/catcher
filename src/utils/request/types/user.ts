@@ -10,8 +10,3 @@ export interface IUserRequest {
    */
   phone: string;
 }
-
-export interface IUserError {
-  error: string;
-  reason: string;
-}

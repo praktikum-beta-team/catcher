@@ -3,10 +3,6 @@ export interface ISigninRequest {
   password: string;
 }
 
-export interface ISigninError {
-  reason: string;
-}
-
 export interface ISignupRequest {
   first_name: string;
   second_name: string;
