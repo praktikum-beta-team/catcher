@@ -32,14 +32,17 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-    clearAuthError: (state) => {
-      state.error = null;
-    },
     fetchUserSuccess: (state, { payload: user }: PayloadAction<IUserResponse>) => {
       state.user = user;
     },
     changeUserSuccess: (state, { payload }: PayloadAction<IUserRequest>) => {
       Object.assign(state, payload);
+    },
+    changeUserFailure: (state, { payload: error }: PayloadAction<string>) => {
+      state.error = error;
+    },
+    clearError: (state) => {
+      state.error = null;
     },
   },
 });

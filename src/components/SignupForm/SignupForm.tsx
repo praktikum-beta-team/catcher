@@ -45,7 +45,7 @@ export const SignupForm: FC = () => {
   };
 
   const handleSigninButtonClick = () => {
-    dispatch(authActions.clearAuthError());
+    dispatch(authActions.clearError());
     push(ROUTES.SIGNIN);
   };
 
