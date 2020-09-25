@@ -1,12 +1,9 @@
 import React, { FC, HTMLProps } from "react";
 
+import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
 
 import "./Loading.css";
-
-const TEXT = {
-  LOADING: "Загрузка...",
-};
 
 const cnLoading = cn("loader");
 

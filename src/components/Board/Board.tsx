@@ -1,15 +1,11 @@
 import React, { FC } from "react";
 
+import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
 import { BoardEntry as Entry } from "./Entry";
 import type { IBoardEntry } from "./Entry";
 
 import "./Board.css";
-
-const TEXT = {
-  PLAYER: "Игрок",
-  SCORE: "Счет",
-};
 
 interface IBoardProps {
   entries: IBoardEntry[];
@@ -36,9 +32,9 @@ export const Board: FC<IBoardProps> = (props) => {
         <tr>
           <th></th>
           <th className={cnBoard("cell", { header: true })} colSpan={2}>
-            {TEXT.PLAYER}
+            {TEXT.LEADERBOARD.PLAYER}
           </th>
-          <th className={cnBoard("cell", { header: true })}>{TEXT.SCORE}</th>
+          <th className={cnBoard("cell", { header: true })}>{TEXT.LEADERBOARD.SCORE}</th>
         </tr>
       </thead>
       <tbody>{renderEntries(entries)}</tbody>

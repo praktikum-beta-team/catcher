@@ -2,21 +2,10 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import type { IUserRequest } from "utils/request/types";
+import { TEXT } from "constants/text";
 import { Form, Input, Button, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
 import { authOperations, authSelectors } from "services/auth";
-
-const TEXT = {
-  FIRST_NAME: "Введите имя",
-  SECOND_NAME: "Введите фамилию",
-  DISPLAY_NAME: "Введите певдоним",
-  EMAIL: "Введите адрес электронной почты",
-  PHONE: "Введите номер мобильного телефона",
-  CURRENT_PASSWORD: "Действующий пароль",
-  NEW_PASSWORD: "Введите новый пароль",
-  NEW_PASSWORD_CONFIRM: "Повторите новый пароль",
-  SUBMIT: "Сохранить",
-};
 
 export const SettingsForm: FC = () => {
   const settings = useSelector(authSelectors.getCurrentSettings);
@@ -34,7 +23,7 @@ export const SettingsForm: FC = () => {
         <Input
           name="first_name"
           value={data.first_name}
-          placeholder={TEXT.FIRST_NAME}
+          placeholder={TEXT.SETTINGS.FIRST_NAME}
           onChange={handleChange}
         />
       </FormField>
@@ -42,7 +31,7 @@ export const SettingsForm: FC = () => {
         <Input
           name="second_name"
           value={data.second_name}
-          placeholder={TEXT.SECOND_NAME}
+          placeholder={TEXT.SETTINGS.SECOND_NAME}
           onChange={handleChange}
         />
       </FormField>
@@ -50,7 +39,7 @@ export const SettingsForm: FC = () => {
         <Input
           name="display_name"
           value={data.display_name ?? ""}
-          placeholder={TEXT.DISPLAY_NAME}
+          placeholder={TEXT.SETTINGS.DISPLAY_NAME}
           onChange={handleChange}
         />
       </FormField>
@@ -58,7 +47,7 @@ export const SettingsForm: FC = () => {
         <Input
           name="email"
           value={data.email}
-          placeholder={TEXT.EMAIL}
+          placeholder={TEXT.SETTINGS.EMAIL}
           type="text"
           onChange={handleChange}
         />
@@ -67,14 +56,14 @@ export const SettingsForm: FC = () => {
         <Input
           name="phone"
           value={data.phone}
-          placeholder={TEXT.PHONE}
+          placeholder={TEXT.SETTINGS.PHONE}
           type="tel"
           onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Button view="action" width="max">
-          {TEXT.SUBMIT}
+          {TEXT.SETTINGS.SUBMIT}
         </Button>
       </FormField>
     </Form>

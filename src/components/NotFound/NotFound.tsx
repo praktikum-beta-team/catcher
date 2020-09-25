@@ -2,13 +2,10 @@ import React, { FC } from "react";
 
 import { Error } from "components/Error";
 import { Layout } from "components/UI";
-
-const TEXT = {
-  MESSAGE: "Ошибка 404. Нет такой страницы",
-};
+import { TEXT } from "constants/text";
 
 export const NotFound: FC = () => (
   <Layout>
-    <Error title={TEXT.MESSAGE} />
+    <Error title={TEXT.NOT_FOUND} />
   </Layout>
 );

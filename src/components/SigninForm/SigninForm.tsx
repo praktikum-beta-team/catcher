@@ -2,18 +2,12 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { TEXT } from "constants/text";
 import { Form, FormField, Input, Button } from "components/UI";
 import { useForm } from "hooks/useForm";
 import { authOperations, authSelectors, authActions } from "services/auth";
 import { ROUTES } from "constants/routes";
 import type { ISigninRequest } from "utils/request/types";
-
-const TEXT = {
-  LOGIN: "Введите логин",
-  PASSWORD: "Введите пароль",
-  SUBMIT: "Войти",
-  SIGNUP: "Зарегистрироваться",
-};
 
 const initialValues: ISigninRequest = {
   login: "",
@@ -36,20 +30,25 @@ export const SigninForm: FC = () => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
-        <Input name="login" value={data.login} placeholder={TEXT.LOGIN} onChange={handleChange} />
+        <Input
+          name="login"
+          value={data.login}
+          placeholder={TEXT.SIGNIN.LOGIN}
+          onChange={handleChange}
+        />
       </FormField>
       <FormField>
         <Input
           name="password"
           value={data.password}
           type="password"
-          placeholder={TEXT.PASSWORD}
+          placeholder={TEXT.SIGNIN.PASSWORD}
           onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Button view="action" width="max">
-          {TEXT.SUBMIT}
+          {TEXT.SIGNIN.SUBMIT}
         </Button>
       </FormField>
       <FormField>
@@ -60,7 +59,7 @@ export const SigninForm: FC = () => {
           container={<Link to={ROUTES.SIGNUP} />}
           onClick={handleSignupButtonClick}
         >
-          {TEXT.SIGNUP}
+          {TEXT.SIGNIN.SIGNUP}
         </Button>
       </FormField>
     </Form>

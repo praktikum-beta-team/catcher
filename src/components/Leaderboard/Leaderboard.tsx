@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 
+import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
 import { Button, Loading, Layout } from "components/UI";
 import { Board } from "components/Board";
@@ -10,11 +11,6 @@ import { ROUTES } from "constants/routes";
 import mockData from "./mockData";
 
 import "./Leaderboard.css";
-
-const TEXT = {
-  TITLE: "Лучшие игроки",
-  CALL_TO_ACTION: "Я могу больше!",
-};
 
 const cnLeaderboard = cn("leaderboard");
 
@@ -39,14 +35,14 @@ export const Leaderboard: FC = () => {
   return (
     <Layout>
       <div className={cnLeaderboard()}>
-        <h1 className={cnLeaderboard("title")}>{TEXT.TITLE}</h1>
+        <h1 className={cnLeaderboard("title")}>{TEXT.LEADERBOARD.TITLE}</h1>
         {loading ? (
           <Loading />
         ) : (
           <>
             <Board entries={entries} />
             <Button view="action" container={<Link to={ROUTES.GAME} />}>
-              {TEXT.CALL_TO_ACTION}
+              {TEXT.LEADERBOARD.CALL_TO_ACTION}
             </Button>
           </>
         )}
