@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, isValidElement, cloneElement, ReactElement } from "react";
 
 import { cn } from "helpers/classname";
 
@@ -15,23 +15,27 @@ interface IAvatarProps {
    * Размер аватара
    */
   size: "s" | "m" | "xl";
+  /**
+   * Контейнер элемента, напрмер, <Link />
+   */
+  container?: ReactElement;
 }
 
 const cnAvatar = cn("avatar");
 
 export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { src, size, className, children, ...restAvatarProps } = props;
+  const { src, size, className, children, container, ...restAvatarProps } = props;
 
-  return (
-    <div
-      role="img"
-      className={cnAvatar({ size }, [className])}
-      style={{
+  return cloneElement(
+    isValidElement(container) ? container : <div />,
+    {
+      role: "img",
+      className: cnAvatar({ size }, [className]),
+      style: {
         backgroundImage: `url(${src ?? DEFAULT_SRC})`,
-      }}
-      {...restAvatarProps}
-    >
-      {children}
-    </div>
+      },
+      ...restAvatarProps,
+    },
+    children
   );
 };
