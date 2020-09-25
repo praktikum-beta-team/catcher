@@ -6,16 +6,15 @@ import "./Error.css";
 
 interface IErrorProps {
   title: string;
-  details?: string;
 }
 
 const cnError = cn("error");
 
-export const Error: FC<IErrorProps> = ({ title, details }) => {
+export const Error: FC<IErrorProps> = ({ title, children }) => {
   return (
     <div className={cnError()}>
-      <span className={cnError("title")}>{title}</span>
-      <span className={cnError("details")}>{details}</span>
+      <h1 className={cnError("title")}>{title}</h1>
+      {children}
     </div>
   );
 };
