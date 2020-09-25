@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, FC } from "react";
+import React, { ButtonHTMLAttributes, cloneElement, FC, isValidElement, ReactElement } from "react";
 
 import { cn } from "helpers/classname";
 
@@ -13,6 +13,10 @@ interface IButtonProps {
    * Внешний вид кнопки
    */
   view: "plain" | "action" | "pseudo";
+  /**
+   * Контейнер элемента, напрмер, <Link />
+   */
+  container?: ReactElement;
 }
 
 const cnButton = cn("button");
@@ -20,11 +24,15 @@ const cnButton = cn("button");
 export const Button: FC<IButtonProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "width">> = (
   props
 ) => {
-  const { children, view, width, className, ...restButtonProps } = props;
+  const { children, view, width, className, container, ...restButtonProps } = props;
+  const buttonChildren = <span className={cnButton("text")}>{children}</span>;
 
-  return (
-    <button className={cnButton({ view, width }, [className])} {...restButtonProps}>
-      <span className={cnButton("text")}>{children}</span>
-    </button>
+  return cloneElement(
+    isValidElement(container) ? container : <button />,
+    {
+      className: cnButton({ view, width }, [className]),
+      ...restButtonProps,
+    },
+    buttonChildren
   );
 };
