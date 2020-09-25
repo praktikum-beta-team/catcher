@@ -3,11 +3,11 @@ import { IBoardEntry } from "components/Board/Entry";
 const mockData: IBoardEntry[] = [
   {
     name: "Дэн",
-    avatar: "https://bit.ly/dan-abramov",
+    avatar: null,
     score: 1500,
   },
   {
-    name: "Иван Сидоров",
+    name: "Иван",
     avatar: null,
     score: 900,
   },

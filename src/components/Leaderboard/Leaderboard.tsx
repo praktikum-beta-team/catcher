@@ -5,8 +5,11 @@ import { Button, Loading, Layout } from "components/UI";
 import { Board } from "components/Board";
 import type { IBoardEntry } from "components/Board/Entry";
 
-import "./Leaderboard.css";
+import { Link } from "react-router-dom";
+import { ROUTES } from "constants/routes";
 import mockData from "./mockData";
+
+import "./Leaderboard.css";
 
 const TEXT = {
   TITLE: "Лучшие игроки",
@@ -36,17 +39,17 @@ export const Leaderboard: FC = () => {
   return (
     <Layout>
       <div className={cnLeaderboard()}>
-        <div className={cnLeaderboard("inner")}>
-          <h1 className={cnLeaderboard("title")}>{TEXT.TITLE}</h1>
-          {loading ? (
-            <Loading />
-          ) : (
-            <>
-              <Board entries={entries} />
-              <Button view="action">{TEXT.CALL_TO_ACTION}</Button>
-            </>
-          )}
-        </div>
+        <h1 className={cnLeaderboard("title")}>{TEXT.TITLE}</h1>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Board entries={entries} />
+            <Button view="action" container={<Link to={ROUTES.GAME} />}>
+              {TEXT.CALL_TO_ACTION}
+            </Button>
+          </>
+        )}
       </div>
     </Layout>
   );

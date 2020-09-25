@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { Form, FormField, Input, Button } from "components/UI";
 import { useForm } from "hooks/useForm";
 import { authOperations, authSelectors, authActions } from "services/auth";
-import { useHistory } from "react-router";
 import { ROUTES } from "constants/routes";
 import type { ISigninRequest } from "utils/request/types";
 
@@ -24,7 +24,6 @@ export const SigninForm: FC = () => {
   const dispatch = useDispatch();
   const [data, handleSubmit, handleChange] = useForm(initialValues);
   const error = useSelector(authSelectors.getError);
-  const { push } = useHistory();
 
   const onSubmit = (values: ISigninRequest) => {
     dispatch(authOperations.signin(values));
@@ -32,7 +31,6 @@ export const SigninForm: FC = () => {
 
   const handleSignupButtonClick = () => {
     dispatch(authActions.clearError());
-    push(ROUTES.SIGNUP);
   };
 
   return (
@@ -55,7 +53,13 @@ export const SigninForm: FC = () => {
         </Button>
       </FormField>
       <FormField>
-        <Button view="pseudo" width="max" type="button" onClick={handleSignupButtonClick}>
+        <Button
+          view="pseudo"
+          width="max"
+          type="button"
+          container={<Link to={ROUTES.SIGNUP} />}
+          onClick={handleSignupButtonClick}
+        >
           {TEXT.SIGNUP}
         </Button>
       </FormField>

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button, Input, Form, FormField } from "components/UI";
@@ -35,7 +35,6 @@ const initialValues: ISignupForm = {
 };
 
 export const SignupForm: FC = () => {
-  const { push } = useHistory();
   const [data, handleSubmit, handleChange] = useForm(initialValues);
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
@@ -46,7 +45,6 @@ export const SignupForm: FC = () => {
 
   const handleSigninButtonClick = () => {
     dispatch(authActions.clearError());
-    push(ROUTES.SIGNIN);
   };
 
   return (
@@ -112,7 +110,13 @@ export const SignupForm: FC = () => {
         </Button>
       </FormField>
       <FormField>
-        <Button view="pseudo" width="max" type="button" onClick={handleSigninButtonClick}>
+        <Button
+          view="pseudo"
+          width="max"
+          type="button"
+          onClick={handleSigninButtonClick}
+          container={<Link to={ROUTES.SIGNIN} />}
+        >
           {TEXT.SIGNIN}
         </Button>
       </FormField>

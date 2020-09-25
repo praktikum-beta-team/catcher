@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Avatar } from "components/UI";
 import { authOperations, authSelectors } from "services/auth";
 import { cn } from "helpers/classname";
-import { BASE_DOMAIN } from "constants/api";
 
 import "./SettingsAvatar.css";
 
@@ -20,9 +19,6 @@ export const SettingsAvatar: FC = () => {
   const src = useSelector(authSelectors.getAvatar);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
-
-  // С бэкенда возвращается адрес изображения относительно корня сервера
-  const fullSrc = src ? `${BASE_DOMAIN}${src}` : src;
 
   const handleClick = (): void => {
     const input = inputRef.current;
@@ -45,7 +41,7 @@ export const SettingsAvatar: FC = () => {
   };
 
   return (
-    <Avatar src={fullSrc} size="xl" onClick={handleClick} className={cnSettingsAvatar()}>
+    <Avatar src={src} size="xl" onClick={handleClick} className={cnSettingsAvatar()}>
       <div className={cnSettingsAvatar("overlay")}>
         <span className={cnSettingsAvatar("overlay-text")}>{TEXT.PICK}</span>
       </div>

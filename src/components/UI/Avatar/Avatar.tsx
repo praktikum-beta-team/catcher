@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes, isValidElement, cloneElement, ReactElement } from "react";
 
+import { BASE_DOMAIN } from "constants/api";
 import { cn } from "helpers/classname";
 
 import "./Avatar.css";
@@ -26,13 +27,16 @@ const cnAvatar = cn("avatar");
 export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props) => {
   const { src, size, className, children, container, ...restAvatarProps } = props;
 
+  // С бэкенда возвращается адрес изображения относительно корня сервера
+  const fullSrc = src ? `${BASE_DOMAIN}${src}` : src;
+
   return cloneElement(
     isValidElement(container) ? container : <div />,
     {
       role: "img",
       className: cnAvatar({ size }, [className]),
       style: {
-        backgroundImage: `url(${src ?? DEFAULT_SRC})`,
+        backgroundImage: `url(${fullSrc ?? DEFAULT_SRC})`,
       },
       ...restAvatarProps,
     },
