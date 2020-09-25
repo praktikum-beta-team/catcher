@@ -1,0 +1,25 @@
+.nav {
+  /* Здесь обертка нужна для семантичности */
+
+  &__list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    display: block;
+    list-style: none;
+  }
+
+  &__link {
+    display: block;
+    padding: 0 16px;
+    text-decoration: none;
+    color: var(--link-color-secondary);
+
+    &:hover {
+      color: var(--link-color-hover);
+    }
+  }
+}
