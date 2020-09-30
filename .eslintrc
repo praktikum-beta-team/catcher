@@ -27,7 +27,6 @@
         "tsx": "never"
       }
     ],
-    "react/prop-types": "off",
     "class-methods-use-this": [
       "error",
       {
@@ -53,7 +52,9 @@
         "ignorePropertyModificationsFor": ["state"]
       }
     ],
-    "camelcase": "off"
+    "camelcase": "off",
+    "arrow-body-style": ["warn", "as-needed"],
+    "react/prop-types": "off"
   },
   "settings": {
     "import/resolver": {
