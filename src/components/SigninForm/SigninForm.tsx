@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -19,13 +19,13 @@ export const SigninForm: FC = () => {
   const [data, handleSubmit, handleChange] = useForm(initialValues);
   const error = useSelector(authSelectors.getError);
 
-  const onSubmit = (values: ISigninRequest) => {
+  const onSubmit = useCallback((values: ISigninRequest) => {
     dispatch(authOperations.signin(values));
-  };
+  }, []);
 
-  const handleSignupButtonClick = () => {
+  const handleSignupButtonClick = useCallback(() => {
     dispatch(authActions.clearError());
-  };
+  }, []);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>

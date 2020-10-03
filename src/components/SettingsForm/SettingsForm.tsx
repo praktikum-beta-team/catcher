@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import type { IUserRequest } from "utils/request/types";
@@ -13,9 +13,9 @@ export const SettingsForm: FC = () => {
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 
-  const handleSettingsFormSubmit = (values: IUserRequest) => {
+  const handleSettingsFormSubmit = useCallback((values: IUserRequest) => {
     dispatch(authOperations.changeUserData(values));
-  };
+  }, []);
 
   return (
     <Form onSubmit={handleSubmit(handleSettingsFormSubmit)} error={error}>

@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react";
+import React, { ChangeEvent, FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { TEXT } from "constants/text";
@@ -14,35 +14,28 @@ const cnSettingsAvatar = cn("settings-avatar");
 
 export const SettingsAvatar: FC = () => {
   const src = useSelector(authSelectors.getAvatar);
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
 
-  const handleClick = (): void => {
-    const input = inputRef.current;
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const formData = new FormData();
+    const nextAvatar = event.target.files![0];
 
-    if (input) {
-      input.click();
-    }
-  };
-
-  const handleChange = () => {
-    const input = inputRef.current;
-
-    if (input && input.files?.length) {
-      const nextAvatarFile = input.files[0];
-      const formData = new FormData();
-
-      formData.append("avatar", nextAvatarFile);
-      dispatch(authOperations.changeUserAvatar(formData));
-    }
-  };
+    formData.append("avatar", nextAvatar);
+    dispatch(authOperations.changeUserAvatar(formData));
+  }, []);
 
   return (
-    <Avatar src={src} size="xl" onClick={handleClick} className={cnSettingsAvatar()}>
+    <Avatar
+      src={src}
+      size="xl"
+      className={cnSettingsAvatar()}
+      // eslint-disable-next-line jsx-a11y/label-has-associated-control
+      container={<label />}
+    >
       <div className={cnSettingsAvatar("overlay")}>
         <span className={cnSettingsAvatar("overlay-text")}>{TEXT.SETTINGS.CHANGE_AVATAR}</span>
       </div>
-      <input type="file" accept={MIME_TYPES} onChange={handleChange} ref={inputRef} hidden />
+      <input type="file" accept={MIME_TYPES} onChange={handleChange} hidden />
     </Avatar>
   );
 };
