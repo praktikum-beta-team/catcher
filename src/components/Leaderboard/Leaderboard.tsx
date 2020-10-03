@@ -27,18 +27,14 @@ export const Leaderboard: FC = () => {
   const [entries, setEntries] = useState<IBoardEntry[]>([]);
 
   useEffect(() => {
-
     /**
-     * Пока апи не работает, выводятся мок-данные
-     *
-     * dispatch(leaderboardOperations.fetchLeaders());
+     * Пока апи не работает, компонент выводит мок-данные
      */
-    
-     loadEntries()
-      .then(data => {
-        setEntries(data);
-        setLoading(false);
-      })
+
+    loadEntries().then((data) => {
+      setEntries(data);
+      setLoading(false);
+    });
   }, []);
 
   return (
