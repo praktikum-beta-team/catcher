@@ -1,4 +1,4 @@
-import React, { ComponentType, FC } from "react";
+import React, { ComponentType } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import { ROUTES } from "constants/routes";
@@ -32,21 +32,23 @@ const componentMap: IComponentMap = [
   { path: ROUTES.LEADERBOARD, component: Leaderboard },
 ];
 
-const routes = componentMap.map(({ component, isPrivate, ...restRouteProps }, index) => {
-  return isPrivate ? (
-    <PrivateRoute key={index} component={withErrorBoundary(component)} {...restRouteProps} />
-  ) : (
-    <Route key={index} component={withErrorBoundary(component)} {...restRouteProps} />
-  );
-});
+export const App = withStartup(() => (
+  <Router>
+    <Switch>
+      {componentMap.map((props) => {
+        const { path, component, isPrivate, ...restRouteProps } = props;
+        const RouteComponent = isPrivate ? PrivateRoute : Route;
 
-export const App: FC = withStartup(() => {
-  return (
-    <Router>
-      <Switch>
-        {routes}
-        <Redirect to={ROUTES.NOT_FOUND} />
-      </Switch>
-    </Router>
-  );
-});
+        return (
+          <RouteComponent
+            key={path}
+            path={path}
+            component={withErrorBoundary(component)}
+            {...restRouteProps}
+          />
+        );
+      })}
+      <Redirect to={ROUTES.NOT_FOUND} />
+    </Switch>
+  </Router>
+));

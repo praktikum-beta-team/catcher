@@ -1,17 +1,18 @@
 import React, { FC, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
 import { Button, Loading, Layout } from "components/UI";
 import { Board } from "components/Board";
-import type { IBoardEntry } from "components/Board/Entry";
+import type { IBoardEntry } from "components/Board";
 
-import { Link } from "react-router-dom";
 import { ROUTES } from "constants/routes";
-import mockData from "./mockData";
 
+import _mockData from "./mockData.json";
 import "./Leaderboard.css";
 
+const mockData = _mockData;
 const cnLeaderboard = cn("leaderboard");
 
 const loadEntries = (): Promise<IBoardEntry[]> =>
@@ -26,10 +27,18 @@ export const Leaderboard: FC = () => {
   const [entries, setEntries] = useState<IBoardEntry[]>([]);
 
   useEffect(() => {
-    loadEntries().then((data) => {
-      setEntries(data);
-      setLoading(false);
-    });
+
+    /**
+     * Пока апи не работает, выводятся мок-данные
+     *
+     * dispatch(leaderboardOperations.fetchLeaders());
+     */
+    
+     loadEntries()
+      .then(data => {
+        setEntries(data);
+        setLoading(false);
+      })
   }, []);
 
   return (

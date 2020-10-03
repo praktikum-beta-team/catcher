@@ -2,10 +2,24 @@ import React, { FC } from "react";
 
 import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
-import { BoardEntry as Entry } from "./Entry";
-import type { IBoardEntry } from "./Entry";
+import { Avatar } from "components/UI";
 
 import "./Board.css";
+
+export interface IBoardEntry {
+  /**
+   * Имя игрока
+   */
+  name: string;
+  /**
+   * Ссылка на аватар
+   */
+  avatar?: string | null;
+  /**
+   * Счет игрока
+   */
+  score: number;
+}
 
 interface IBoardProps {
   entries: IBoardEntry[];
@@ -21,7 +35,20 @@ const renderEntries = (entries: IBoardEntry[]) =>
      * и занять одно место
      */
     .sort((a, b) => b.score - a.score)
-    .map((entry, index) => <Entry key={index} place={index + 1} {...entry} />);
+    .map((entry, place) => {
+      const { avatar, name, score } = entry;
+
+      return (
+        <tr key={place}>
+          <td className={cnBoard("cell")}>{place + 1}</td>
+          <td className={cnBoard("cell")}>
+            <Avatar size="s" src={avatar} />
+          </td>
+          <td className={cnBoard("cell")}>{name}</td>
+          <td className={cnBoard("cell", { score: true })}>{score}</td>
+        </tr>
+      );
+    });
 
 export const Board: FC<IBoardProps> = (props) => {
   const { entries } = props;

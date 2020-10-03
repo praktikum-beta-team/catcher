@@ -1,1 +1,1 @@
-export { Board, cnBoard } from "./Board";
+export { Board, cnBoard, IBoardEntry } from "./Board";
