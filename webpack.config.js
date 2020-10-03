@@ -36,10 +36,6 @@ module.exports = {
           "postcss-loader",
         ],
       },
-      {
-        test: /\.json$/,
-        loader: "json-loader",
-      },
     ],
   },
   optimization: {
