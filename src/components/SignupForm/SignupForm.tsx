@@ -24,7 +24,7 @@ const initialValues: ISignupForm = {
 };
 
 export const SignupForm: FC = () => {
-  const [data, handleSubmit, handleChange] = useForm(initialValues);
+  const [, handleSubmit, fieldProps] = useForm(initialValues);
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 
@@ -40,62 +40,46 @@ export const SignupForm: FC = () => {
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
         <Input
-          name="first_name"
-          value={data.first_name}
+          {...fieldProps("first_name")}
           placeholder={TEXT.SIGNUP.FIRST_NAME}
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="second_name"
-          value={data.second_name}
+          {...fieldProps("second_name")}
           placeholder={TEXT.SIGNUP.SECOND_NAME}
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="login"
-          value={data.login}
-          type="text"
+          {...fieldProps("login")}
           placeholder={TEXT.SIGNUP.LOGIN}
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="email"
-          value={data.email}
-          type="text"
+          {...fieldProps("email")}
           placeholder={TEXT.SIGNUP.EMAIL}
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="phone"
-          value={data.phone}
+          {...fieldProps("phone")}
           placeholder={TEXT.SIGNUP.PHONE}
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="password"
-          value={data.password}
+          {...fieldProps("password")}
+          type="password"
           placeholder={TEXT.SIGNUP.PASSWORD}
-          type="password"
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="password_confirm"
-          value={data.password_confirm}
-          placeholder={TEXT.SIGNUP.PASSWORD_CONFIRM}
+          {...fieldProps("password_confirm")}
           type="password"
-          onChange={handleChange}
+          placeholder={TEXT.SIGNUP.PASSWORD_CONFIRM}
         />
       </FormField>
       <FormField>

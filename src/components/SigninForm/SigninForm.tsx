@@ -16,10 +16,10 @@ const initialValues: ISigninRequest = {
 
 export const SigninForm: FC = () => {
   const dispatch = useDispatch();
-  const [data, handleSubmit, handleChange] = useForm(initialValues);
+  const [, handleSubmit, fieldProps] = useForm<ISigninRequest>(initialValues);
   const error = useSelector(authSelectors.getError);
 
-  const onSubmit = useCallback((values: ISigninRequest) => {
+  const onSubmit = useCallback((values) => {
     dispatch(authOperations.signin(values));
   }, []);
 
@@ -31,19 +31,15 @@ export const SigninForm: FC = () => {
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
         <Input
-          name="login"
-          value={data.login}
           placeholder={TEXT.SIGNIN.LOGIN}
-          onChange={handleChange}
+          {...fieldProps('login')}
         />
       </FormField>
       <FormField>
         <Input
-          name="password"
-          value={data.password}
-          type="password"
           placeholder={TEXT.SIGNIN.PASSWORD}
-          onChange={handleChange}
+          type="password"
+          {...fieldProps('password')}
         />
       </FormField>
       <FormField>

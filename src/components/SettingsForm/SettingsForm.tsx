@@ -9,7 +9,7 @@ import { authOperations, authSelectors } from "services/auth";
 
 export const SettingsForm: FC = () => {
   const settings = useSelector(authSelectors.getCurrentSettings);
-  const [data, handleSubmit, handleChange] = useForm(settings);
+  const [, handleSubmit, fieldProps] = useForm(settings);
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 
@@ -21,44 +21,34 @@ export const SettingsForm: FC = () => {
     <Form onSubmit={handleSubmit(handleSettingsFormSubmit)} error={error}>
       <FormField>
         <Input
-          name="first_name"
-          value={data.first_name}
+          {...fieldProps("first_name")}
           placeholder={TEXT.SETTINGS.FIRST_NAME}
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="second_name"
-          value={data.second_name}
+          {...fieldProps("second_name")}
           placeholder={TEXT.SETTINGS.SECOND_NAME}
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="display_name"
-          value={data.display_name ?? ""}
+          {...fieldProps("display_name")}
           placeholder={TEXT.SETTINGS.DISPLAY_NAME}
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="email"
-          value={data.email}
+          {...fieldProps("email")}
           placeholder={TEXT.SETTINGS.EMAIL}
           type="text"
-          onChange={handleChange}
         />
       </FormField>
       <FormField>
         <Input
-          name="phone"
-          value={data.phone}
+          {...fieldProps("first_name")}
           placeholder={TEXT.SETTINGS.PHONE}
           type="tel"
-          onChange={handleChange}
         />
       </FormField>
       <FormField>

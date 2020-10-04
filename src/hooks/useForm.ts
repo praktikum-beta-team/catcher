@@ -5,7 +5,13 @@ export const useForm = <T>(
 ): [
   T,
   (cb?: (data: T) => void) => (event: FormEvent<HTMLFormElement>) => void,
-  (event: ChangeEvent<HTMLInputElement>) => void
+  (
+    name: keyof T
+  ) => {
+    name: keyof T;
+    value: string;
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  }
 ] => {
   const [data, setData] = useState(initialValues);
 
@@ -17,14 +23,16 @@ export const useForm = <T>(
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+  const fieldProps = (name: keyof T) => ({
+    name,
+    value: data[name] ? String(data[name]) : '',
+    onChange: ({ target }: ChangeEvent<HTMLInputElement>) => {
+      setData({
+        ...data,
+        [name]: target.value,
+      });
+    },
+  });
 
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
-
-  return [data, handleSubmit, handleChange];
+  return [data, handleSubmit, fieldProps];
 };
