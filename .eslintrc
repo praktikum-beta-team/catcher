@@ -54,7 +54,8 @@
     ],
     "camelcase": "off",
     "arrow-body-style": ["warn", "as-needed"],
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-use-before-define": "off"
   },
   "settings": {
     "import/resolver": {
