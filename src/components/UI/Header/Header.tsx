@@ -14,7 +14,7 @@ const cnHeader = cn("header");
 
 export const Header: FC<HTMLProps<HTMLHeadElement>> = (props) => {
   const { className, ...restHeaderProps } = props;
-  const isAuthenticated = useSelector(authSelectors.getAuthStatus);
+  const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
   const avatar = useSelector(authSelectors.getAvatar);
 
   return (

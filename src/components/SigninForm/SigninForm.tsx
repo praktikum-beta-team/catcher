@@ -9,14 +9,14 @@ import { authOperations, authSelectors, authActions } from "services/auth";
 import { ROUTES } from "constants/routes";
 import type { ISigninRequest } from "utils/request/types";
 
-const initialValues: ISigninRequest = {
+const defaultValues: ISigninRequest = {
   login: "",
   password: "",
 };
 
 export const SigninForm: FC = () => {
   const dispatch = useDispatch();
-  const [, handleSubmit, fieldProps] = useForm<ISigninRequest>(initialValues);
+  const [handleSubmit, fieldProps] = useForm(defaultValues);
   const error = useSelector(authSelectors.getError);
 
   const onSubmit = useCallback((values) => {
@@ -30,17 +30,10 @@ export const SigninForm: FC = () => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
-        <Input
-          placeholder={TEXT.SIGNIN.LOGIN}
-          {...fieldProps('login')}
-        />
+        <Input placeholder={TEXT.SIGNIN.LOGIN} {...fieldProps("login")} />
       </FormField>
       <FormField>
-        <Input
-          placeholder={TEXT.SIGNIN.PASSWORD}
-          type="password"
-          {...fieldProps('password')}
-        />
+        <Input placeholder={TEXT.SIGNIN.PASSWORD} type="password" {...fieldProps("password")} />
       </FormField>
       <FormField>
         <Button view="action" width="max">

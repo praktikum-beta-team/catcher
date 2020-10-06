@@ -1,15 +1,24 @@
 import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import type { IUserRequest } from "utils/request/types";
 import { TEXT } from "constants/text";
-import { Form, Input, Button, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
+import { Form, Input, Button, FormField } from "components/UI";
 import { authOperations, authSelectors } from "services/auth";
+import { IUserRequest } from "utils/request/types";
+
+const defaultValues: IUserRequest = {
+  first_name: "",
+  second_name: "",
+  display_name: "",
+  login: "",
+  email: "",
+  phone: "",
+};
 
 export const SettingsForm: FC = () => {
-  const settings = useSelector(authSelectors.getCurrentSettings);
-  const [, handleSubmit, fieldProps] = useForm(settings);
+  const settings = useSelector(authSelectors.getSettings);
+  const [handleSubmit, fieldProps] = useForm(settings ?? defaultValues);
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 

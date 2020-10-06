@@ -8,7 +8,7 @@ export const withStartup = <P extends Record<string, unknown>>(
 ): FC<P> => {
   const WrappedComponent = (props: P) => {
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector(authSelectors.getAuthStatus);
+    const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
 
     useEffect(() => {
       if (isAuthenticated) {

@@ -9,7 +9,7 @@ export function request<T = null, R = Record<string, unknown>, E = IErrorRespons
 ) {
   return async (
     data: T,
-    cb: (data: AxiosResponse<R>) => void,
+    cb: (response: AxiosResponse<R>) => void,
     errorCb?: (e: AxiosError<E>) => void
   ): Promise<void | AxiosResponse> => {
     try {

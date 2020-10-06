@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { TEXT } from "constants/text";
-import { getAuthStatus } from "services/auth/selectors";
+import { authSelectors } from "services/auth";
 import { cn } from "helpers/classname";
 import { Modal } from "components/UI";
 import { SigninForm } from "components/SigninForm";
@@ -14,7 +14,7 @@ import "./Signin.css";
 const cnSignin = cn("signin");
 
 export const Signin: FC = () => {
-  const isAuthenticated = useSelector(getAuthStatus);
+  const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
 
   return isAuthenticated ? (
     <Redirect to={ROUTES.GAME} />

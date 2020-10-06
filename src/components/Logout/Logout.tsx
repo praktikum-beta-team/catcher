@@ -8,7 +8,7 @@ import { Loading } from "components/UI";
 
 export const Logout: FC = () => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(authSelectors.getAuthStatus);
+  const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
 
   useEffect(() => {
     dispatch(authOperations.logout());

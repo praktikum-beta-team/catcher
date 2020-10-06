@@ -24,7 +24,7 @@ const initialValues: ISignupForm = {
 };
 
 export const SignupForm: FC = () => {
-  const [, handleSubmit, fieldProps] = useForm(initialValues);
+  const [handleSubmit, fieldProps] = useForm(initialValues);
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 

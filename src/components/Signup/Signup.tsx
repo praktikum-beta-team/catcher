@@ -14,7 +14,7 @@ import { ROUTES } from "constants/routes";
 const cnSignup = cn("signup");
 
 export const Signup: FC = () => {
-  const isAuthenticated = useSelector(authSelectors.getAuthStatus);
+  const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
 
   return isAuthenticated ? (
     <Redirect to={ROUTES.GAME} />
