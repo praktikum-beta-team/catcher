@@ -53,6 +53,7 @@
     "postcss-mixins": "7.0.0",
     "postcss-nested": "5.0.0",
     "postcss-simple-vars": "6.0.0",
+    "prettier": "2.1.2",
     "style-loader": "1.2.1",
     "ts-jest": "26.4.1",
     "ts-loader": "8.0.2",
