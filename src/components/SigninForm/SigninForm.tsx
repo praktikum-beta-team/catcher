@@ -26,7 +26,7 @@ export const SigninForm: FC = () => {
     [dispatch]
   );
 
-  const handleSignupButtonClick = useCallback(() => {
+  const onSignupButtonClick = useCallback(() => {
     dispatch(authActions.clearError());
   }, [dispatch]);
 
@@ -49,7 +49,7 @@ export const SigninForm: FC = () => {
           width="max"
           type="button"
           container={<Link to={ROUTES.SIGNUP} />}
-          onClick={handleSignupButtonClick}
+          onClick={onSignupButtonClick}
         >
           {TEXT.SIGNIN.SIGNUP}
         </Button>

@@ -35,48 +35,29 @@ export const SignupForm: FC = () => {
     [dispatch]
   );
 
-  const handleSigninButtonClick = useCallback(() => {
+  const onSigninButtonClick = useCallback(() => {
     dispatch(authActions.clearError());
   }, [dispatch]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
-        <Input
-          {...fieldProps("first_name")}
-          placeholder={TEXT.SIGNUP.FIRST_NAME}
-        />
+        <Input {...fieldProps("first_name")} placeholder={TEXT.SIGNUP.FIRST_NAME} />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("second_name")}
-          placeholder={TEXT.SIGNUP.SECOND_NAME}
-        />
+        <Input {...fieldProps("second_name")} placeholder={TEXT.SIGNUP.SECOND_NAME} />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("login")}
-          placeholder={TEXT.SIGNUP.LOGIN}
-        />
+        <Input {...fieldProps("login")} placeholder={TEXT.SIGNUP.LOGIN} />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("email")}
-          placeholder={TEXT.SIGNUP.EMAIL}
-        />
+        <Input {...fieldProps("email")} placeholder={TEXT.SIGNUP.EMAIL} />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("phone")}
-          placeholder={TEXT.SIGNUP.PHONE}
-        />
+        <Input {...fieldProps("phone")} placeholder={TEXT.SIGNUP.PHONE} />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("password")}
-          type="password"
-          placeholder={TEXT.SIGNUP.PASSWORD}
-        />
+        <Input {...fieldProps("password")} type="password" placeholder={TEXT.SIGNUP.PASSWORD} />
       </FormField>
       <FormField>
         <Input
@@ -95,7 +76,7 @@ export const SignupForm: FC = () => {
           view="pseudo"
           width="max"
           type="button"
-          onClick={handleSigninButtonClick}
+          onClick={onSigninButtonClick}
           container={<Link to={ROUTES.SIGNIN} />}
         >
           {TEXT.SIGNUP.SIGNIN}
