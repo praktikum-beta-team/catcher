@@ -3,6 +3,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
+
 module.exports = {
   entry: "./src/index.tsx",
   output: {
@@ -25,13 +27,13 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: process.env.NODE_ENV === "production" ? "ts-loader" : ["ts-loader", "eslint-loader"],
+        use: IS_PRODUCTION ? "ts-loader" : ["ts-loader", "eslint-loader"],
         exclude: /node_modules/,
       },
       {
         test: /\.css$/,
         use: [
-          process.env.NODE_ENV === "production" ? MiniCssExtractPlugin.loader : "style-loader",
+          IS_PRODUCTION ? MiniCssExtractPlugin.loader : "style-loader",
           "css-loader",
           "postcss-loader",
         ],
