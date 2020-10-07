@@ -11,14 +11,14 @@ interface IFormProps {
   error: null | string;
 }
 
-const cnForm = cn("form");
+const b_ = cn("form");
 
 export const Form: FC<IFormProps & HTMLProps<HTMLFormElement>> = (props) => {
   const { error, children, className, ...restFormProps } = props;
 
   return (
-    <form className={cnForm({}, [className])} {...restFormProps}>
-      {error && <span className={cnForm("error")}>{error}</span>}
+    <form className={b_({}, [className])} {...restFormProps}>
+      {error && <span className={b_("error")}>{error}</span>}
       {children}
     </form>
   );

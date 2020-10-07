@@ -11,7 +11,7 @@ import { ROUTES } from "constants/routes";
 
 import "./Signin.css";
 
-const cnSignin = cn("signin");
+const b_ = cn("signin");
 
 export const Signin: FC = () => {
   const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
@@ -19,7 +19,7 @@ export const Signin: FC = () => {
   return isAuthenticated ? (
     <Redirect to={ROUTES.GAME} />
   ) : (
-    <div className={cnSignin()}>
+    <div className={b_()}>
       <Modal title={TEXT.SIGNIN.TITLE}>
         <SigninForm />
       </Modal>

@@ -10,7 +10,7 @@ import "./SettingsAvatar.css";
 
 const MIME_TYPES = "image/*";
 
-const cnSettingsAvatar = cn("settings-avatar");
+const b_ = cn("settings-avatar");
 
 export const SettingsAvatar: FC = () => {
   const src = useSelector(authSelectors.getAvatar);
@@ -28,12 +28,12 @@ export const SettingsAvatar: FC = () => {
     <Avatar
       src={src}
       size="xl"
-      className={cnSettingsAvatar()}
+      className={b_()}
       // eslint-disable-next-line jsx-a11y/label-has-associated-control
       container={<label />}
     >
-      <div className={cnSettingsAvatar("overlay")}>
-        <span className={cnSettingsAvatar("overlay-text")}>{TEXT.SETTINGS.CHANGE_AVATAR}</span>
+      <div className={b_("overlay")}>
+        <span className={b_("overlay-text")}>{TEXT.SETTINGS.CHANGE_AVATAR}</span>
       </div>
       <input type="file" accept={MIME_TYPES} onChange={handleChange} hidden />
     </Avatar>

@@ -19,18 +19,18 @@ interface IButtonProps {
   container?: ReactElement;
 }
 
-const cnButton = cn("button");
+const b_ = cn("button");
 
 export const Button: FC<IButtonProps & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "width">> = (
   props
 ) => {
   const { children, view, width, className, container, ...restButtonProps } = props;
-  const buttonChildren = <span className={cnButton("text")}>{children}</span>;
+  const buttonChildren = <span className={b_("text")}>{children}</span>;
 
   return cloneElement(
     isValidElement(container) ? container : <button />,
     {
-      className: cnButton({ view, width }, [className]),
+      className: b_({ view, width }, [className]),
       ...restButtonProps,
     },
     buttonChildren

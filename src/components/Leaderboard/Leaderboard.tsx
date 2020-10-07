@@ -13,7 +13,7 @@ import _mockData from "./mockData.json";
 import "./Leaderboard.css";
 
 const mockData = _mockData;
-const cnLeaderboard = cn("leaderboard");
+const b_ = cn("leaderboard");
 
 const loadEntries = (): Promise<IBoardEntry[]> =>
   new Promise((resolve) => {
@@ -39,8 +39,8 @@ export const Leaderboard: FC = () => {
 
   return (
     <Layout>
-      <div className={cnLeaderboard()}>
-        <h1 className={cnLeaderboard("title")}>{TEXT.LEADERBOARD.TITLE}</h1>
+      <div className={b_()}>
+        <h1 className={b_("title")}>{TEXT.LEADERBOARD.TITLE}</h1>
         {loading ? (
           <Loading />
         ) : (

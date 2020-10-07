@@ -25,7 +25,7 @@ interface IBoardProps {
   entries: IBoardEntry[];
 }
 
-export const cnBoard = cn("board");
+export const b_ = cn("board");
 
 const renderEntries = (entries: IBoardEntry[]) =>
   entries
@@ -40,12 +40,12 @@ const renderEntries = (entries: IBoardEntry[]) =>
 
       return (
         <tr key={place}>
-          <td className={cnBoard("cell")}>{place + 1}</td>
-          <td className={cnBoard("cell")}>
+          <td className={b_("cell")}>{place + 1}</td>
+          <td className={b_("cell")}>
             <Avatar size="s" src={avatar} />
           </td>
-          <td className={cnBoard("cell")}>{name}</td>
-          <td className={cnBoard("cell", { score: true })}>{score}</td>
+          <td className={b_("cell")}>{name}</td>
+          <td className={b_("cell", { score: true })}>{score}</td>
         </tr>
       );
     });
@@ -54,14 +54,14 @@ export const Board: FC<IBoardProps> = (props) => {
   const { entries } = props;
 
   return (
-    <table className={cnBoard()}>
-      <thead className={cnBoard("header")}>
+    <table className={b_()}>
+      <thead className={b_("header")}>
         <tr>
           <th></th>
-          <th className={cnBoard("cell", { header: true })} colSpan={2}>
+          <th className={b_("cell", { header: true })} colSpan={2}>
             {TEXT.LEADERBOARD.PLAYER}
           </th>
-          <th className={cnBoard("cell", { header: true })}>{TEXT.LEADERBOARD.SCORE}</th>
+          <th className={b_("cell", { header: true })}>{TEXT.LEADERBOARD.SCORE}</th>
         </tr>
       </thead>
       <tbody>{renderEntries(entries)}</tbody>

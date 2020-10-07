@@ -55,7 +55,8 @@
     "camelcase": "off",
     "arrow-body-style": ["warn", "as-needed"],
     "react/prop-types": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "no-underscore-dangle": ["error", { "allow": ["b_"] }]
   },
   "settings": {
     "import/resolver": {

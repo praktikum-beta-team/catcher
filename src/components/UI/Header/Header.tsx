@@ -10,7 +10,7 @@ import { HeaderNav } from "./Nav";
 
 import "./Header.css";
 
-const cnHeader = cn("header");
+const b_ = cn("header");
 
 export const Header: FC<HTMLProps<HTMLHeadElement>> = (props) => {
   const { className, ...restHeaderProps } = props;
@@ -18,10 +18,10 @@ export const Header: FC<HTMLProps<HTMLHeadElement>> = (props) => {
   const avatar = useSelector(authSelectors.getAvatar);
 
   return (
-    <header className={cnHeader({}, [className])} {...restHeaderProps}>
-      <HeaderNav className={cnHeader("nav")} />
+    <header className={b_({}, [className])} {...restHeaderProps}>
+      <HeaderNav className={b_("nav")} />
       {isAuthenticated && (
-        <div className={cnHeader("user")}>
+        <div className={b_("user")}>
           <Avatar src={avatar} size="s" container={<Link to={ROUTES.SETTINGS} />} />
         </div>
       )}

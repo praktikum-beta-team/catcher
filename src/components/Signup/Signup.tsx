@@ -11,7 +11,7 @@ import { authSelectors } from "services/auth";
 import "./Signup.css";
 import { ROUTES } from "constants/routes";
 
-const cnSignup = cn("signup");
+const b_ = cn("signup");
 
 export const Signup: FC = () => {
   const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
@@ -19,7 +19,7 @@ export const Signup: FC = () => {
   return isAuthenticated ? (
     <Redirect to={ROUTES.GAME} />
   ) : (
-    <div className={cnSignup()}>
+    <div className={b_()}>
       <Modal title={TEXT.SIGNUP.TITLE}>
         <SignupForm />
       </Modal>

@@ -10,20 +10,20 @@ import { authSelectors } from "services/auth";
 
 import "./Settings.css";
 
-const cnSettings = cn("settings");
+const b_ = cn("settings");
 
 export const Settings: FC = () => {
   const user = useSelector(authSelectors.getUser);
 
   return user ? (
     <Layout>
-      <div className={cnSettings()}>
-        <h1 className={cnSettings("title")}>{TEXT.SETTINGS.TITLE}</h1>
-        <div className={cnSettings("layout")}>
-          <div className={cnSettings("column")}>
+      <div className={b_()}>
+        <h1 className={b_("title")}>{TEXT.SETTINGS.TITLE}</h1>
+        <div className={b_("layout")}>
+          <div className={b_("column")}>
             <SettingsAvatar />
           </div>
-          <div className={cnSettings("column")}>
+          <div className={b_("column")}>
             <SettingsForm />
           </div>
         </div>

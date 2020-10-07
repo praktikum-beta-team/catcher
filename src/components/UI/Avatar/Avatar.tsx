@@ -22,7 +22,7 @@ interface IAvatarProps {
   container?: ReactElement;
 }
 
-const cnAvatar = cn("avatar");
+const b_ = cn("avatar");
 
 export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props) => {
   const { src, size, className, children, container, ...restAvatarProps } = props;
@@ -34,7 +34,7 @@ export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props)
     isValidElement(container) ? container : <div />,
     {
       role: "img",
-      className: cnAvatar({ size }, [className]),
+      className: b_({ size }, [className]),
       style: {
         backgroundImage: `url(${fullSrc ?? DEFAULT_SRC})`,
       },

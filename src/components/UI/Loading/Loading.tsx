@@ -5,8 +5,8 @@ import { cn } from "helpers/classname";
 
 import "./Loading.css";
 
-const cnLoading = cn("loader");
+const b_ = cn("loader");
 
 export const Loading: FC<HTMLProps<HTMLSpanElement>> = () => {
-  return <div className={cnLoading()}>{TEXT.LOADING}</div>;
+  return <div className={b_()}>{TEXT.LOADING}</div>;
 };

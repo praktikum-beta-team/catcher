@@ -6,13 +6,13 @@ import { cn } from "helpers/classname";
 
 import "./HeaderNav.css";
 
-const cnNav = cn("nav");
+const b_ = cn("nav");
 
 export const HeaderNav: FC<HTMLProps<HTMLDivElement>> = ({ className, ...restNavProps }) => (
-  <nav className={cnNav(null, [className])} {...restNavProps}>
-    <ul className={cnNav("list")}>
-      <li className={cnNav("item")}>
-        <Link className={cnNav("link")} to={ROUTES.LEADERBOARD}>
+  <nav className={b_(null, [className])} {...restNavProps}>
+    <ul className={b_("list")}>
+      <li className={b_("item")}>
+        <Link className={b_("link")} to={ROUTES.LEADERBOARD}>
           Список лидеров
         </Link>
       </li>
