@@ -24,7 +24,7 @@ export const SettingsForm: FC = () => {
 
   const handleSettingsFormSubmit = useCallback((values: IUserRequest) => {
     dispatch(authOperations.changeUserData(values));
-  }, []);
+  }, [dispatch]);
 
   return (
     <Form onSubmit={handleSubmit(handleSettingsFormSubmit)} error={error}>

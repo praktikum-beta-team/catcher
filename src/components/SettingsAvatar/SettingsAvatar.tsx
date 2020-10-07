@@ -22,7 +22,7 @@ export const SettingsAvatar: FC = () => {
 
     formData.append("avatar", nextAvatar);
     dispatch(authOperations.changeUserAvatar(formData));
-  }, []);
+  }, [dispatch]);
 
   return (
     <Avatar

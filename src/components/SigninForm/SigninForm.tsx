@@ -19,13 +19,16 @@ export const SigninForm: FC = () => {
   const [handleSubmit, fieldProps] = useForm(defaultValues);
   const error = useSelector(authSelectors.getError);
 
-  const onSubmit = useCallback((values) => {
-    dispatch(authOperations.signin(values));
-  }, []);
+  const onSubmit = useCallback(
+    (values) => {
+      dispatch(authOperations.signin(values));
+    },
+    [dispatch]
+  );
 
   const handleSignupButtonClick = useCallback(() => {
     dispatch(authActions.clearError());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>
