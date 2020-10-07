@@ -18,15 +18,15 @@ export class Collectible {
     this.x = Math.floor(Math.random() * ctx.canvas.width - this.width);
   }
 
-  move() {
-    this.y += 5;
+  draw() {
+    this.ctx.fillStyle = "#00ff00";
+    this.ctx.fillRect(this.x, this.y, this.height, this.width);
 
     return this;
   }
 
-  draw() {
-    this.ctx.fillStyle = "#00ff00";
-    this.ctx.fillRect(this.x, this.y, this.height, this.width);
+  move() {
+    this.y += 5;
 
     return this;
   }

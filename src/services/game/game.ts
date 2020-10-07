@@ -55,11 +55,13 @@ export class Game {
   }
 
   render = () => {
-    this.lastFrameTime = window.performance.now();
-    this.loop(this.lastFrameTime);
+      this.lastFrameTime = window.performance.now();
+      this.loop(this.lastFrameTime);
   };
 
   loop: FrameRequestCallback = (currentTime) => {
+    if (this.score > 20) return;
+
     this.requestedFrame = window.requestAnimationFrame(this.loop);
 
     const elapsedTime = currentTime - this.lastFrameTime!;

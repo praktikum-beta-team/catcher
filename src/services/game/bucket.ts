@@ -26,9 +26,9 @@ export class Bucket {
   }
 
   move(left = false) {
-    if (left) {
+    if (left && this.x > 0) {
       this.x -= 5;
-    } else {
+    } else if (this.x < this.ctx.canvas.width - this.width) {
       this.x += 5;
     }
 
