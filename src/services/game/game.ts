@@ -1,4 +1,5 @@
 import { Input } from "./input";
+import { HUD } from "./hud";
 import { Collectible } from "./collectible";
 import { Bucket } from "./bucket";
 
@@ -25,6 +26,8 @@ export class Game {
 
   input;
 
+  hud;
+
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
     this.frame = 0;
@@ -39,6 +42,8 @@ export class Game {
 
     this.input = new Input();
     this.input.addListeners();
+
+    this.hud = new HUD(this);
   }
 
   destroy() {
@@ -82,6 +87,8 @@ export class Game {
     }
 
     this.bucket.draw();
+
+    this.hud.draw();
 
     this.collectibles.forEach((collectible, index) => {
       if (collectible.isOnScreen) {
