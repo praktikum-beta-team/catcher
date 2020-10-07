@@ -11,21 +11,22 @@ export const GameScreen: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
+    let game: Game;
     const ctx = canvasRef.current?.getContext('2d')
 
     if (ctx) {
-      const game = new Game(ctx)
-      game.render()
+      game = new Game(ctx);
+      game.render();
     }
 
-    return () => {
-      console.log('unmount')
-    }
+    return () => game && game.destroy();
   }, [])
   
   return (
-      <div className={b_()}>
-        <canvas ref={canvasRef} width={320} height={480} />
-      </div>
-    );
+    <div className={b_()}>
+      <canvas ref={canvasRef} width={320} height={480}>
+        Canvas disabled
+      </canvas>
+    </div>
+  );
 };

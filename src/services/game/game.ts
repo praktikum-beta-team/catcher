@@ -1,3 +1,4 @@
+import { Input } from "./input";
 import { Collectible } from "./collectible";
 import { Bucket } from "./bucket";
 
@@ -7,10 +8,6 @@ export class Game {
   ctx;
 
   frame;
-
-  rightPressed;
-
-  leftPressed;
 
   collectibles: any[];
 
@@ -26,12 +23,12 @@ export class Game {
 
   frameInterval: number;
 
+  input;
+
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
     this.frame = 0;
     this.score = 0;
-    this.rightPressed = false;
-    this.leftPressed = false;
 
     this.collectibles = [];
     this.bucket = new Bucket(this.ctx);
@@ -40,34 +37,16 @@ export class Game {
 
     this.frameInterval = 1000 / FPS;
 
-    this.init();
-  }
-
-  init() {
-    const keyDownHandler = (event: KeyboardEvent) => {
-      if (event.key === "Right" || event.key === "ArrowRight") {
-        this.rightPressed = true;
-      } else if (event.key === "Left" || event.key === "ArrowLeft") {
-        this.leftPressed = true;
-      }
-    };
-
-    const keyUpHandler = (event: KeyboardEvent) => {
-      if (event.key === "Right" || event.key === "ArrowRight") {
-        this.rightPressed = false;
-      } else if (event.key === "Left" || event.key === "ArrowLeft") {
-        this.leftPressed = false;
-      }
-    };
-
-    document.addEventListener("keydown", keyDownHandler);
-    document.addEventListener("keyup", keyUpHandler);
+    this.input = new Input();
+    this.input.addListeners();
   }
 
   destroy() {
     if (this.requestedFrame) {
       window.cancelAnimationFrame(this.requestedFrame);
     }
+
+    this.input.removeListeners();
   }
 
   render = () => {
@@ -96,9 +75,9 @@ export class Game {
 
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
-    if (this.leftPressed) {
+    if (this.input.keys.left) {
       this.bucket.move(true);
-    } else if (this.rightPressed) {
+    } else if (this.input.keys.right) {
       this.bucket.move();
     }
 
