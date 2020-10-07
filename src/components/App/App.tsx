@@ -11,41 +11,40 @@ import {
   NotFound,
   Logout,
   GameScreen,
-  withErrorBoundary,
+  ErrorBoundary,
   withStartup,
 } from "components";
 
 type IComponentMap = {
   path: string;
-  component: ComponentType;
+  Component: ComponentType;
   isPrivate?: boolean;
   exact?: boolean;
 }[];
 
 const componentMap: IComponentMap = [
-  { path: ROUTES.SIGNIN, component: Signin, exact: true },
-  { path: ROUTES.SIGNUP, component: Signup },
-  { path: ROUTES.SETTINGS, component: Settings, isPrivate: true },
-  { path: ROUTES.GAME, component: GameScreen },
-  { path: ROUTES.LOGOUT, component: Logout, isPrivate: true },
-  { path: ROUTES.NOT_FOUND, component: NotFound },
-  { path: ROUTES.LEADERBOARD, component: Leaderboard },
+  { path: ROUTES.SIGNIN, Component: Signin, exact: true },
+  { path: ROUTES.SIGNUP, Component: Signup },
+  { path: ROUTES.SETTINGS, Component: Settings, isPrivate: true },
+  { path: ROUTES.GAME, Component: GameScreen },
+  { path: ROUTES.LOGOUT, Component: Logout, isPrivate: true },
+  { path: ROUTES.NOT_FOUND, Component: NotFound },
+  { path: ROUTES.LEADERBOARD, Component: Leaderboard },
 ];
 
 export const App = withStartup(() => (
   <Router>
     <Switch>
       {componentMap.map((props) => {
-        const { path, component, isPrivate, ...restRouteProps } = props;
+        const { path, Component, isPrivate, ...restRouteProps } = props;
         const RouteComponent = isPrivate ? PrivateRoute : Route;
 
         return (
-          <RouteComponent
-            key={path}
-            path={path}
-            component={withErrorBoundary(component)}
-            {...restRouteProps}
-          />
+          <RouteComponent key={path} path={path} {...restRouteProps}>
+            <ErrorBoundary>
+              <Component />
+            </ErrorBoundary>
+          </RouteComponent>
         );
       })}
       <Redirect to={ROUTES.NOT_FOUND} />

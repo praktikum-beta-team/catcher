@@ -1,7 +1,7 @@
 export * from "./PrivateRoute";
 
-export * from "./withErrorBoundary";
 export * from "./withStartup";
+export * from "./ErrorBoundary";
 
 export * from "./GameScreen";
 export * from "./Logout";
