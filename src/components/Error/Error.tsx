@@ -10,11 +10,9 @@ interface IErrorProps {
 
 const b_ = cn("error");
 
-export const Error: FC<IErrorProps> = ({ title, children }) => {
-  return (
-    <div className={b_()}>
-      <h1 className={b_("title")}>{title}</h1>
-      {children}
-    </div>
-  );
-};
+export const Error: FC<IErrorProps> = ({ title, children }) => (
+  <div className={b_()}>
+    <h1 className={b_("title")}>{title}</h1>
+    {children}
+  </div>
+);

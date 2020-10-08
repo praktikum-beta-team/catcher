@@ -16,9 +16,9 @@ export const SettingsAvatar: FC = () => {
   const src = useSelector(authSelectors.getAvatar);
   const dispatch = useDispatch();
 
-  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
     const formData = new FormData();
-    const nextAvatar = event.target.files![0];
+    const nextAvatar = target.files![0];
 
     formData.append("avatar", nextAvatar);
     dispatch(authOperations.changeUserAvatar(formData));

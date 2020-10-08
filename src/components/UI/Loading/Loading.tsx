@@ -7,6 +7,6 @@ import "./Loading.css";
 
 const b_ = cn("loader");
 
-export const Loading: FC<HTMLProps<HTMLSpanElement>> = () => {
-  return <div className={b_()}>{TEXT.LOADING}</div>;
-};
+export const Loading: FC<HTMLProps<HTMLSpanElement>> = () => (
+  <div className={b_()}>{TEXT.LOADING}</div>
+);
