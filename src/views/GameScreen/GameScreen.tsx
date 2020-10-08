@@ -16,7 +16,7 @@ export const GameScreen: FC = () => {
 
     if (ctx) {
       game = new Game(ctx);
-      game.render();
+      game.start();
     }
 
     return () => game && game.destroy();

@@ -1,20 +1,26 @@
+import type { Game } from "./game";
+
 export class HUD {
   game;
 
-  x;
-
-  y;
-
-  constructor(game: any) {
+  constructor(game: Game) {
     this.game = game;
-    this.x = 0;
-    this.y = 0;
   }
 
   draw() {
-    this.game.ctx.fillStyle = "#ffffff";
-    this.game.ctx.font = "25px sans-serif";
-    this.game.ctx.textBaseline = "top";
-    this.game.ctx.fillText(this.game.score, this.x, this.y);
+    const { ctx, score, lives } = this.game;
+    const { width } = ctx.canvas;
+
+    ctx.textBaseline = "top";
+
+    ctx.font = "24px sans-serif";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "start";
+    ctx.fillText(`${lives}`, 0, 0);
+
+    ctx.font = "18px sans-serif";
+    ctx.fillStyle = "grey";
+    ctx.textAlign = "end";
+    ctx.fillText(`${score}`, width, 0);
   }
 }

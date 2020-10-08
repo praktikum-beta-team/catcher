@@ -1,10 +1,25 @@
+export const KEYS = <const>{
+  LEFT: "left",
+  RIGHT: "right",
+  SPASEBAR: "spacebar",
+};
+
+type callback = (...args: unknown[]) => void;
+
+type Keys = typeof KEYS[keyof typeof KEYS];
+
 export class Input {
-  keys: Record<string, boolean>;
+  keys: {
+    [P in Keys]: boolean;
+  };
+
+  listeners: Record<string, callback[]> = {};
 
   constructor() {
     this.keys = {
       left: false,
       right: false,
+      spacebar: false,
     };
   }
 
@@ -19,18 +34,55 @@ export class Input {
   }
 
   handleKeyPress = ({ key, type }: KeyboardEvent) => {
-    const keyState = type === "keydown";
+    const { keys, emit } = this;
+    const pressed = type === "keydown";
 
     // eslint-disable-next-line default-case
     switch (key) {
       case "Right":
       case "ArrowRight":
-        this.keys.right = keyState;
+        keys[KEYS.RIGHT] = pressed;
         break;
       case "Left":
       case "ArrowLeft":
-        this.keys.left = keyState;
+        keys[KEYS.LEFT] = pressed;
+        break;
+      case "Spacebar":
+      case " ":
+        keys[KEYS.SPASEBAR] = pressed;
+        if (pressed) emit(KEYS.SPASEBAR);
         break;
     }
   };
+
+  /**
+   * TODO: Добавить возможность подписываться на событие однократно
+   * on(key: string, cb: callback, once = false) {}
+   */
+
+  on = (key: Keys, cb: callback) => {
+    const { listeners } = this;
+
+    if (!listeners[key]) {
+      listeners[key] = [];
+    }
+
+    listeners[key].push(cb);
+  };
+
+  emit = (key: Keys) => {
+    const { listeners } = this;
+
+    if (listeners[key]) {
+      listeners[key].forEach((cb) => {
+        cb();
+      });
+    }
+  };
+
+  detach(key: Keys, cb: callback) {
+    const { listeners } = this;
+
+    listeners[key] = listeners[key].filter((listener) => listener !== cb);
+  }
 }

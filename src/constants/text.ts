@@ -40,4 +40,7 @@ export const TEXT = {
     SUBMIT: "Зарегистрироваться",
     SIGNIN: "Войти с паролем",
   },
+  GAME: {
+    RESTART: "Пробел, чтобы начать сначала",
+  },
 } as const;
