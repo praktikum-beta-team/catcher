@@ -26,7 +26,8 @@ export class Collectible implements IGameObject {
     this.params = params;
 
     const { width: canvasWidth } = ctx.canvas;
-    this.x = Math.floor(Math.random() * canvasWidth - this.width);
+
+    this.x = Math.floor(Math.random() * (canvasWidth - this.width))
   }
 
   draw() {
