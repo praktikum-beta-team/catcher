@@ -107,6 +107,9 @@ export class Game {
         }
         collectible.move();
       } else {
+        if (!collectible.params.dangerous) {
+          this.lives -= 1;
+        }
         collectibles.splice(index, 1);
       }
     });
