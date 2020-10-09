@@ -1,7 +1,7 @@
 import { Bucket, Collectible } from "./objects";
 import { HUD } from "./hud";
 import { Input, KEYS } from "./input";
-import { Loss } from "./screens";
+import { Crash, Loss } from "./screens";
 
 const FPS = 60;
 const LIVES = 3;
@@ -31,6 +31,8 @@ export class Game {
 
   loss;
 
+  crash;
+
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
     this.input = new Input();
@@ -39,6 +41,7 @@ export class Game {
     this.bucket = new Bucket(this.ctx);
     this.hud = new HUD(this);
     this.loss = new Loss(this);
+    this.crash = new Crash(this.ctx);
   }
 
   start = () => {
@@ -65,7 +68,7 @@ export class Game {
   };
 
   loop: FrameRequestCallback = (nextTick) => {
-    const { input, enqueue, update, draw, restart, loss, loop, tickLength, lives } = this;
+    const { input, enqueue, update, draw, restart, loss, crash, loop, tickLength, lives } = this;
 
     if (!lives) {
       input.on(KEYS.SPASEBAR, restart);
@@ -79,8 +82,16 @@ export class Game {
     if (elapsed >= tickLength) {
       this.numTicks += 1;
       this.lastTick = nextTick - (elapsed % tickLength);
-      update();
-      draw();
+
+      try {
+        update();
+        draw();
+      } catch (error) {
+        console.error(error);
+        enqueue(crash.draw);
+
+        return;
+      }
     }
 
     enqueue(loop);
@@ -95,19 +106,19 @@ export class Game {
       bucket.move();
     }
 
-    collectibles.forEach((collectible, index) => {
-      if (collectible.isOnScreen) {
-        if (collectible.intersectsWithObject(bucket)) {
-          if (collectible.params.dangerous) {
+    collectibles.forEach(({ isOnScreen, intersectsWithObject, dangerous, move }, index) => {
+      if (isOnScreen) {
+        if (intersectsWithObject(bucket)) {
+          if (dangerous) {
             this.lives -= 1;
           } else {
             this.score += 1;
           }
           collectibles.splice(index, 1);
         }
-        collectible.move();
+        move();
       } else {
-        if (!collectible.params.dangerous) {
+        if (!dangerous) {
           this.lives -= 1;
         }
         collectibles.splice(index, 1);

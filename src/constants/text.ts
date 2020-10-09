@@ -42,5 +42,6 @@ export const TEXT = {
   },
   GAME: {
     RESTART: "Пробел, чтобы начать сначала",
+    ERROR: "Что-то пошло не так",
   },
 } as const;
