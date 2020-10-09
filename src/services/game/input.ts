@@ -4,8 +4,6 @@ export const KEYS = <const>{
   SPASEBAR: "spacebar",
 };
 
-type callback = (...args: unknown[]) => void;
-
 type Keys = typeof KEYS[keyof typeof KEYS];
 
 export class Input {
@@ -13,13 +11,13 @@ export class Input {
     [P in Keys]: boolean;
   };
 
-  listeners: Record<string, callback[]> = {};
+  listeners: Record<string, (() => void)[]> = {};
 
   constructor() {
     this.keys = {
-      left: false,
-      right: false,
-      spacebar: false,
+      [KEYS.LEFT]: false,
+      [KEYS.RIGHT]: false,
+      [KEYS.SPASEBAR]: false,
     };
   }
 
@@ -33,7 +31,7 @@ export class Input {
     document.removeEventListener("keyup", this.handleKeyPress);
   }
 
-  handleKeyPress = ({ key, type }: KeyboardEvent) => {
+  private handleKeyPress = ({ key, type }: KeyboardEvent) => {
     const { keys, emit } = this;
     const pressed = type === "keydown";
 
@@ -60,7 +58,7 @@ export class Input {
    * on(key: string, cb: callback, once = false) {}
    */
 
-  on = (key: Keys, cb: callback) => {
+  on = (key: Keys, cb: () => void) => {
     const { listeners } = this;
 
     if (!listeners[key]) {
@@ -70,7 +68,7 @@ export class Input {
     listeners[key].push(cb);
   };
 
-  emit = (key: Keys) => {
+  private emit = (key: Keys) => {
     const { listeners } = this;
 
     if (listeners[key]) {
@@ -80,7 +78,7 @@ export class Input {
     }
   };
 
-  detach(key: Keys, cb: callback) {
+  detach(key: Keys, cb: () => void) {
     const { listeners } = this;
 
     listeners[key] = listeners[key].filter((listener) => listener !== cb);

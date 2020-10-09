@@ -1,7 +1,7 @@
 import type { Game } from "./game";
 
 export class HUD {
-  game;
+  private game;
 
   constructor(game: Game) {
     this.game = game;

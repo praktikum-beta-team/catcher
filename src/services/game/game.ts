@@ -9,29 +9,29 @@ const LIVES = 3;
 export class Game {
   ctx;
 
-  numTicks = 0;
+  private numTicks = 0;
 
-  lastTick = 0;
+  private lastTick = 0;
 
-  tickLength = 1000 / FPS;
+  private tickLength = 1000 / FPS;
 
-  input;
+  private input;
 
   score = 0;
 
   lives = LIVES;
 
-  requestedFrame = 0;
+  private requestedFrame = 0;
 
-  collectibles: Collectible[];
+  private collectibles: Collectible[];
 
-  bucket;
+  private bucket;
 
-  hud;
+  private hud;
 
-  loss;
+  private loss;
 
-  crash;
+  private crash;
 
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
@@ -51,7 +51,7 @@ export class Game {
     loop(this.lastTick);
   };
 
-  restart = () => {
+  private restart = () => {
     const { collectibles, input, enqueue, loop } = this;
 
     this.lives = LIVES;
@@ -63,11 +63,11 @@ export class Game {
     input.detach(KEYS.SPASEBAR, this.restart);
   };
 
-  enqueue = (cb: FrameRequestCallback) => {
+  private enqueue = (cb: FrameRequestCallback) => {
     this.requestedFrame = window.requestAnimationFrame(cb);
   };
 
-  loop: FrameRequestCallback = (nextTick) => {
+  private loop: FrameRequestCallback = (nextTick) => {
     const { input, enqueue, update, draw, restart, loss, crash, loop, tickLength, lives } = this;
 
     if (!lives) {
@@ -97,7 +97,7 @@ export class Game {
     enqueue(loop);
   };
 
-  update = () => {
+  private update = () => {
     const { numTicks, ctx, input, bucket, collectibles } = this;
 
     if (input.keys.left) {
@@ -139,7 +139,7 @@ export class Game {
     }
   };
 
-  draw = () => {
+  private draw = () => {
     const { ctx, bucket, hud, collectibles } = this;
     const { width, height } = ctx.canvas;
 

@@ -1,12 +1,14 @@
 import type { IGameObject } from "../types";
 
 interface ICollectibleParams {
-  speed: number;
-  dangerous: boolean;
+  speed?: number;
+  dangerous?: boolean;
 }
 
+const SPEED = 4;
+
 export class Collectible implements IGameObject {
-  ctx;
+  private ctx;
 
   x;
 
@@ -16,43 +18,47 @@ export class Collectible implements IGameObject {
 
   width = 20;
 
-  params;
+  speed;
 
-  constructor(ctx: CanvasRenderingContext2D, params: ICollectibleParams = {
-    speed: 4,
-    dangerous: false,
-  }) {
+  dangerous;
+
+  constructor(ctx: CanvasRenderingContext2D, { dangerous, speed }: ICollectibleParams = {}) {
     this.ctx = ctx;
-    this.params = params;
+    this.dangerous = dangerous ?? false;
+    this.speed = speed ?? SPEED;
 
     const { width: canvasWidth } = ctx.canvas;
 
-    this.x = Math.floor(Math.random() * (canvasWidth - this.width))
+    this.x = Math.floor(Math.random() * (canvasWidth - this.width));
   }
 
-  draw() {
+  draw = () => {
     const { ctx } = this;
 
-    ctx.fillStyle = this.params.dangerous ? "red" : "green";
+    ctx.fillStyle = this.dangerous ? "red" : "green";
     ctx.fillRect(this.x, this.y, this.height, this.width);
-  }
+  };
 
-  move() {
-    this.y += this.params.speed;
-  }
+  move = () => {
+    const { speed } = this;
+
+    this.y += speed;
+  };
 
   get isOnScreen() {
-    return this.y < this.ctx.canvas.height;
+    const { height } = this.ctx.canvas;
+
+    return this.y < height;
   }
 
-  intersectsWithObject(other: IGameObject) {
+  intersectsWithObject = (other: IGameObject) => {
     const { x, y, height, width } = this;
-    
+
     return (
       x + width > other.x &&
       x < other.x + other.width &&
       y + height > other.y &&
       y < other.y + other.height
     );
-  }
+  };
 }

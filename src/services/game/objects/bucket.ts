@@ -3,7 +3,7 @@ import type { IGameObject } from "../types";
 const SPEED = 4;
 
 export class Bucket implements IGameObject {
-  ctx;
+  private ctx;
 
   x = 0;
 

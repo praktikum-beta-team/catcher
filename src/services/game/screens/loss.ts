@@ -2,13 +2,13 @@ import { TEXT } from "constants/text";
 import type { Game } from "../game";
 
 export class Loss {
-  game;
+  private game;
 
   constructor(game: Game) {
     this.game = game;
   }
 
-  draw = () => {
+  draw: FrameRequestCallback = () => {
     const { ctx, score } = this.game;
     const { width, height } = ctx.canvas;
 
