@@ -1,5 +1,6 @@
-import React, { ComponentType, FC, useEffect } from "react";
+import React, { ComponentType, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import OfflinePluginRuntime from "offline-plugin/runtime";
 
 import { authOperations, authSelectors } from "services/auth";
 
@@ -10,11 +11,11 @@ export const withStartup = <P extends Record<string, unknown>>(
     const dispatch = useDispatch();
     const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
 
-    useEffect(() => {
-      if (isAuthenticated) {
-        dispatch(authOperations.fetchUserData());
-      }
-    }, [dispatch, isAuthenticated]);
+    if (isAuthenticated) {
+      dispatch(authOperations.fetchUserData());
+    }
+
+    OfflinePluginRuntime.install();
 
     return <Component {...props} />;
   };
