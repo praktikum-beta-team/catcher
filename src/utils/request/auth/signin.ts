@@ -1,10 +1,6 @@
-import { AUTH_SIGNIN } from "consts";
+import { AUTH_SIGNIN } from "constants/api";
 
 import { request } from "../request";
+import type { ISigninRequest } from "../types";
 
-interface ISignin {
-  login: string;
-  password: string;
-}
-
-export const signin = request<ISignin>(AUTH_SIGNIN);
+export const signin = request<ISigninRequest, null>(AUTH_SIGNIN);

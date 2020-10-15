@@ -1,56 +1,57 @@
-import React, { FC } from "react";
-import { useHistory } from "react-router";
+import React, { FC, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
+import { TEXT } from "constants/text";
 import { Form, FormField, Input, Button } from "components/UI";
 import { useForm } from "hooks/useForm";
+import { authOperations, authSelectors, authActions } from "services/auth";
+import { ROUTES } from "constants/routes";
+import type { ISigninRequest } from "utils/request/types";
 
-const TEXT = {
-  LOGIN: "Введите логин",
-  PASSWORD: "Введите пароль",
-  SUBMIT: "Войти",
-  REGISTER: "Зарегистрироваться",
-};
-
-interface ISigninForm {
-  login: string;
-  password: string;
-}
-
-const initialValues: ISigninForm = {
+const defaultValues: ISigninRequest = {
   login: "",
   password: "",
 };
 
-const cb = (data: ISigninForm) => {
-  console.log(data);
-};
-
 export const SigninForm: FC = () => {
-  const { push } = useHistory();
-  const [data, handleSubmit, handleChange] = useForm(initialValues);
+  const dispatch = useDispatch();
+  const [handleSubmit, fieldProps] = useForm(defaultValues);
+  const error = useSelector(authSelectors.getError);
+
+  const onSubmit = useCallback(
+    (values) => {
+      dispatch(authOperations.signin(values));
+    },
+    [dispatch]
+  );
+
+  const onSignupButtonClick = useCallback(() => {
+    dispatch(authActions.clearError());
+  }, [dispatch]);
 
   return (
-    <Form onSubmit={handleSubmit(cb)}>
+    <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
-        <Input name="login" value={data.login} placeholder={TEXT.LOGIN} onChange={handleChange} />
+        <Input placeholder={TEXT.SIGNIN.LOGIN} {...fieldProps("login")} />
       </FormField>
       <FormField>
-        <Input
-          name="password"
-          value={data.password}
-          type="password"
-          placeholder={TEXT.PASSWORD}
-          onChange={handleChange}
-        />
+        <Input placeholder={TEXT.SIGNIN.PASSWORD} type="password" {...fieldProps("password")} />
       </FormField>
       <FormField>
         <Button view="action" width="max">
-          {TEXT.SUBMIT}
+          {TEXT.SIGNIN.SUBMIT}
         </Button>
       </FormField>
       <FormField>
-        <Button view="pseudo" width="max" onClick={() => push("/signup")}>
-          {TEXT.REGISTER}
+        <Button
+          view="pseudo"
+          width="max"
+          type="button"
+          container={<Link to={ROUTES.SIGNUP} />}
+          onClick={onSignupButtonClick}
+        >
+          {TEXT.SIGNIN.SIGNUP}
         </Button>
       </FormField>
     </Form>

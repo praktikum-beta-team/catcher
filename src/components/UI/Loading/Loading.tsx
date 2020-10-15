@@ -1,21 +1,12 @@
 import React, { FC, HTMLProps } from "react";
 
+import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
 
-import "./Loading.scss";
+import "./Loading.css";
 
-const TEXT = {
-  LOADING: "Загрузка...",
-};
+const b_ = cn("loader");
 
-const cnLoading = cn("loading");
-
-export const Loading: FC<HTMLProps<HTMLSpanElement>> = (props) => {
-  const { className, ...restLoadingProps } = props;
-
-  return (
-    <span className={cnLoading({}, [className])} {...restLoadingProps}>
-      {TEXT.LOADING}
-    </span>
-  );
-};
+export const Loading: FC<HTMLProps<HTMLSpanElement>> = () => (
+  <div className={b_()}>{TEXT.LOADING}</div>
+);

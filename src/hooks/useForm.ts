@@ -3,28 +3,33 @@ import { useState, FormEvent, ChangeEvent } from "react";
 export const useForm = <T>(
   initialValues: T
 ): [
-  T,
   (cb?: (data: T) => void) => (event: FormEvent<HTMLFormElement>) => void,
-  (event: ChangeEvent<HTMLInputElement>) => void
+  (name: keyof T) => {
+    name: keyof T;
+    value: T[keyof T];
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  }
 ] => {
-  const [data, setData] = useState(initialValues);
+  const [values, setValues] = useState(initialValues);
 
   const handleSubmit = (callback?: (data: T) => void) => (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (callback) {
-      callback(data);
+      callback(values);
     }
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+  const fieldProps = (name: keyof T) => ({
+    name,
+    value: values[name],
+    onChange: ({ target }: ChangeEvent<HTMLInputElement>) => {
+      setValues({
+        ...values,
+        [name]: target.value,
+      });
+    },
+  });
 
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
-
-  return [data, handleSubmit, handleChange];
+  return [handleSubmit, fieldProps];
 };

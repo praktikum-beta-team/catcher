@@ -1,8 +1,9 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, isValidElement, cloneElement, ReactElement } from "react";
 
+import { BASE_DOMAIN } from "constants/api";
 import { cn } from "helpers/classname";
 
-import "./Avatar.scss";
+import "./Avatar.css";
 
 const DEFAULT_SRC = "https://api.adorable.io/avatars/220/abott@adorable.png"; // В дальнейшем заменим на собственное изображение
 
@@ -15,23 +16,30 @@ interface IAvatarProps {
    * Размер аватара
    */
   size: "s" | "m" | "xl";
+  /**
+   * Контейнер элемента, напрмер, <Link />
+   */
+  container?: ReactElement;
 }
 
-const cnAvatar = cn("avatar");
+const b_ = cn("avatar");
 
 export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props) => {
-  const { src, size, className, children, ...restAvatarProps } = props;
+  const { src, size, className, children, container, ...restAvatarProps } = props;
 
-  return (
-    <div
-      role="img"
-      className={cnAvatar({ size }, [className])}
-      style={{
-        backgroundImage: `url(${src ?? DEFAULT_SRC})`,
-      }}
-      {...restAvatarProps}
-    >
-      {children}
-    </div>
+  // С бэкенда возвращается адрес изображения относительно корня сервера
+  const fullSrc = src ? `${BASE_DOMAIN}${src}` : src;
+
+  return cloneElement(
+    isValidElement(container) ? container : <div />,
+    {
+      role: "img",
+      className: b_({ size }, [className]),
+      style: {
+        backgroundImage: `url(${fullSrc ?? DEFAULT_SRC})`,
+      },
+      ...restAvatarProps,
+    },
+    children
   );
 };

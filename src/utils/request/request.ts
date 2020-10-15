@@ -1,18 +1,22 @@
 import axios, { Method, AxiosResponse, AxiosError } from "axios";
 
-import { BASE_URL } from "consts";
+import { BASE_URL } from "constants/api";
+import { IErrorResponse } from "./types/error";
 
-export function request<T>(reqUrl: string, method: Method = "POST") {
+export function request<T = null, R = Record<string, unknown>, E = IErrorResponse>(
+  endpoint: string,
+  method: Method = "POST"
+) {
   return async (
     data: T,
-    cb: (data: AxiosResponse) => void,
-    errorCb?: (e: AxiosError) => void
+    cb: (response: AxiosResponse<R>) => void,
+    errorCb?: (e: AxiosError<E>) => void
   ): Promise<void | AxiosResponse> => {
     try {
       const res = await axios({
         data,
         method,
-        url: reqUrl,
+        url: endpoint,
         baseURL: BASE_URL,
         withCredentials: true,
       });

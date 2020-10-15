@@ -2,7 +2,7 @@ import React, { FC, HTMLProps } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./Modal.scss";
+import "./Modal.css";
 
 interface IModalProps {
   /**
@@ -11,18 +11,18 @@ interface IModalProps {
   title: string;
 }
 
-const cnModal = cn("modal");
+const b_ = cn("modal");
 
 export const Modal: FC<IModalProps & HTMLProps<HTMLDivElement>> = (props) => {
   const { title, children, className } = props;
   return (
-    <div className={cnModal({}, [className])}>
+    <div className={b_({}, [className])}>
       {title && (
-        <div className={cnModal("header")}>
-          <span className={cnModal("title")}>{title}</span>
+        <div className={b_("header")}>
+          <span className={b_("title")}>{title}</span>
         </div>
       )}
-      <div className={cnModal("content")}>{children}</div>
+      <div className={b_("content")}>{children}</div>
     </div>
   );
 };

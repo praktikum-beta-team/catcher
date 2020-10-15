@@ -1,0 +1,5 @@
+.signup {
+  @mixin flex-centered;
+  min-height: 100vh;
+  background-color: var(--common-background-secondary);
+}

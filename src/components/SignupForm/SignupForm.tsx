@@ -1,106 +1,85 @@
-import React, { FC } from "react";
-import { useHistory } from "react-router";
+import React, { FC, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+import { TEXT } from "constants/text";
 import { Button, Input, Form, FormField } from "components/UI";
 import { useForm } from "hooks/useForm";
+import { ROUTES } from "constants/routes";
+import { authOperations, authSelectors, authActions } from "services/auth";
+import type { ISignupRequest } from "utils/request/types";
 
-const TEXT = {
-  FIRST_NAME: "Имя",
-  SECOND_NAME: "Фамилия",
-  LOGIN: "Придумайте логин",
-  EMAIL: "Адрес электронной почты",
-  PASSWORD: "Придумайте пароль",
-  PASSWORD_CONFIRM: "Повторите пароль",
-  SUBMIT: "Зарегистрироваться",
-  SIGNIN: "Войти с паролем",
-};
-
-interface ISignupForm {
-  firstName: string;
-  secondName: string;
-  login: string;
-  email: string;
-  password: string;
-  passwordConfirm: string;
+interface ISignupForm extends ISignupRequest {
+  password_confirm: string;
 }
 
 const initialValues: ISignupForm = {
-  firstName: "",
-  secondName: "",
+  first_name: "",
+  second_name: "",
   login: "",
   email: "",
   password: "",
-  passwordConfirm: "",
-};
-
-const cb = (data: ISignupForm) => {
-  console.log(data);
+  password_confirm: "",
+  phone: "",
 };
 
 export const SignupForm: FC = () => {
-  const { push } = useHistory();
-  const [data, handleSubmit, handleChange] = useForm(initialValues);
+  const [handleSubmit, fieldProps] = useForm(initialValues);
+  const error = useSelector(authSelectors.getError);
+  const dispatch = useDispatch();
+
+  const onSubmit = useCallback(
+    (values: ISignupForm) => {
+      dispatch(authOperations.signup(values));
+    },
+    [dispatch]
+  );
+
+  const onSigninButtonClick = useCallback(() => {
+    dispatch(authActions.clearError());
+  }, [dispatch]);
 
   return (
-    <Form onSubmit={handleSubmit(cb)}>
+    <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
-        <Input
-          name="firstName"
-          value={data.firstName}
-          placeholder={TEXT.FIRST_NAME}
-          onChange={handleChange}
-        />
+        <Input {...fieldProps("first_name")} placeholder={TEXT.SIGNUP.FIRST_NAME} />
+      </FormField>
+      <FormField>
+        <Input {...fieldProps("second_name")} placeholder={TEXT.SIGNUP.SECOND_NAME} />
+      </FormField>
+      <FormField>
+        <Input {...fieldProps("login")} placeholder={TEXT.SIGNUP.LOGIN} />
+      </FormField>
+      <FormField>
+        <Input {...fieldProps("email")} placeholder={TEXT.SIGNUP.EMAIL} />
+      </FormField>
+      <FormField>
+        <Input {...fieldProps("phone")} placeholder={TEXT.SIGNUP.PHONE} />
+      </FormField>
+      <FormField>
+        <Input {...fieldProps("password")} type="password" placeholder={TEXT.SIGNUP.PASSWORD} />
       </FormField>
       <FormField>
         <Input
-          name="secondName"
-          value={data.secondName}
-          placeholder={TEXT.SECOND_NAME}
-          onChange={handleChange}
-        />
-      </FormField>
-      <FormField>
-        <Input
-          name="login"
-          value={data.login}
-          type="text"
-          placeholder={TEXT.LOGIN}
-          onChange={handleChange}
-        />
-      </FormField>
-      <FormField>
-        <Input
-          name="email"
-          value={data.email}
-          type="text"
-          placeholder={TEXT.EMAIL}
-          onChange={handleChange}
-        />
-      </FormField>
-      <FormField>
-        <Input
-          name="password"
-          value={data.password}
-          placeholder={TEXT.PASSWORD}
-          onChange={handleChange}
-        />
-      </FormField>
-      <FormField>
-        <Input
-          name="passwordConfirm"
-          value={data.passwordConfirm}
-          placeholder={TEXT.PASSWORD_CONFIRM}
-          onChange={handleChange}
+          {...fieldProps("password_confirm")}
+          type="password"
+          placeholder={TEXT.SIGNUP.PASSWORD_CONFIRM}
         />
       </FormField>
       <FormField>
         <Button view="action" width="max">
-          {TEXT.SUBMIT}
+          {TEXT.SIGNUP.SUBMIT}
         </Button>
       </FormField>
       <FormField>
-        <Button view="pseudo" width="max" onClick={() => push("/")}>
-          {TEXT.SIGNIN}
+        <Button
+          view="pseudo"
+          width="max"
+          type="button"
+          onClick={onSigninButtonClick}
+          container={<Link to={ROUTES.SIGNIN} />}
+        >
+          {TEXT.SIGNUP.SIGNIN}
         </Button>
       </FormField>
     </Form>

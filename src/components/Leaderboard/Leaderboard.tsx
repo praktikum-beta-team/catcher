@@ -1,20 +1,21 @@
 import React, { FC, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
+import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
-import { Header, Button, Loading } from "components/UI";
-import { Board, BoardEntries } from "components/Board";
+import { Button, Loading, Layout } from "components/UI";
+import { Board } from "components/Board";
+import type { IBoardEntry } from "components/Board";
 
-import "./Leaderboard.scss";
-import mockData from "./mockData";
+import { ROUTES } from "constants/routes";
 
-const TEXT = {
-  TITLE: "Лучшие игроки",
-  CALL_TO_ACTION: "Я могу больше!",
-};
+import _mockData from "./mockData.json";
+import "./Leaderboard.css";
 
-const cnLeaderboard = cn("leaderboard");
+const mockData = _mockData;
+const b_ = cn("leaderboard");
 
-const loadEntries = (): Promise<BoardEntries> =>
+const loadEntries = (): Promise<IBoardEntry[]> =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockData);
@@ -23,9 +24,13 @@ const loadEntries = (): Promise<BoardEntries> =>
 
 export const Leaderboard: FC = () => {
   const [loading, setLoading] = useState(true);
-  const [entries, setEntries] = useState<BoardEntries>([]);
+  const [entries, setEntries] = useState<IBoardEntry[]>([]);
 
   useEffect(() => {
+    /**
+     * Пока апи не работает, компонент выводит мок-данные
+     */
+
     loadEntries().then((data) => {
       setEntries(data);
       setLoading(false);
@@ -33,21 +38,20 @@ export const Leaderboard: FC = () => {
   }, []);
 
   return (
-    <>
-      <Header />
-      <div className={cnLeaderboard()}>
-        <div className={cnLeaderboard("inner")}>
-          <h1 className={cnLeaderboard("title")}>{TEXT.TITLE}</h1>
-          {loading ? (
-            <Loading />
-          ) : (
-            <>
-              <Board entries={entries} />
-              <Button view="action">{TEXT.CALL_TO_ACTION}</Button>
-            </>
-          )}
-        </div>
+    <Layout>
+      <div className={b_()}>
+        <h1 className={b_("title")}>{TEXT.LEADERBOARD.TITLE}</h1>
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Board entries={entries} />
+            <Button view="action" container={<Link to={ROUTES.GAME} />}>
+              {TEXT.LEADERBOARD.CALL_TO_ACTION}
+            </Button>
+          </>
+        )}
       </div>
-    </>
+    </Layout>
   );
 };

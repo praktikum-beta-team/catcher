@@ -4,9 +4,9 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest",
   },
   moduleDirectories: ["node_modules", "src/"],
-  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
   moduleNameMapper: {
-    "\\.scss$": "identity-obj-proxy"
-  }
+    "\\.css$": "identity-obj-proxy",
+  },
 };

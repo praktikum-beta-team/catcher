@@ -4,6 +4,6 @@ export { Form } from "./Form";
 export { FormField } from "./FormField";
 export { Modal } from "./Modal";
 export { Avatar } from "./Avatar";
-export { AvatarInput } from "./AvatarInput";
 export { Header } from "./Header";
 export { Loading } from "./Loading";
+export { Layout } from "./Layout";

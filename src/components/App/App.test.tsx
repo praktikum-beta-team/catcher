@@ -1,9 +1,15 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { shallow } from "enzyme";
+
 import { App } from "./App";
 
-describe("<App />", () => {
-  test("should display app component", async () => {
-    render(<App />);
+jest.mock("react-redux", () => ({
+  useSelector: jest.fn(),
+  useDispatch: () => jest.fn(),
+}));
+
+describe("App", () => {
+  it("рендерится", () => {
+    shallow(<App />);
   });
 });

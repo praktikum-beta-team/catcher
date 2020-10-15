@@ -1,24 +1,33 @@
 import React, { FC } from "react";
 
+import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
-import { BoardEntry as Entry, IBoardEntryProps } from "./Entry";
+import { Avatar } from "components/UI";
 
-import "./Board.scss";
+import "./Board.css";
 
-const TEXT = {
-  PLAYER: "Игрок",
-  SCORE: "Счет",
-};
-
-export type BoardEntries = Omit<IBoardEntryProps, "place">[];
-
-interface IBoardProps {
-  entries: BoardEntries;
+export interface IBoardEntry {
+  /**
+   * Имя игрока
+   */
+  name: string;
+  /**
+   * Ссылка на аватар
+   */
+  avatar?: string | null;
+  /**
+   * Счет игрока
+   */
+  score: number;
 }
 
-export const cnBoard = cn("board");
+interface IBoardProps {
+  entries: IBoardEntry[];
+}
 
-const renderEntries = (entries: BoardEntries) =>
+export const b_ = cn("board");
+
+const renderEntries = (entries: IBoardEntry[]) =>
   entries
     /**
      * TODO: продумать сортировку и вывод результатов:
@@ -26,20 +35,33 @@ const renderEntries = (entries: BoardEntries) =>
      * и занять одно место
      */
     .sort((a, b) => b.score - a.score)
-    .map((entry, index) => <Entry key={index} place={index + 1} {...entry} />);
+    .map((entry, place) => {
+      const { avatar, name, score } = entry;
+
+      return (
+        <tr key={place}>
+          <td className={b_("cell")}>{place + 1}</td>
+          <td className={b_("cell")}>
+            <Avatar size="s" src={avatar} />
+          </td>
+          <td className={b_("cell")}>{name}</td>
+          <td className={b_("cell", { score: true })}>{score}</td>
+        </tr>
+      );
+    });
 
 export const Board: FC<IBoardProps> = (props) => {
   const { entries } = props;
 
   return (
-    <table className={cnBoard()}>
-      <thead className={cnBoard("header")}>
+    <table className={b_()}>
+      <thead className={b_("header")}>
         <tr>
           <th></th>
-          <th className={cnBoard("cell", { header: true })} colSpan={2}>
-            {TEXT.PLAYER}
+          <th className={b_("cell", { header: true })} colSpan={2}>
+            {TEXT.LEADERBOARD.PLAYER}
           </th>
-          <th className={cnBoard("cell", { header: true })}>{TEXT.SCORE}</th>
+          <th className={b_("cell", { header: true })}>{TEXT.LEADERBOARD.SCORE}</th>
         </tr>
       </thead>
       <tbody>{renderEntries(entries)}</tbody>

@@ -15,3 +15,6 @@ yarn-error.log*
 
 # build
 /dist
+
+# VS Code settings
+.vscode

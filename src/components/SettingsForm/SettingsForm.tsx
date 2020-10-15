@@ -1,112 +1,70 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Form, AvatarInput, Input, Button, FormField } from "components/UI";
+import { TEXT } from "constants/text";
 import { useForm } from "hooks/useForm";
+import { Form, Input, Button, FormField } from "components/UI";
+import { authOperations, authSelectors } from "services/auth";
+import { IUserRequest } from "utils/request/types";
 
-import "./SettingsForm.scss";
-import mockData from "./mockData";
-
-const TEXT = {
-  FIRST_NAME: "Введите имя",
-  SECOND_NAME: "Введите фамилию",
-  EMAIL: "Введите адрес электронной почты",
-  CURRENT_PASSWORD: "Действующий пароль",
-  NEW_PASSWORD: "Введите новый пароль",
-  NEW_PASSWORD_CONFIRM: "Повторите новый пароль",
-  SUBMIT: "Сохранить",
-};
-
-interface ISettingsForm {
-  firstName: string;
-  secondName: string;
-  email: string;
-  oldPassword: string;
-  newPassword: string;
-  newPasswordConfirm: string;
-}
-
-const { firstName, secondName, email } = mockData;
-
-const initialValues: ISettingsForm = {
-  firstName,
-  secondName,
-  email,
-  oldPassword: "",
-  newPassword: "",
-  newPasswordConfirm: "",
-};
-
-const cb = (data: ISettingsForm) => {
-  console.log(data);
+const defaultValues: IUserRequest = {
+  first_name: "",
+  second_name: "",
+  display_name: "",
+  login: "",
+  email: "",
+  phone: "",
 };
 
 export const SettingsForm: FC = () => {
-  const [data, handleSubmit, handleChange] = useForm(initialValues);
+  const settings = useSelector(authSelectors.getSettings);
+  const [handleSubmit, fieldProps] = useForm(settings ?? defaultValues);
+  const error = useSelector(authSelectors.getError);
+  const dispatch = useDispatch();
+
+  const handleSettingsFormSubmit = useCallback((values: IUserRequest) => {
+    dispatch(authOperations.changeUserData(values));
+  }, [dispatch]);
 
   return (
-    <Form className="settings-form" onSubmit={handleSubmit(cb)}>
-      <div className="settings-form__column">
-        <AvatarInput name="avatar" onChange={handleChange} />
-      </div>
-      <div className="settings-form__column">
-        <FormField>
-          <Input
-            name="firstName"
-            value={data.firstName}
-            placeholder={TEXT.FIRST_NAME}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="secondName"
-            value={data.secondName}
-            placeholder={TEXT.SECOND_NAME}
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="email"
-            value={data.email}
-            placeholder={TEXT.EMAIL}
-            type="text"
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="oldPassword"
-            value={data.oldPassword}
-            placeholder={TEXT.CURRENT_PASSWORD}
-            type="password"
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="newPassword"
-            value={data.newPassword}
-            placeholder={TEXT.NEW_PASSWORD}
-            type="password"
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Input
-            name="newPasswordConfirm"
-            value={data.newPasswordConfirm}
-            placeholder={TEXT.NEW_PASSWORD_CONFIRM}
-            type="password"
-            onChange={handleChange}
-          />
-        </FormField>
-        <FormField>
-          <Button view="action" width="max">
-            {TEXT.SUBMIT}
-          </Button>
-        </FormField>
-      </div>
+    <Form onSubmit={handleSubmit(handleSettingsFormSubmit)} error={error}>
+      <FormField>
+        <Input
+          {...fieldProps("first_name")}
+          placeholder={TEXT.SETTINGS.FIRST_NAME}
+        />
+      </FormField>
+      <FormField>
+        <Input
+          {...fieldProps("second_name")}
+          placeholder={TEXT.SETTINGS.SECOND_NAME}
+        />
+      </FormField>
+      <FormField>
+        <Input
+          {...fieldProps("display_name")}
+          placeholder={TEXT.SETTINGS.DISPLAY_NAME}
+        />
+      </FormField>
+      <FormField>
+        <Input
+          {...fieldProps("email")}
+          placeholder={TEXT.SETTINGS.EMAIL}
+          type="text"
+        />
+      </FormField>
+      <FormField>
+        <Input
+          {...fieldProps("first_name")}
+          placeholder={TEXT.SETTINGS.PHONE}
+          type="tel"
+        />
+      </FormField>
+      <FormField>
+        <Button view="action" width="max">
+          {TEXT.SETTINGS.SUBMIT}
+        </Button>
+      </FormField>
     </Form>
   );
 };

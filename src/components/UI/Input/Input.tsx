@@ -2,7 +2,7 @@ import React, { FC, HTMLProps } from "react";
 
 import { cn } from "helpers/classname";
 
-import "./Input.scss";
+import "./Input.css";
 
 interface IInputProps {
   /**
@@ -11,15 +11,15 @@ interface IInputProps {
   error?: string;
 }
 
-const cnInput = cn("input");
+const b_ = cn("input");
 
 export const Input: FC<IInputProps & HTMLProps<HTMLInputElement>> = ({
   error,
   className,
   ...restInputProps
 }) => (
-  <div className={cnInput({ invalid: Boolean(error) }, [className])}>
-    <input className={cnInput("control")} {...restInputProps} />
-    {error && <span className={cnInput("error")}>{error}</span>}
+  <div className={b_({ invalid: Boolean(error) }, [className])}>
+    <input className={b_("control")} {...restInputProps} />
+    {error && <span className={b_("error")}>{error}</span>}
   </div>
 );

@@ -1,7 +1,9 @@
 const path = require("path");
-const MiniCss = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -25,12 +27,16 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: ["ts-loader", "eslint-loader"],
+        use: IS_PRODUCTION ? "ts-loader" : ["ts-loader", "eslint-loader"],
         exclude: /node_modules/,
       },
       {
-        test: /\.(s*)css$/,
-        use: [MiniCss.loader, "css-loader", "postcss-loader", "sass-loader"],
+        test: /\.css$/,
+        use: [
+          IS_PRODUCTION ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+          "postcss-loader",
+        ],
       },
     ],
   },
@@ -47,6 +53,10 @@ module.exports = {
       template: "./www/index.html",
     }),
     new CleanWebpackPlugin(),
-    new MiniCss({ filename: "style.[hash].bundle.css", disable: false, allChunks: true }),
+    new MiniCssExtractPlugin({
+      filename: "style.[hash].bundle.css",
+      disable: false,
+      allChunks: true,
+    }),
   ],
 };

@@ -27,7 +27,6 @@
         "tsx": "never"
       }
     ],
-    "react/prop-types": "off",
     "class-methods-use-this": [
       "error",
       {
@@ -45,14 +44,26 @@
           "componentWillUnmount"
         ]
       }
-    ]
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "camelcase": "off",
+    "arrow-body-style": ["warn", "as-needed"],
+    "react/prop-types": "off",
+    "no-use-before-define": "off",
+    "no-underscore-dangle": ["error", { "allow": ["b_"] }]
   },
   "settings": {
     "import/resolver": {
       "node": {
         "moduleDirectory": ["node_modules", "src/"],
         "paths": ["src"],
-        "extensions": [".ts", ".tsx", ".scss"]
+        "extensions": [".ts", ".tsx"]
       }
     },
     "react": {
@@ -72,5 +83,5 @@
     "browser": true,
     "jest": true
   },
-  "ignorePatterns": ["webpack.config.js"]
+  "ignorePatterns": ["webpack.config.js", "dist"]
 }
