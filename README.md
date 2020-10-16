@@ -15,8 +15,6 @@
 - Настройки пользователя (/settings);
 - Список лидеров (/leaderboard).
 
-![Прототип игры](https://downloader.disk.yandex.ru/preview/54407e0a9ccbb8add34081325792372ce5f35e3a7fe50fd482396dd0d54d7e85/5f57ae69/NWhCodiNGdupRBKAvbR3sswlVxF9h7ybcM6JexvkdjzWX5FVruu6D9PZyu7HpgvalveY4DHb7GLmCqyoDfccnw==?uid=0&filename=2020-09-08_15-11-48.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&owner_uid=320594280&size=2048x2048)
-
 ## Технологии
 - React,
 - Redux,
