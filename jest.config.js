@@ -1,12 +1,10 @@
 module.exports = {
-  roots: ["<rootDir>/src"],
-  transform: {
-    "^.+\\.tsx?$": "ts-jest",
-  },
-  moduleDirectories: ["node_modules", "src/"],
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
+  moduleDirectories: ["node_modules", "src"],
   moduleNameMapper: {
+    // Заглушка для CSS
     "\\.css$": "identity-obj-proxy",
   },
 };
