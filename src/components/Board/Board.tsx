@@ -39,7 +39,7 @@ const renderEntries = (entries: IBoardEntry[]) =>
       const { avatar, name, score } = entry;
 
       return (
-        <tr key={place}>
+        <tr key={name}>
           <td className={b_("cell")}>{place + 1}</td>
           <td className={b_("cell")}>
             <Avatar size="s" src={avatar} />
@@ -57,7 +57,7 @@ export const Board: FC<IBoardProps> = (props) => {
     <table className={b_()}>
       <thead className={b_("header")}>
         <tr>
-          <th></th>
+          <th aria-label={TEXT.LEADERBOARD.PLACE} />
           <th className={b_("cell", { header: true })} colSpan={2}>
             {TEXT.LEADERBOARD.PLAYER}
           </th>
