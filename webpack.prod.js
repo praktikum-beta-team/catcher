@@ -17,8 +17,16 @@ module.exports = merge(common, {
     ],
   },
   optimization: {
-    minimize: true,
     minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
+        },
+      },
+    },
   },
   plugins: [
     new CleanWebpackPlugin(),
