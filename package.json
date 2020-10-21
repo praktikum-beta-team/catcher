@@ -69,7 +69,9 @@
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "test": "jest"
+    "test": "jest",
+    "docker:build": "docker build -t catcher .",
+    "docker:run": "docker run -it --rm -p 8080:8000 -e PORT=8000 catcher"
   },
   "repository": {
     "type": "git",

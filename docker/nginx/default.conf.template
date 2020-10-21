@@ -1,8 +1,12 @@
 server {
-  listen $PORT default_server;
+    listen ${PORT}; 
+    listen [::]:${PORT};
+    server_name _;
 
-  location / {
     root   /usr/share/nginx/html;
     index  index.html index.htm;
-  }
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
 }

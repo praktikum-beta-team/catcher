@@ -1,14 +1,9 @@
-FROM node:12.18.3-alpine3.9 as build-stage
+FROM node:lts-alpine3.9 AS build-stage
 WORKDIR /app
-COPY ./package*.json /app/
+COPY ./ /app
 ENV HUSKY_SKIP_INSTALL=1
-RUN npm install
-COPY ./ /app/
-RUN CI=true npm test
-RUN npm run build
+RUN npm ci && npm run build
 
-FROM nginx:1.15
-COPY ./docker/nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
-COPY --from=build-stage /app/dist/ /usr/share/nginx/html
-
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+FROM nginx:1.19
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY ./docker/nginx/default.conf.template /etc/nginx/templates/default.conf.template
