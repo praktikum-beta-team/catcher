@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { TEXT } from "constants/text";
-import { Button, Input, Form, FormField } from "components/UI";
-import { useForm } from "hooks/useForm";
+import { Button, Input, Form, useForm, FormField } from "components/UI";
 import { ROUTES } from "constants/routes";
 import { authOperations, authSelectors, authActions } from "services/auth";
 import type { ISignupRequest } from "utils/request/types";

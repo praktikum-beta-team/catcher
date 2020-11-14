@@ -2,7 +2,7 @@ import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { TEXT } from "constants/text";
-import { useForm } from "hooks/useForm";
+import { useForm } from "components/UI/Form/useForm";
 import { Form, Input, Button, FormField } from "components/UI";
 import { authOperations, authSelectors } from "services/auth";
 import { IUserRequest } from "utils/request/types";
@@ -22,43 +22,29 @@ export const SettingsForm: FC = () => {
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 
-  const handleSettingsFormSubmit = useCallback((values: IUserRequest) => {
-    dispatch(authOperations.changeUserData(values));
-  }, [dispatch]);
+  const handleSettingsFormSubmit = useCallback(
+    (values: IUserRequest) => {
+      dispatch(authOperations.changeUserData(values));
+    },
+    [dispatch]
+  );
 
   return (
     <Form onSubmit={handleSubmit(handleSettingsFormSubmit)} error={error}>
       <FormField>
-        <Input
-          {...fieldProps("first_name")}
-          placeholder={TEXT.SETTINGS.FIRST_NAME}
-        />
+        <Input {...fieldProps("first_name")} placeholder={TEXT.SETTINGS.FIRST_NAME} />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("second_name")}
-          placeholder={TEXT.SETTINGS.SECOND_NAME}
-        />
+        <Input {...fieldProps("second_name")} placeholder={TEXT.SETTINGS.SECOND_NAME} />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("display_name")}
-          placeholder={TEXT.SETTINGS.DISPLAY_NAME}
-        />
+        <Input {...fieldProps("display_name")} placeholder={TEXT.SETTINGS.DISPLAY_NAME} />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("email")}
-          placeholder={TEXT.SETTINGS.EMAIL}
-          type="text"
-        />
+        <Input {...fieldProps("email")} placeholder={TEXT.SETTINGS.EMAIL} type="text" />
       </FormField>
       <FormField>
-        <Input
-          {...fieldProps("first_name")}
-          placeholder={TEXT.SETTINGS.PHONE}
-          type="tel"
-        />
+        <Input {...fieldProps("first_name")} placeholder={TEXT.SETTINGS.PHONE} type="tel" />
       </FormField>
       <FormField>
         <Button view="action" width="max">
