@@ -6,11 +6,11 @@ module.exports = {
     app: "./src/index.tsx",
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "../..", "dist"),
     filename: "[name].[fullhash].bundle.js",
   },
   resolve: {
-    modules: ["node_modules", path.join(__dirname, "src")],
+    modules: ["node_modules", path.join(__dirname, "../..", "src")],
     extensions: [".tsx", ".ts", ".js", ".jsx"],
   },
   module: {
