@@ -6,4 +6,4 @@ RUN npm ci && npm run build
 
 FROM nginx:1.19
 COPY --from=build-stage /app/dist /usr/share/nginx/html
-COPY ./docker/nginx/default.conf.template /etc/nginx/templates/default.conf.template
+COPY ./config/nginx/default.conf.template /etc/nginx/templates/default.conf.template
