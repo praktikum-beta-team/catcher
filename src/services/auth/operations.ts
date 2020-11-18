@@ -39,11 +39,11 @@ export const signin = (params: ISigninRequest): ThunkAction<void, unknown, null,
 };
 
 export const logout = (): ThunkAction<void, unknown, null, AnyAction> => (dispatch) => {
+  localStorage.clear();
   auth.logout(
     null,
     () => {
       dispatch(actions.logoutSuccess());
-      localStorage.clear();
     },
     ({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
