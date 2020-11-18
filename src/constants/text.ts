@@ -2,6 +2,7 @@ export const TEXT = {
   NOT_FOUND: "Ошибка 404. Нет такой страницы",
   LOADING: "Загрузка...",
   LEADERBOARD: {
+    PLACE: "Место",
     PLAYER: "Игрок",
     SCORE: "Счет",
     TITLE: "Лучшие игроки",

@@ -1,7 +1,13 @@
+import nock from "nock";
 import type { AxiosError, AxiosResponse } from "axios";
 
-import { api } from "../__mocks__/api";
+import { BASE_URL } from "constants/api";
 import { request } from "../request";
+
+const scope = nock(BASE_URL).defaultReplyHeaders({
+  "access-control-allow-origin": "*",
+  "access-control-allow-credentials": "true",
+});
 
 describe("request", () => {
   /**
@@ -16,7 +22,7 @@ describe("request", () => {
     const responseData = { buzz: "bar" };
     const cb = jest.fn((response: AxiosResponse) => response.data);
 
-    api.post("/endpoint", requestData).reply(200, responseData);
+    scope.post("/endpoint", requestData).reply(200, responseData);
 
     await request<typeof requestData>("/endpoint")(requestData, cb);
     expect(cb.mock.results[0].value).toEqual(responseData);
@@ -29,7 +35,7 @@ describe("request", () => {
     };
     const errCb = jest.fn(({ response }: AxiosError) => response?.data);
 
-    api.post("/endpoint").reply(401, errResponse);
+    scope.post("/endpoint").reply(401, errResponse);
 
     await request("/endpoint")(null, cb, errCb);
     expect(errCb.mock.results[0].value).toEqual(errResponse);

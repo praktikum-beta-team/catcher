@@ -2,18 +2,8 @@ import React, { ComponentType } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import { ROUTES } from "constants/routes";
-import {
-  PrivateRoute,
-  Signin,
-  Signup,
-  Settings,
-  Leaderboard,
-  NotFound,
-  Logout,
-  GameScreen,
-  ErrorBoundary,
-  withStartup,
-} from "components";
+import { Signin, Signup, Settings, Leaderboard, NotFound, GameScreen } from "views";
+import { PrivateRoute, withStartup, ErrorBoundary, Logout } from "components";
 
 type IComponentMap = {
   path: string;

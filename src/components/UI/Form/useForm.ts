@@ -4,7 +4,9 @@ export const useForm = <T>(
   initialValues: T
 ): [
   (cb?: (data: T) => void) => (event: FormEvent<HTMLFormElement>) => void,
-  (name: keyof T) => {
+  (
+    name: keyof T
+  ) => {
     name: keyof T;
     value: T[keyof T];
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;

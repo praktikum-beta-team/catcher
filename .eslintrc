@@ -1,87 +1,100 @@
 {
+  "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "jsx-a11y", "react", "testing-library"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "ignorePatterns": ["/*.*"],
+  "plugins": ["@typescript-eslint"],
   "extends": [
-    "airbnb-base",
+    // Пресет Airbnb, включает правила React, хуков, a11y
+    "airbnb-typescript",
+    // React хуки
+    "airbnb/hooks",
+    // Базовые правила TypeScript
+    "plugin:@typescript-eslint/recommended",
+    // Базовые правила Jest
+    "plugin:jest/recommended",
+    // Правила для совместимости с Prettier
     "prettier",
     "prettier/react",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:react/recommended",
-    "plugin:testing-library/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript"
+    "prettier/@typescript-eslint"
   ],
-  "rules": {
-    "import/no-extraneous-dependencies": [
-      "error",
-      { "devDependencies": ["**/*.test.ts", "**/*.test.tsx"] }
-    ],
-    "import/prefer-default-export": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-    "class-methods-use-this": [
-      "error",
-      {
-        "exceptMethods": [
-          "render",
-          "getInitialState",
-          "getDefaultProps",
-          "getChildContext",
-          "componentWillMount",
-          "componentDidMount",
-          "componentWillReceiveProps",
-          "shouldComponentUpdate",
-          "componentWillUpdate",
-          "componentDidUpdate",
-          "componentWillUnmount"
-        ]
-      }
-    ],
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true,
-        "ignorePropertyModificationsFor": ["state"]
-      }
-    ],
-    "camelcase": "off",
-    "arrow-body-style": ["warn", "as-needed"],
-    "react/prop-types": "off",
-    "no-use-before-define": "off",
-    "no-underscore-dangle": ["error", { "allow": ["b_"] }]
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": ["node_modules", "src/"],
-        "paths": ["src"],
-        "extensions": [".ts", ".tsx"]
-      }
-    },
-    "react": {
-      "createClass": "createReactClass",
-      "pragma": "React",
-      "version": "detect",
-      "flowVersion": "0.53"
-    },
-    "propWrapperFunctions": [
-      "forbidExtraProps",
-      { "property": "freeze", "object": "Object" },
-      { "property": "myFavoriteWrapper" }
-    ],
-    "linkComponents": ["Hyperlink", { "name": "Link", "linkAttribute": "to" }]
-  },
   "env": {
     "browser": true,
+    "node": true,
     "jest": true
   },
-  "ignorePatterns": ["webpack.config.js", "dist"]
+  "rules": {
+    /* Импорт модулей */
+
+    // Разрешает использование именованного экспорта
+    "import/prefer-default-export": "off",
+
+    // Разрешает импорт дев-зависимостей в тестах
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.test.ts*", "**/setupTests.ts", "**/__tests__/*", "**/__mocks__/*"]
+      }
+    ],
+
+    /* React */
+
+    // Отключает запрет на использование spread-оператора в пропсах
+    "react/jsx-props-no-spreading": "off",
+
+    // Отключает проверку PropTypes
+    "react/prop-types": "off",
+
+    // Отключает обязательный проп type для кнопок. По спецификации, тип по-умолчанию - submit
+    "react/button-has-type": "off",
+
+    "react/state-in-constructor": "off",
+
+    /* Redux */
+
+    // Отключает запрет на мутацию аргументов. В Redux Toolkit стейт можно мутировать.
+    "no-param-reassign": "off",
+
+    /* Именование */
+
+    // Общие правила именования. snake_case разрешен для совместимости с Api
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "selector": "default",
+        "format": ["camelCase", "PascalCase", "snake_case", "UPPER_CASE"]
+      },
+      // Требует начинать имена интерфейсов с I
+      {
+        "selector": "interface",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^I[A-Z]/w*",
+          "match": false
+        }
+      },
+      // Исключения
+      {
+        "selector": "variable",
+        "format": null,
+        "filter": {
+          "regex": "b_",
+          "match": true
+        }
+      }
+    ],
+
+    //Отключает запрет использования _
+    "no-underscore-dangle": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    }
+  ]
 }

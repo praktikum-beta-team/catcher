@@ -3,7 +3,7 @@ root = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.ts]
+[*.{js, jsx, ts, tsx}]
 trim_trailing_whitespace = true
 
 [*]

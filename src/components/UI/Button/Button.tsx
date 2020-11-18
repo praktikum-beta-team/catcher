@@ -28,6 +28,7 @@ export const Button: FC<IButtonProps & Omit<ButtonHTMLAttributes<HTMLButtonEleme
   const buttonChildren = <span className={b_("text")}>{children}</span>;
 
   return cloneElement(
+    // eslint-disable-next-line jsx-a11y/control-has-associated-label
     isValidElement(container) ? container : <button />,
     {
       className: b_({ view, width }, [className]),

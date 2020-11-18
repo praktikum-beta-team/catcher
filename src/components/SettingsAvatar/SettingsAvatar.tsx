@@ -16,22 +16,20 @@ export const SettingsAvatar: FC = () => {
   const src = useSelector(authSelectors.getAvatar);
   const dispatch = useDispatch();
 
-  const handleChange = useCallback(({target}: ChangeEvent<HTMLInputElement>) => {
-    const formData = new FormData();
-    const nextAvatar = target.files![0];
+  const handleChange = useCallback(
+    ({ target }: ChangeEvent<HTMLInputElement>) => {
+      const formData = new FormData();
+      const nextAvatar = target.files![0];
 
-    formData.append("avatar", nextAvatar);
-    dispatch(authOperations.changeUserAvatar(formData));
-  }, [dispatch]);
+      formData.append("avatar", nextAvatar);
+      dispatch(authOperations.changeUserAvatar(formData));
+    },
+    [dispatch]
+  );
 
   return (
-    <Avatar
-      src={src}
-      size="xl"
-      className={b_()}
-      // eslint-disable-next-line jsx-a11y/label-has-associated-control
-      container={<label />}
-    >
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
+    <Avatar src={src} size="xl" className={b_()} container={<label />}>
       <div className={b_("overlay")}>
         <span className={b_("overlay-text")}>{TEXT.SETTINGS.CHANGE_AVATAR}</span>
       </div>

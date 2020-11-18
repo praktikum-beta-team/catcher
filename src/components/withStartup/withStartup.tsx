@@ -14,7 +14,7 @@ export const withStartup = <P extends Record<string, unknown>>(
       if (isAuthenticated) {
         dispatch(authOperations.fetchUserData());
       }
-    }, []);
+    }, [dispatch, isAuthenticated]);
 
     return <Component {...props} />;
   };

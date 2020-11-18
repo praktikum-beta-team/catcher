@@ -12,7 +12,7 @@ export const Logout: FC = () => {
 
   useEffect(() => {
     dispatch(authOperations.logout());
-  }, []);
+  }, [dispatch]);
 
   return isAuthenticated ? <Loading /> : <Redirect to={ROUTES.SIGNIN} />;
 };
