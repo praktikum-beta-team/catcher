@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 
 import { ROUTES } from "constants/routes";
 import { Signin, Signup, Settings, Leaderboard, NotFound, GameScreen } from "views";
-import { PrivateRoute, withStartup, ErrorBoundary, Logout } from "components";
+import { PrivateRoute, ErrorBoundary, Logout } from "components";
+import { withStartup } from "HOCs";
 
 type IComponentMap = {
   path: string;
