@@ -3,14 +3,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: "./src/index.tsx",
+    app: "./src/app/index.tsx",
   },
   output: {
     path: path.resolve(__dirname, "../..", "dist"),
     filename: "[name].[fullhash].bundle.js",
   },
   resolve: {
-    modules: ["node_modules", path.join(__dirname, "../..", "src")],
+    modules: ["node_modules", path.join(__dirname, "../..", "src/app")],
     extensions: [".tsx", ".ts", ".js", ".jsx"],
   },
   module: {
