@@ -6,11 +6,10 @@ import { Provider } from "react-redux";
 import { createStore } from "app/store";
 import { App } from "app/components/App";
 
-const store = createStore({
-  auth: {
-    isAuthenticated: false,
-  },
-});
+const state = (window as any).__PRELOADED_STATE__;
+delete (window as any).__PRELOADED_STATE__;
+
+const store = createStore(state);
 
 render(
   <Router>
