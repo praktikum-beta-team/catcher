@@ -4,6 +4,7 @@ import express from "express";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router";
+import morgan from "morgan";
 
 import { App } from "app/components/App";
 import { TEXT } from "server/constants/text";
@@ -12,6 +13,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.static("./dist"));
+
+app.use(morgan("tiny"));
 
 app.get("*", (req, res) => {
   const indexFile = path.resolve("./dist/index.html");
@@ -32,5 +35,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("\x1b[32m", TEXT.SERVER_START_MESSEGE.replace("%s", String(PORT)), "\x1b[0m");
+  console.log(TEXT.SERVER_START_MESSEGE.replace("%s", String(PORT)));
 });
