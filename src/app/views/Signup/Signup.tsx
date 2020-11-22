@@ -6,7 +6,7 @@ import { TEXT } from "app/constants/text";
 import { cn } from "app/helpers/classname";
 import { Modal } from "app/components/UI";
 import { SignupForm } from "app/components/SignupForm";
-import { authSelectors } from "app/services/auth";
+import { authSelectors } from "app/store/auth";
 
 import "./Signup.css";
 import { ROUTES } from "app/constants/routes";

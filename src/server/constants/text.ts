@@ -1,4 +1,4 @@
 export const TEXT = {
   ERROR_500: "Something went wrong",
-  SERVER_START_MESSEGE: "App listening at %s",
+  RUNNING_ON: "SSR running on port %s",
 };

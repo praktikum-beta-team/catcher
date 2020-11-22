@@ -4,24 +4,25 @@ import express from "express";
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router";
+import { Provider } from "react-redux";
 import morgan from "morgan";
 
 import { App } from "app/components/App";
 import { TEXT } from "server/constants/text";
+import { createStore } from "app/store";
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-app.use(express.static("./dist"));
-
-app.use(morgan("tiny"));
-
-app.get("*", (req, res) => {
+const handleRender: express.RequestHandler = (req, res) => {
   const indexFile = path.resolve("./dist/index.html");
+  const store = createStore();
 
   const markup = ReactDOMServer.renderToString(
     <StaticRouter location={req.url}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </StaticRouter>
   );
 
@@ -32,8 +33,20 @@ app.get("*", (req, res) => {
 
     return res.send(data.replace('<div id="root"></div>', `<div id="root">${markup}</div>`));
   });
-});
+};
 
-app.listen(PORT, () => {
-  console.log(TEXT.SERVER_START_MESSEGE.replace("%s", String(PORT)));
-});
+const handleStartup = () => {
+  // TODO: Кажется, в этот коллбэк должна передаваться ошибка, но TS говорит, что у него нет параметров
+
+  // if (error) {
+  //   console.error(error)
+  //   return
+  //  }
+  console.log(TEXT.RUNNING_ON.replace("%s", PORT.toString()));
+};
+
+app
+  .use(morgan("tiny"))
+  .use(express.static("./dist"))
+  .get("/*", handleRender)
+  .listen(PORT, handleStartup);

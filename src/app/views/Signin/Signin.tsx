@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 import { TEXT } from "app/constants/text";
-import { authSelectors } from "app/services/auth";
+import { authSelectors } from "app/store/auth";
 import { cn } from "app/helpers/classname";
 import { Modal } from "app/components/UI";
 import { SigninForm } from "app/components/SigninForm";

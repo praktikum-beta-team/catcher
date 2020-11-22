@@ -2,7 +2,7 @@ import React, { FC, HTMLProps } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import { authSelectors } from "app/services/auth";
+import { authSelectors } from "app/store/auth";
 import { ROUTES } from "app/constants/routes";
 import { cn } from "app/helpers/classname";
 import { Avatar } from "../Avatar";

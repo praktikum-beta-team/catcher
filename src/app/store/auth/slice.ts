@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import type { IUserResponse, IUserRequest } from "app/utils/request/types";
 
-interface IAuthSliceState {
+export interface IAuthSliceState {
   isAuthenticated: boolean;
   error: null | string;
   user: null | IUserResponse;

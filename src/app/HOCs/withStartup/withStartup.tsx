@@ -1,7 +1,7 @@
 import React, { ComponentType, FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { authOperations, authSelectors } from "app/services/auth";
+import { authOperations, authSelectors } from "app/store/auth";
 
 export const withStartup = <P extends Record<string, unknown>>(
   Component: ComponentType<P>

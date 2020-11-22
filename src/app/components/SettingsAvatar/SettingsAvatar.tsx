@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { TEXT } from "app/constants/text";
 import { Avatar } from "app/components/UI";
-import { authOperations, authSelectors } from "app/services/auth";
+import { authOperations, authSelectors } from "app/store/auth";
 import { cn } from "app/helpers/classname";
 
 import "./SettingsAvatar.css";

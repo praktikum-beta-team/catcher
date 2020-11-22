@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TEXT } from "app/constants/text";
 import { useForm } from "app/components/UI/Form/useForm";
 import { Form, Input, Button, FormField } from "app/components/UI";
-import { authOperations, authSelectors } from "app/services/auth";
+import { authOperations, authSelectors } from "app/store/auth";
 import { IUserRequest } from "app/utils/request/types";
 
 const defaultValues: IUserRequest = {

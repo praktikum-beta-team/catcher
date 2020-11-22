@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TEXT } from "app/constants/text";
 import { Button, Input, Form, useForm, FormField } from "app/components/UI";
 import { ROUTES } from "app/constants/routes";
-import { authOperations, authSelectors, authActions } from "app/services/auth";
+import { authOperations, authSelectors, authActions } from "app/store/auth";
 import type { ISignupRequest } from "app/utils/request/types";
 
 interface ISignupForm extends ISignupRequest {

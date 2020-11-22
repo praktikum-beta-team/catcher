@@ -6,7 +6,7 @@ import { cn } from "app/helpers/classname";
 import { Layout, Loading } from "app/components/UI";
 import { SettingsForm } from "app/components/SettingsForm";
 import { SettingsAvatar } from "app/components/SettingsAvatar";
-import { authSelectors } from "app/services/auth";
+import { authSelectors } from "app/store/auth";
 
 import "./Settings.css";
 

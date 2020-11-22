@@ -1,11 +1,11 @@
 import React, { ComponentType } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { Provider } from "react-redux";
 
 import { ROUTES } from "app/constants/routes";
 import { Signin, Signup, Settings, Leaderboard, NotFound, GameScreen } from "app/views";
 import { PrivateRoute, ErrorBoundary, Logout } from "app/components";
-import { store } from "app/store";
+
+import "app/styles/main.css";
 
 type IComponentMap = {
   path: string;
@@ -25,21 +25,19 @@ const componentMap: IComponentMap = [
 ];
 
 export const App = () => (
-  <Provider store={store}>
-    <Switch>
-      {componentMap.map((props) => {
-        const { path, Component, isPrivate, ...restRouteProps } = props;
-        const RouteComponent = isPrivate ? PrivateRoute : Route;
+  <Switch>
+    {componentMap.map((props) => {
+      const { path, Component, isPrivate, ...restRouteProps } = props;
+      const RouteComponent = isPrivate ? PrivateRoute : Route;
 
-        return (
-          <RouteComponent key={path} path={path} {...restRouteProps}>
-            <ErrorBoundary>
-              <Component />
-            </ErrorBoundary>
-          </RouteComponent>
-        );
-      })}
-      <Redirect to={ROUTES.NOT_FOUND} />
-    </Switch>
-  </Provider>
+      return (
+        <RouteComponent key={path} path={path} {...restRouteProps}>
+          <ErrorBoundary>
+            <Component />
+          </ErrorBoundary>
+        </RouteComponent>
+      );
+    })}
+    <Redirect to={ROUTES.NOT_FOUND} />
+  </Switch>
 );
