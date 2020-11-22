@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
 
-import { TEXT } from "constants/text";
-import { cn } from "helpers/classname";
-import { Layout, Loading } from "components/UI";
-import { SettingsForm } from "components/SettingsForm";
-import { SettingsAvatar } from "components/SettingsAvatar";
-import { authSelectors } from "services/auth";
+import { TEXT } from "app/constants/text";
+import { cn } from "app/helpers/classname";
+import { Layout, Loading } from "app/components/UI";
+import { SettingsForm } from "app/components/SettingsForm";
+import { SettingsAvatar } from "app/components/SettingsAvatar";
+import { authSelectors } from "app/services/auth";
 
 import "./Settings.css";
 

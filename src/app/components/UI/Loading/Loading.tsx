@@ -1,7 +1,7 @@
 import React, { FC, HTMLProps } from "react";
 
-import { TEXT } from "constants/text";
-import { cn } from "helpers/classname";
+import { TEXT } from "app/constants/text";
+import { cn } from "app/helpers/classname";
 
 import "./Loading.css";
 

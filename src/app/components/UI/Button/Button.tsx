@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes, cloneElement, FC, isValidElement, ReactElement } from "react";
 
-import { cn } from "helpers/classname";
+import { cn } from "app/helpers/classname";
 
 import "./Button.css";
 

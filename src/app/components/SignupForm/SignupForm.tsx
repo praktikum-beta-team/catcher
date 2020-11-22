@@ -2,11 +2,11 @@ import React, { FC, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { TEXT } from "constants/text";
-import { Button, Input, Form, useForm, FormField } from "components/UI";
-import { ROUTES } from "constants/routes";
-import { authOperations, authSelectors, authActions } from "services/auth";
-import type { ISignupRequest } from "utils/request/types";
+import { TEXT } from "app/constants/text";
+import { Button, Input, Form, useForm, FormField } from "app/components/UI";
+import { ROUTES } from "app/constants/routes";
+import { authOperations, authSelectors, authActions } from "app/services/auth";
+import type { ISignupRequest } from "app/utils/request/types";
 
 interface ISignupForm extends ISignupRequest {
   password_confirm: string;

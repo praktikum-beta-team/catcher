@@ -1,10 +1,11 @@
 import React, { ComponentType } from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import { ROUTES } from "constants/routes";
-import { Signin, Signup, Settings, Leaderboard, NotFound, GameScreen } from "views";
-import { PrivateRoute, ErrorBoundary, Logout } from "components";
-import { withStartup } from "HOCs";
+import { ROUTES } from "app/constants/routes";
+import { Signin, Signup, Settings, Leaderboard, NotFound, GameScreen } from "app/views";
+import { PrivateRoute, ErrorBoundary, Logout } from "app/components";
+import { store } from "app/store";
 
 type IComponentMap = {
   path: string;
@@ -23,8 +24,8 @@ const componentMap: IComponentMap = [
   { path: ROUTES.LEADERBOARD, Component: Leaderboard },
 ];
 
-export const App = withStartup(() => (
-  <Router>
+export const App = () => (
+  <Provider store={store}>
     <Switch>
       {componentMap.map((props) => {
         const { path, Component, isPrivate, ...restRouteProps } = props;
@@ -40,5 +41,5 @@ export const App = withStartup(() => (
       })}
       <Redirect to={ROUTES.NOT_FOUND} />
     </Switch>
-  </Router>
-));
+  </Provider>
+);

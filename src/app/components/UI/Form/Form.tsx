@@ -1,6 +1,6 @@
 import React, { FC, HTMLProps } from "react";
 
-import { cn } from "helpers/classname";
+import { cn } from "app/helpers/classname";
 
 import "./Form.css";
 

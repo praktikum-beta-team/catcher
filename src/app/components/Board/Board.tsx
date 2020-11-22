@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 
-import { TEXT } from "constants/text";
-import { cn } from "helpers/classname";
-import { Avatar } from "components/UI";
+import { TEXT } from "app/constants/text";
+import { cn } from "app/helpers/classname";
+import { Avatar } from "app/components/UI";
 
 import "./Board.css";
 

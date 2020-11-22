@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { TEXT } from "constants/text";
-import { Avatar } from "components/UI";
-import { authOperations, authSelectors } from "services/auth";
-import { cn } from "helpers/classname";
+import { TEXT } from "app/constants/text";
+import { Avatar } from "app/components/UI";
+import { authOperations, authSelectors } from "app/services/auth";
+import { cn } from "app/helpers/classname";
 
 import "./SettingsAvatar.css";
 

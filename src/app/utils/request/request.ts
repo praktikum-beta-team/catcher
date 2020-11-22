@@ -1,6 +1,6 @@
 import axios, { Method, AxiosResponse, AxiosError } from "axios";
 
-import { BASE_URL } from "constants/api";
+import { BASE_URL } from "app/constants/api";
 import { IErrorResponse } from "./types/error";
 
 export function request<T = null, R = Record<string, unknown>, E = IErrorResponse>(

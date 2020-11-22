@@ -1,4 +1,4 @@
-import { TEXT } from "constants/text";
+import { TEXT } from "app/constants/text";
 
 export class Crash {
   private ctx;

@@ -1,4 +1,4 @@
-import { AUTH_LOGOUT } from "constants/api";
+import { AUTH_LOGOUT } from "app/constants/api";
 
 import { request } from "../request";
 

@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 
-import { Error } from "components/Error";
-import { Layout } from "components/UI";
-import { TEXT } from "constants/text";
+import { Error } from "app/components/Error";
+import { Layout } from "app/components/UI";
+import { TEXT } from "app/constants/text";
 
 export const NotFound: FC = () => (
   <Layout>

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import type { IUserResponse, IUserRequest } from "utils/request/types";
+import type { IUserResponse, IUserRequest } from "app/utils/request/types";
 
 interface IAuthSliceState {
   isAuthenticated: boolean;
@@ -8,7 +8,7 @@ interface IAuthSliceState {
   user: null | IUserResponse;
 }
 
-const isAuthenticated = Boolean(localStorage.getItem("isAuthenticated"));
+const isAuthenticated = false; // Boolean(localStorage.getItem("isAuthenticated"));
 
 const initialState: IAuthSliceState = {
   isAuthenticated,

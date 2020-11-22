@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef } from "react";
 
-import { Game } from "services/game";
-import { cn } from "helpers/classname";
+import { Game } from "app/services/game";
+import { cn } from "app/helpers/classname";
 
 import "./GameScreen.css";
 

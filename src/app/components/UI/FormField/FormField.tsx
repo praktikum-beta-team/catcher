@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 
-import { cn } from "helpers/classname";
+import { cn } from "app/helpers/classname";
 
 import "./FormField.css";
 

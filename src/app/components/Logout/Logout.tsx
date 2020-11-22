@@ -2,9 +2,9 @@ import React, { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { authOperations, authSelectors } from "services/auth";
-import { ROUTES } from "constants/routes";
-import { Loading } from "components/UI";
+import { authOperations, authSelectors } from "app/services/auth";
+import { ROUTES } from "app/constants/routes";
+import { Loading } from "app/components/UI";
 
 export const Logout: FC = () => {
   const dispatch = useDispatch();

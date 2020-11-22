@@ -1,13 +1,13 @@
 import React, { FC, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { TEXT } from "constants/text";
-import { cn } from "helpers/classname";
-import { Button, Loading, Layout } from "components/UI";
-import { Board } from "components/Board";
-import type { IBoardEntry } from "components/Board";
+import { TEXT } from "app/constants/text";
+import { cn } from "app/helpers/classname";
+import { Button, Loading, Layout } from "app/components/UI";
+import { Board } from "app/components/Board";
+import type { IBoardEntry } from "app/components/Board";
 
-import { ROUTES } from "constants/routes";
+import { ROUTES } from "app/constants/routes";
 
 import _mockData from "./mockData.json";
 import "./Leaderboard.css";

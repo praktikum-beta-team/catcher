@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, isValidElement, cloneElement, ReactElement } from "react";
 
-import { BASE_DOMAIN } from "constants/api";
-import { cn } from "helpers/classname";
+import { BASE_DOMAIN } from "app/constants/api";
+import { cn } from "app/helpers/classname";
 
 import "./Avatar.css";
 

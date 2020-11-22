@@ -1,11 +1,11 @@
 import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { TEXT } from "constants/text";
-import { useForm } from "components/UI/Form/useForm";
-import { Form, Input, Button, FormField } from "components/UI";
-import { authOperations, authSelectors } from "services/auth";
-import { IUserRequest } from "utils/request/types";
+import { TEXT } from "app/constants/text";
+import { useForm } from "app/components/UI/Form/useForm";
+import { Form, Input, Button, FormField } from "app/components/UI";
+import { authOperations, authSelectors } from "app/services/auth";
+import { IUserRequest } from "app/utils/request/types";
 
 const defaultValues: IUserRequest = {
   first_name: "",

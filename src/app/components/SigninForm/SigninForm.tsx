@@ -2,11 +2,11 @@ import React, { FC, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { TEXT } from "constants/text";
-import { Form, useForm, FormField, Input, Button } from "components/UI";
-import { authOperations, authSelectors, authActions } from "services/auth";
-import { ROUTES } from "constants/routes";
-import type { ISigninRequest } from "utils/request/types";
+import { TEXT } from "app/constants/text";
+import { Form, useForm, FormField, Input, Button } from "app/components/UI";
+import { authOperations, authSelectors, authActions } from "app/services/auth";
+import { ROUTES } from "app/constants/routes";
+import type { ISigninRequest } from "app/utils/request/types";
 
 const defaultValues: ISigninRequest = {
   login: "",

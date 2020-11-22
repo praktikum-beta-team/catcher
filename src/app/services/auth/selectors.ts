@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { IUserRequest } from "utils/request/types";
-import type { RootState } from "store";
+import { IUserRequest } from "app/utils/request/types";
+import type { RootState } from "app/store";
 
 export const getIsAuthenticated = (state: RootState) => state.auth.isAuthenticated;
 export const getError = (state: RootState) => state.auth.error;

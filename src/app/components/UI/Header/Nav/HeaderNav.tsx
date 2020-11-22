@@ -1,8 +1,8 @@
 import React, { FC, HTMLProps } from "react";
 import { Link } from "react-router-dom";
 
-import { ROUTES } from "constants/routes";
-import { cn } from "helpers/classname";
+import { ROUTES } from "app/constants/routes";
+import { cn } from "app/helpers/classname";
 
 import "./HeaderNav.css";
 

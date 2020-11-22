@@ -1,7 +1,7 @@
 import nock from "nock";
 import type { AxiosError, AxiosResponse } from "axios";
 
-import { BASE_URL } from "constants/api";
+import { BASE_URL } from "app/constants/api";
 import { request } from "../request";
 
 const scope = nock(BASE_URL).defaultReplyHeaders({

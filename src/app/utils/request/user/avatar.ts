@@ -1,4 +1,4 @@
-import { USER_PROFILE_AVATAR } from "constants/api";
+import { USER_PROFILE_AVATAR } from "app/constants/api";
 
 import { request } from "../request";
 
