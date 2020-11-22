@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const common = require("./webpack.common.js");
 
@@ -32,6 +33,10 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "style.[fullhash].min.css",
+    }),
+    new HtmlWebPackPlugin({
+      template: "./www/index.html",
+      title: "Catcher",
     }),
   ],
 });

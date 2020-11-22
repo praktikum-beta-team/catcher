@@ -1,7 +1,6 @@
 const { merge } = require("webpack-merge");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
 const nodeExternals = require("webpack-node-externals");
+const webpack = require("webpack");
 
 const common = require("./webpack.common.js");
 
@@ -21,16 +20,9 @@ module.exports = merge(common, {
       },
     ],
   },
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendor",
-        },
-      },
-    },
-  },
-  plugins: null,
+  plugins: [
+    new webpack.ProvidePlugin({
+      // TODO: Здесь хорошо бы замокать window, local storage и пр.
+    }),
+  ],
 });
