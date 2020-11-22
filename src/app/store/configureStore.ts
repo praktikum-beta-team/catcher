@@ -7,6 +7,8 @@ export interface IRootState {
   [authName]: IAuthSliceState;
 }
 
+export type PreloadedState = DeepPartial<IRootState>;
+
 const reducer = {
   [authName]: authReducer,
 };
@@ -15,7 +17,7 @@ const middleware = getDefaultMiddleware({
   thunk: true,
 });
 
-export const createStore = (preloadedState: DeepPartial<IRootState> = {}) => {
+export const createStore = (preloadedState: PreloadedState = {}) => {
   return configureStore({
     reducer,
     middleware,
