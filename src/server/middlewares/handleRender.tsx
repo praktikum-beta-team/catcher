@@ -1,25 +1,45 @@
-import path from "path";
-import fs from "fs";
 import React from "react";
-import ReactDOMServer from "react-dom/server";
+import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router";
 import { Provider } from "react-redux";
 import type { RequestHandler } from "express";
 
 import { App } from "app/components/App";
 import { createStore, PreloadedState } from "app/store";
-import { TEXT } from "server/constants/text";
+import _assets from "../../../dist/assets.json";
+
+const assets = _assets;
+
+const renderFullPage = (html: string, preloadedState: PreloadedState) =>
+  renderToStaticMarkup(
+    <html lang="ru">
+      <head>
+        <link rel="stylesheet" href={assets.main.css} />
+      </head>
+      <body className="body">
+        <div id="root" dangerouslySetInnerHTML={{ __html: html }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+              /</g,
+              "\\u003c"
+            )}`,
+          }}
+        />
+        <script src={assets.main.js} />
+        <script src={assets.vendor.js} />
+      </body>
+    </html>
+  );
 
 export const handleRender: RequestHandler = (req, res) => {
-  const indexFile = path.resolve("./dist/index.html");
-  const preloadedState: PreloadedState = {
+  const store = createStore({
     auth: {
       isAuthenticated: false,
     },
-  };
-  const store = createStore(preloadedState);
+  });
 
-  const markup = ReactDOMServer.renderToString(
+  const html = renderToString(
     <StaticRouter location={req.url}>
       <Provider store={store}>
         <App />
@@ -27,11 +47,7 @@ export const handleRender: RequestHandler = (req, res) => {
     </StaticRouter>
   );
 
-  fs.readFile(indexFile, "utf8", (err, data) => {
-    if (err) {
-      return res.status(500).send(TEXT.ERROR_500);
-    }
+  const preloadedState = store.getState();
 
-    return res.send(data.replace('<div id="root"></div>', `<div id="root">${markup}</div>`));
-  });
+  res.send(renderFullPage(html, preloadedState));
 };
