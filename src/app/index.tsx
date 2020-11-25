@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
+import { hydrate } from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 
@@ -11,7 +11,7 @@ delete (window as any).__PRELOADED_STATE__;
 
 const store = createStore(state);
 
-render(
+hydrate(
   <Router>
     <Provider store={store}>
       <App />
