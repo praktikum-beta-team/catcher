@@ -1,10 +1,7 @@
 const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: {
-    app: "./src/index.tsx",
-  },
+  entry: "./src/app/index.tsx",
   output: {
     path: path.resolve(__dirname, "../..", "dist"),
     filename: "[name].[fullhash].bundle.js",
@@ -21,10 +18,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: "./www/index.html",
-      title: "Catcher",
-    }),
-  ],
 };
