@@ -2,15 +2,20 @@
   "compilerOptions": {
     "strict": true,
     "noImplicitAny": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
+    "paths": {
+      "app/*": ["./src/app/*"],
+      "server/*": ["./src/server/*"]
+    },
     "outDir": "./dist/",
-    "module": "es6",
-    "target": "es5",
+    "module": "commonjs",
+    "target": "es6",
     "declaration": false,
     "jsx": "react",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+  },
+  "exclude": ["node_modules"]
 }

@@ -1,5 +1,7 @@
 import React, { ComponentType } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { hot } from "react-hot-loader/root";
 
 import { ROUTES } from "app/constants/routes";
 import { Signin, Signup, Settings, Leaderboard, NotFound, GameScreen } from "app/views";
@@ -24,7 +26,7 @@ const componentMap: IComponentMap = [
   { path: ROUTES.LEADERBOARD, Component: Leaderboard },
 ];
 
-export const App = () => (
+export const App = hot(() => (
   <Switch>
     {componentMap.map((props) => {
       const { path, Component, isPrivate, ...restRouteProps } = props;
@@ -40,4 +42,4 @@ export const App = () => (
     })}
     <Redirect to={ROUTES.NOT_FOUND} />
   </Switch>
-);
+));

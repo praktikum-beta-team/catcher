@@ -1,1 +1,1 @@
-export * from "./handleRender";
+export * as ssr from "./ssr";
