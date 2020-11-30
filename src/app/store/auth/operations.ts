@@ -2,7 +2,7 @@ import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
 
 import type { ISigninRequest, ISignupRequest, IUserRequest } from "app/utils/request/types";
-import { user, auth } from "app/utils/request";
+import { user, auth, yandex } from "app/utils/request";
 import { actions } from "./slice";
 
 export const fetchUserData = (): ThunkAction<void, unknown, null, AnyAction> => (dispatch) => {
@@ -29,7 +29,6 @@ export const signin = (params: ISigninRequest): ThunkAction<void, unknown, null,
     () => {
       dispatch(actions.authSuccess());
       dispatch(fetchUserData());
-      // localStorage.setItem("isAuthenticated", "true");
     },
     ({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
@@ -39,7 +38,6 @@ export const signin = (params: ISigninRequest): ThunkAction<void, unknown, null,
 };
 
 export const logout = (): ThunkAction<void, unknown, null, AnyAction> => (dispatch) => {
-  // localStorage.clear();
   auth.logout(
     null,
     () => {
@@ -92,6 +90,37 @@ export const changeUserAvatar = (params: FormData): ThunkAction<void, unknown, n
     ({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
       console.error(errorMessage);
+    }
+  );
+};
+
+export const getYandexPasportInfo = (
+  token: string
+): ThunkAction<void, unknown, null, AnyAction> => (dispatch) => {
+  yandex.getPasportInfo(
+    {
+      format: "json",
+    },
+    ({ data }) => {
+      dispatch(
+        actions.fetchUserSuccess({
+          id: data.id,
+          first_name: data.first_name,
+          second_name: data.last_name,
+          display_name: data.real_name,
+          login: data.login,
+          email: data.default_email,
+          avatar: `https://avatars.yandex.net/get-yapic/${data.default_avatar_id}/islands-50`,
+        })
+      );
+      dispatch(actions.authSuccess());
+    },
+    ({ message, response }) => {
+      const errorMessage = response ? response.statusText : message;
+      dispatch(actions.authFailure(errorMessage));
+    },
+    {
+      Authorization: `OAuth ${token}`,
     }
   );
 };

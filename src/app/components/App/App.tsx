@@ -5,7 +5,7 @@ import { hot } from "react-hot-loader/root";
 
 import { ROUTES } from "app/constants/routes";
 import { Signin, Signup, Settings, Leaderboard, NotFound, GameScreen } from "app/views";
-import { PrivateRoute, ErrorBoundary, Logout } from "app/components";
+import { PrivateRoute, ErrorBoundary, Logout, OAuth } from "app/components";
 
 import "app/styles/main.css";
 
@@ -24,6 +24,7 @@ const componentMap: IComponentMap = [
   { path: ROUTES.LOGOUT, Component: Logout, isPrivate: true },
   { path: ROUTES.NOT_FOUND, Component: NotFound },
   { path: ROUTES.LEADERBOARD, Component: Leaderboard },
+  { path: ROUTES.OAUTH, Component: OAuth },
 ];
 
 export const App = hot(() => (

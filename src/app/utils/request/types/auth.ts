@@ -19,6 +19,6 @@ export interface IUserResponse {
   display_name: string;
   login: string;
   email: string;
-  phone: string;
-  avatar: string;
+  phone?: string;
+  avatar?: string;
 }
