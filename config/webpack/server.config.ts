@@ -1,13 +1,13 @@
-const { merge } = require("webpack-merge");
-const nodeExternals = require("webpack-node-externals");
-const webpack = require("webpack");
+import { merge } from "webpack-merge";
+import nodeExternals from "webpack-node-externals";
+import webpack from "webpack";
 
-const common = require("./webpack.common.js");
+import base from "./base.config";
 
-module.exports = merge(common, {
+module.exports = merge(base, {
   mode: "production",
   target: "node",
-  entry: "./src/server/index.tsx",
+  entry: "./src/server/server.ts",
   output: {
     filename: "server.js",
   },
