@@ -1,7 +1,6 @@
 .board {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 40px;
   @mixin border-bottom;
 
   /* Элементы */

@@ -11,4 +11,8 @@
     font-size: 36px;
     font-weight: normal;
   }
+
+  &__action {
+    margin-top: 40px;
+  }
 }

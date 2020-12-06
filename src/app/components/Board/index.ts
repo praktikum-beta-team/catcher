@@ -1,1 +1,1 @@
-export { Board, IBoardEntry } from "./Board";
+export { Board } from "./Board";
