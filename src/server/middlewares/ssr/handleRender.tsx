@@ -80,7 +80,15 @@ const renderFullPage = (
 };
 
 export const handleRender: RequestHandler = ({ url }, res) => {
-  const store = createStore({});
+  const store = createStore({
+    auth: {
+      isAuthenticated: false,
+      error: null,
+      user: null,
+      yaToken: null,
+      ...res.locals.auth,
+    },
+  });
   const preloadedState = store.getState();
 
   const content = renderToString(

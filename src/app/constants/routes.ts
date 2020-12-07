@@ -9,5 +9,5 @@ export const ROUTES = {
   LEADERBOARD: "/leaderboard",
   NOT_FOUND: "/404",
   OAUTH: "/OAUTH",
-  OAUTH_YANDEX: `https://oauth.yandex.ru/authorize?response_type=token&client_id=${YANDEX.CLIENT_ID}&redirect_uri=http://localhost:3000/oAuth`,
+  OAUTH_YANDEX: `https://oauth.yandex.ru/authorize?response_type=code&client_id=${YANDEX.CLIENT_ID}&redirect_uri=http://localhost:3001/oAuth`,
 };

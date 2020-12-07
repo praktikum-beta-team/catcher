@@ -93,34 +93,3 @@ export const changeUserAvatar = (params: FormData): ThunkAction<void, unknown, n
     }
   );
 };
-
-export const getYandexPasportInfo = (
-  token: string
-): ThunkAction<void, unknown, null, AnyAction> => (dispatch) => {
-  yandex.getPasportInfo(
-    {
-      format: "json",
-    },
-    ({ data }) => {
-      dispatch(
-        actions.fetchUserSuccess({
-          id: data.id,
-          first_name: data.first_name,
-          second_name: data.last_name,
-          display_name: data.real_name,
-          login: data.login,
-          email: data.default_email,
-          avatar: `https://avatars.yandex.net/get-yapic/${data.default_avatar_id}/islands-50`,
-        })
-      );
-      dispatch(actions.authSuccess());
-    },
-    ({ message, response }) => {
-      const errorMessage = response ? response.statusText : message;
-      dispatch(actions.authFailure(errorMessage));
-    },
-    {
-      Authorization: `OAuth ${token}`,
-    }
-  );
-};

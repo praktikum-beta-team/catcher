@@ -5,11 +5,13 @@
   "dependencies": {
     "@bem-react/classname": "1.5.8",
     "@reduxjs/toolkit": "1.4.0",
+    "@types/qs": "6.9.5",
     "axios": "0.20.0",
     "express": "4.17.1",
     "memory-fs": "0.5.0",
     "morgan": "1.10.0",
     "open": "7.3.0",
+    "qs": "6.9.4",
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-redux": "7.2.1",
