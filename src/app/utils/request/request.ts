@@ -1,23 +1,30 @@
 import axios, { Method, AxiosResponse, AxiosError } from "axios";
+import qs from "qs";
 
 import { BASE_URL } from "app/constants/api";
 import { IErrorResponse } from "./types/error";
 
 export function request<T = null, R = Record<string, unknown>, E = IErrorResponse>(
   endpoint: string,
-  method: Method = "POST"
+  method: Method = "post",
+  reqBaseURL = BASE_URL,
+  stringify = false
 ) {
   return async (
     data: T,
     cb: (response: AxiosResponse<R>) => void,
-    errorCb?: (e: AxiosError<E>) => void
-  ): Promise<void | AxiosResponse> => {
+    errorCb?: (e: AxiosError<E>) => void,
+    headers?: Record<string, string>
+  ): Promise<void> => {
     try {
       const res = await axios({
-        data,
+        data: stringify ? qs.stringify(data) : data,
         method,
         url: endpoint,
-        baseURL: BASE_URL,
+        baseURL: reqBaseURL,
+        headers: {
+          ...headers,
+        },
         withCredentials: true,
       });
       return cb(res);

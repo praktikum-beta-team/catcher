@@ -53,6 +53,17 @@ export const SigninForm: FC = () => {
           {TEXT.SIGNIN.SIGNUP}
         </Button>
       </FormField>
+      <FormField>
+        <Button
+          view="pseudo"
+          width="max"
+          type="button"
+          container={<a href={ROUTES.OAUTH_YANDEX}>{}</a>}
+          onClick={onSignupButtonClick}
+        >
+          {TEXT.SIGNIN.OAUTH_YANDEX}
+        </Button>
+      </FormField>
     </Form>
   );
 };

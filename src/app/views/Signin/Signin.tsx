@@ -15,7 +15,6 @@ const b_ = cn("signin");
 
 export const Signin: FC = () => {
   const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
-
   return isAuthenticated ? (
     <Redirect to={ROUTES.GAME} />
   ) : (

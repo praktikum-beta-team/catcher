@@ -6,6 +6,7 @@ export interface IAuthSliceState {
   isAuthenticated: boolean;
   error: null | string;
   user: null | IUserResponse;
+  yaToken: null | string;
 }
 
 const isAuthenticated = false; // Boolean(localStorage.getItem("isAuthenticated"));
@@ -14,6 +15,7 @@ const initialState: IAuthSliceState = {
   isAuthenticated,
   error: null,
   user: null,
+  yaToken: null,
 };
 
 const authSlice = createSlice({
@@ -43,6 +45,9 @@ const authSlice = createSlice({
     },
     clearError: (state) => {
       state.error = null;
+    },
+    setYaToken: (state, { payload: token }: PayloadAction<string>) => {
+      state.yaToken = token;
     },
   },
 });

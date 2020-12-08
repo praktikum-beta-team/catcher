@@ -27,6 +27,7 @@ export const TEXT = {
     PASSWORD: "Введите пароль",
     SUBMIT: "Войти",
     SIGNUP: "Зарегистрироваться",
+    OAUTH_YANDEX: "Войти через Яндекс",
   },
   SIGNUP: {
     TITLE: "Регистрация",
