@@ -1,54 +1,45 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { TEXT } from "app/constants/text";
 import { cn } from "app/helpers/classname";
 import { Button, Loading, Layout } from "app/components/UI";
 import { Board } from "app/components/Board";
-import type { IBoardEntry } from "app/components/Board";
+import { leaderboardOperations, leaderboardSelectors } from "app/store/leaderboard";
 
 import { ROUTES } from "app/constants/routes";
 
-import _mockData from "./mockData.json";
 import "./Leaderboard.css";
 
-const mockData = _mockData;
 const b_ = cn("leaderboard");
 
-const loadEntries = (): Promise<IBoardEntry[]> =>
-  new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockData);
-    }, 1500);
-  });
+const { getPending, getError, getLeaders } = leaderboardSelectors;
 
 export const Leaderboard: FC = () => {
-  const [loading, setLoading] = useState(true);
-  const [entries, setEntries] = useState<IBoardEntry[]>([]);
+  const dispatch = useDispatch();
+  const pending = useSelector(getPending);
+  const error = useSelector(getError);
+  const entries = useSelector(getLeaders);
 
   useEffect(() => {
-    /**
-     * Пока апи не работает, компонент выводит мок-данные
-     */
-
-    loadEntries().then((data) => {
-      setEntries(data);
-      setLoading(false);
-    });
-  }, []);
+    dispatch(leaderboardOperations.fetchLeadersRequest());
+  }, [dispatch]);
 
   return (
     <Layout>
       <div className={b_()}>
         <h1 className={b_("title")}>{TEXT.LEADERBOARD.TITLE}</h1>
-        {loading ? (
-          <Loading />
-        ) : (
+        {pending && <Loading />}
+        {!pending && error && TEXT.LEADERBOARD.ERROR}
+        {!pending && !error && (
           <>
-            <Board entries={entries} />
-            <Button view="action" container={<Link to={ROUTES.GAME} />}>
-              {TEXT.LEADERBOARD.CALL_TO_ACTION}
-            </Button>
+            {entries.length ? <Board entries={entries} /> : TEXT.LEADERBOARD.NO_LEADERS}
+            <div className={b_("action")}>
+              <Button view="action" container={<Link to={ROUTES.GAME} />}>
+                {TEXT.LEADERBOARD.CALL_TO_ACTION[entries.length ? 0 : 1]}
+              </Button>
+            </div>
           </>
         )}
       </div>
