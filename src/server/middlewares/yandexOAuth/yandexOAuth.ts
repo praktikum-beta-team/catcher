@@ -1,22 +1,22 @@
 import { RequestHandler } from "express";
 
-import { yandex } from "app/utils/request";
+import { getPasportInfo, getToken } from "app/services/api/yandexOAuth";
 import { YANDEX } from "app/constants/oAuth";
 
-import type { IUserResponse } from "app/utils/request/types";
+import { IUser } from "app/types/models/user";
 
 const getPasportInfoYandex = async (token: string) => {
-  return new Promise<IUserResponse>((resolve, reject) => {
-    yandex.getPasportInfo(
+  return new Promise<IUser>((resolve, reject) => {
+    getPasportInfo(
       {
         format: "json",
       },
       ({ data }) => {
         resolve({
           id: data.id,
-          first_name: data.first_name,
-          second_name: data.last_name,
-          display_name: data.real_name,
+          firstName: data.first_name,
+          secondName: data.last_name,
+          displayName: data.real_name,
           login: data.login,
           email: data.default_email,
           avatar: `https://avatars.yandex.net/get-yapic/${data.default_avatar_id}/islands-50`,
@@ -34,7 +34,7 @@ const getPasportInfoYandex = async (token: string) => {
 
 const getTokenYandex = async (code: string) => {
   return new Promise<string>((resolve, reject) => {
-    yandex.getToken(
+    getToken(
       {
         grant_type: "authorization_code",
         code,
@@ -51,7 +51,7 @@ const getTokenYandex = async (code: string) => {
   });
 };
 
-export const oAuthYandex: RequestHandler = async (req, res, next) => {
+export const yandexOAuth: RequestHandler = async (req, res, next) => {
   const { code, error_description } = req.query;
   res.locals.auth = {};
   if (!code) {

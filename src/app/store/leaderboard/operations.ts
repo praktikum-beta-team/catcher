@@ -1,7 +1,7 @@
 import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
 
-import { fetchLeaders } from "app/modules/api";
+import { fetchLeaders } from "app/services/api";
 
 import { actions } from "./slice";
 

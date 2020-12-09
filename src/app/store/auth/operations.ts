@@ -1,44 +1,58 @@
-import { AnyAction } from "redux";
 import { ThunkAction } from "redux-thunk";
+import type { Action } from "redux";
 
-import type { ISigninRequest, ISignupRequest, IUserRequest } from "app/utils/request/types";
-import { user, auth, yandex } from "app/utils/request";
+import { signin, signup, logout, fetchUserData } from "app/services/api/auth";
+import { changeUserProfile, changeUserAvatar } from "app/services/api/users";
+import type { ISigninRequest, ISignupRequest } from "app/services/api/auth";
+import type { IUserRequest } from "app/services/api/users";
+
 import { actions } from "./slice";
 
-export const fetchUserData = (): ThunkAction<void, unknown, null, AnyAction> => (dispatch) => {
-  auth.user(
+const {
+  authSuccess,
+  authFailure,
+  logoutSuccess,
+  fetchUserDataSuccess,
+  changeUserDataSuccess,
+  changeUserDataFailure,
+  clearError,
+  setYaToken,
+} = actions;
+
+const fetchUserDataRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
+  fetchUserData(
     null,
     ({ data }) => {
-      dispatch(actions.fetchUserSuccess(data));
+      dispatch(fetchUserDataSuccess(data));
     },
     ({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
       /**
        * TODO: обработать сетевую ошибку отлично от ошибки апи
        */
-      dispatch(actions.authFailure(errorMessage));
+      dispatch(authFailure(errorMessage));
     }
   );
 };
 
-export const signin = (params: ISigninRequest): ThunkAction<void, unknown, null, AnyAction> => (
+const signinRequest = (params: ISigninRequest): ThunkAction<void, unknown, null, Action> => (
   dispatch
 ) => {
-  auth.signin(
+  signin(
     params,
     () => {
-      dispatch(actions.authSuccess());
-      dispatch(fetchUserData());
+      dispatch(authSuccess());
+      // dispatch(fetchUserDataRequest());
     },
     ({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
-      dispatch(actions.authFailure(errorMessage));
+      dispatch(authFailure(errorMessage));
     }
   );
 };
 
-export const logout = (): ThunkAction<void, unknown, null, AnyAction> => (dispatch) => {
-  auth.logout(
+const logoutRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
+  logout(
     null,
     () => {
       dispatch(actions.logoutSuccess());
@@ -50,14 +64,13 @@ export const logout = (): ThunkAction<void, unknown, null, AnyAction> => (dispat
   );
 };
 
-export const signup = (params: ISignupRequest): ThunkAction<void, unknown, null, AnyAction> => (
+const signupRequest = (params: ISignupRequest): ThunkAction<void, unknown, null, Action> => (
   dispatch
 ) => {
-  auth.signup(
+  signup(
     params,
     () => {
       dispatch(actions.authSuccess());
-      // localStorage.setItem("isAuthenticated", "true");
     },
     ({ message, response }) => {
       const error = response ? response.data.reason : message;
@@ -66,30 +79,47 @@ export const signup = (params: ISignupRequest): ThunkAction<void, unknown, null,
   );
 };
 
-export const changeUserData = (
-  params: IUserRequest
-): ThunkAction<void, unknown, null, AnyAction> => (dispatch) => {
-  user.changeProfile(
+const changeUserDataRequest = (params: IUserRequest): ThunkAction<void, unknown, null, Action> => (
+  dispatch
+) => {
+  changeUserProfile(
     params,
-    () => dispatch(actions.changeUserSuccess(params)),
+    () => dispatch(actions.changeUserDataSuccess(params)),
     ({ response, message }) => {
       const errorMessage = response ? response.data.reason : message;
-      dispatch(actions.changeUserFailure(errorMessage));
+      dispatch(actions.changeUserDataFailure(errorMessage));
     }
   );
 };
 
-export const changeUserAvatar = (params: FormData): ThunkAction<void, unknown, null, AnyAction> => (
+const changeUserAvatarRequest = (params: FormData): ThunkAction<void, unknown, null, Action> => (
   dispatch
 ) => {
-  user.changeAvatar(
+  changeUserAvatar(
     params,
     () => {
-      dispatch(fetchUserData());
+      dispatch(fetchUserDataRequest());
     },
     ({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
       console.error(errorMessage);
     }
   );
+};
+
+export {
+  signinRequest,
+  signupRequest,
+  authSuccess,
+  authFailure,
+  logoutRequest,
+  logoutSuccess,
+  fetchUserDataRequest,
+  fetchUserDataSuccess,
+  changeUserDataRequest,
+  changeUserDataSuccess,
+  changeUserDataFailure,
+  clearError,
+  setYaToken,
+  changeUserAvatarRequest,
 };

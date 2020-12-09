@@ -1,18 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import type { IUserResponse, IUserRequest } from "app/utils/request/types";
+import type { IUser } from "app/types/models/user";
+import type { IUserRequest } from "app/services/api/users";
+import type { IUserResponse } from "app/services/api/auth";
 
 export interface IAuthSliceState {
   isAuthenticated: boolean;
   error: null | string;
-  user: null | IUserResponse;
+  user: null | IUser;
   yaToken: null | string;
 }
 
-const isAuthenticated = false; // Boolean(localStorage.getItem("isAuthenticated"));
-
 const initialState: IAuthSliceState = {
-  isAuthenticated,
+  isAuthenticated: false,
   error: null,
   user: null,
   yaToken: null,
@@ -34,13 +34,23 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
-    fetchUserSuccess: (state, { payload: user }: PayloadAction<IUserResponse>) => {
+    fetchUserDataSuccess: (state, { payload }: PayloadAction<IUserResponse>) => {
+      const user: IUser = {
+        id: payload.id,
+        firstName: payload.first_name,
+        secondName: payload.second_name,
+        displayName: payload.display_name,
+        login: payload.login,
+        email: payload.email,
+        phone: payload.phone,
+        avatar: payload.avatar,
+      };
       state.user = user;
     },
-    changeUserSuccess: (state, { payload }: PayloadAction<IUserRequest>) => {
+    changeUserDataSuccess: (state, { payload }: PayloadAction<IUserRequest>) => {
       Object.assign(state, payload);
     },
-    changeUserFailure: (state, { payload: error }: PayloadAction<string>) => {
+    changeUserDataFailure: (state, { payload: error }: PayloadAction<string>) => {
       state.error = error;
     },
     clearError: (state) => {
@@ -52,4 +62,4 @@ const authSlice = createSlice({
   },
 });
 
-export const { name, reducer, actions } = authSlice;
+export const { reducer, actions } = authSlice;

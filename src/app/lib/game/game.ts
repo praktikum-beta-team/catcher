@@ -1,7 +1,7 @@
 import { Bucket, Collectible } from "./objects";
 import { HUD } from "./hud";
-import { Input, KEYS } from "./input";
-import { Mouse } from "./mouse";
+import { Keyboard, KEYS } from "./keyboard";
+import { Pointer } from "./pointer";
 import { Crash, Loss } from "./screens";
 
 const FPS = 60;
@@ -16,9 +16,9 @@ export class Game {
 
   private tickLength = 1000 / FPS;
 
-  private input;
+  private keyboard;
 
-  private mouse;
+  private pointer;
 
   score = 0;
 
@@ -38,10 +38,10 @@ export class Game {
 
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
-    this.input = new Input();
-    this.input.addListeners();
-    this.mouse = new Mouse(ctx.canvas);
-    this.mouse.addListeners();
+    this.keyboard = new Keyboard();
+    this.keyboard.addListeners();
+    this.pointer = new Pointer(ctx.canvas);
+    this.pointer.addListeners();
     this.collectibles = [];
     this.bucket = new Bucket(this.ctx);
     this.hud = new HUD(this);
@@ -57,7 +57,7 @@ export class Game {
   };
 
   private restart = () => {
-    const { collectibles, input, enqueue, loop } = this;
+    const { collectibles, keyboard, enqueue, loop } = this;
 
     this.lives = LIVES;
     this.score = 0;
@@ -65,7 +65,7 @@ export class Game {
     collectibles.length = 0;
 
     enqueue(loop);
-    input.detach(KEYS.SPASEBAR, this.restart);
+    keyboard.detach(KEYS.SPASEBAR, this.restart);
   };
 
   private enqueue = (cb: FrameRequestCallback) => {
@@ -73,10 +73,10 @@ export class Game {
   };
 
   private loop: FrameRequestCallback = (nextTick) => {
-    const { input, enqueue, update, draw, restart, loss, crash, loop, tickLength, lives } = this;
+    const { keyboard, enqueue, update, draw, restart, loss, crash, loop, tickLength, lives } = this;
 
     if (!lives) {
-      input.on(KEYS.SPASEBAR, restart);
+      keyboard.on(KEYS.SPASEBAR, restart);
       enqueue(loss.draw);
 
       return;
@@ -103,13 +103,13 @@ export class Game {
   };
 
   private update = () => {
-    const { numTicks, ctx, input, bucket, collectibles, mouse } = this;
-    if (input.keys.left) {
+    const { numTicks, ctx, keyboard, bucket, collectibles, pointer } = this;
+    if (keyboard.keys.left) {
       bucket.move({ direction: "left" });
-    } else if (input.keys.right) {
+    } else if (keyboard.keys.right) {
       bucket.move({ direction: "right" });
-    } else if (mouse.events.x) {
-      bucket.move({ dx: mouse.events.x });
+    } else if (pointer.events.x) {
+      bucket.move({ dx: pointer.events.x });
     }
 
     collectibles.forEach(({ isOnScreen, intersectsWithObject, dangerous, move }, index) => {
@@ -160,13 +160,13 @@ export class Game {
   };
 
   destroy() {
-    const { input, mouse } = this;
+    const { keyboard, pointer } = this;
 
     if (this.requestedFrame) {
       window.cancelAnimationFrame(this.requestedFrame);
     }
 
-    input.removeListeners();
-    mouse.removeListeners();
+    keyboard.removeListeners();
+    pointer.removeListeners();
   }
 }

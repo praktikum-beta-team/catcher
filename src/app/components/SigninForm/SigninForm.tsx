@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 
 import { TEXT } from "app/constants/text";
 import { Form, useForm, FormField, Input, Button } from "app/components/UI";
-import { authOperations, authSelectors, authActions } from "app/store/auth";
+import { authOperations, authSelectors } from "app/store/auth";
+import type { ISigninRequest } from "app/services/api/auth";
+import { YANDEX } from "app/constants/oAuth";
 import { ROUTES } from "app/constants/routes";
-import type { ISigninRequest } from "app/utils/request/types";
 
 const defaultValues: ISigninRequest = {
   login: "",
@@ -18,19 +19,19 @@ export const SigninForm: FC = () => {
   const [handleSubmit, fieldProps] = useForm(defaultValues);
   const error = useSelector(authSelectors.getError);
 
-  const onSubmit = useCallback(
+  const handleSigninFormSybmit = useCallback(
     (values) => {
-      dispatch(authOperations.signin(values));
+      dispatch(authOperations.signinRequest(values));
     },
     [dispatch]
   );
 
-  const onSignupButtonClick = useCallback(() => {
-    dispatch(authActions.clearError());
+  const handleSignupButtonClick = useCallback(() => {
+    dispatch(authOperations.clearError());
   }, [dispatch]);
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} error={error}>
+    <Form onSubmit={handleSubmit(handleSigninFormSybmit)} error={error}>
       <FormField>
         <Input placeholder={TEXT.SIGNIN.LOGIN} {...fieldProps("login")} />
       </FormField>
@@ -39,7 +40,22 @@ export const SigninForm: FC = () => {
       </FormField>
       <FormField>
         <Button view="action" width="max">
-          {TEXT.SIGNIN.SUBMIT}
+          {TEXT.SIGNIN.BUTTON_SIGNIN}
+        </Button>
+      </FormField>
+      <FormField>
+        <Button
+          view="pseudo"
+          width="max"
+          type="button"
+          container={
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
+            <a
+              href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${YANDEX.CLIENT_ID}&redirect_uri=http://localhost:3001${ROUTES.OAUTH}`}
+            />
+          }
+        >
+          {TEXT.SIGNIN.BUTTON_SIGNIN_YANDEX}
         </Button>
       </FormField>
       <FormField>
@@ -48,20 +64,9 @@ export const SigninForm: FC = () => {
           width="max"
           type="button"
           container={<Link to={ROUTES.SIGNUP} />}
-          onClick={onSignupButtonClick}
+          onClick={handleSignupButtonClick}
         >
-          {TEXT.SIGNIN.SIGNUP}
-        </Button>
-      </FormField>
-      <FormField>
-        <Button
-          view="pseudo"
-          width="max"
-          type="button"
-          container={<a href={ROUTES.OAUTH_YANDEX}>{}</a>}
-          onClick={onSignupButtonClick}
-        >
-          {TEXT.SIGNIN.OAUTH_YANDEX}
+          {TEXT.SIGNIN.BUTTON_SIGNUP}
         </Button>
       </FormField>
     </Form>

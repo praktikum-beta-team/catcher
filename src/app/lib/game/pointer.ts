@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { TEXT } from "app/constants/text";
+
 export const MOUSE_EVENTS = <const>{
   X: "x",
 };
 
-export class Mouse {
+export class Pointer {
   private element: Element;
 
   events: {
     [MOUSE_EVENTS.X]: number | null;
   };
 
-  private havePointerLock =
+  private hasPointerLock =
     "pointerLockElement" in document ||
     "mozPointerLockElement" in document ||
     "webkitPointerLockElement" in document;
@@ -30,8 +33,9 @@ export class Mouse {
       (document as any).webkitExitPointerLock;
   }
 
-  addListeners(): void {
+  addListeners() {
     const { element, isLocked, changeCallback } = this;
+
     ["mouseover", "click"].forEach((e) => {
       element.addEventListener(e, () => {
         if (!isLocked()) element.requestPointerLock();
@@ -42,8 +46,9 @@ export class Mouse {
     });
   }
 
-  removeListeners(): void {
+  removeListeners() {
     const { element, changeCallback } = this;
+
     ["mouseover", "click"].forEach((e) => {
       element.removeEventListener(e, () => {
         element.requestPointerLock();
@@ -56,6 +61,7 @@ export class Mouse {
 
   private isLocked = () => {
     const { element } = this;
+
     return (
       element === document.pointerLockElement ||
       element === (document as any).mozPointerLockElement ||
@@ -64,9 +70,11 @@ export class Mouse {
   };
 
   private changeCallback = () => {
-    const { havePointerLock, isLocked, handleMouseButtonPress, handleMouseMove } = this;
-    if (!havePointerLock) {
-      console.log("Браузер не поддерживает pointer-lock");
+    const { hasPointerLock, isLocked, handleMouseButtonPress, handleMouseMove } = this;
+
+    if (!hasPointerLock) {
+      console.log(TEXT.GAME.ERROR_POINTER_LOCK_API);
+
       return;
     }
 
