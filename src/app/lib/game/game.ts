@@ -1,6 +1,7 @@
 import { Bucket, Collectible } from "./objects";
 import { HUD } from "./hud";
 import { Input, KEYS } from "./input";
+import { Mouse } from "./mouse";
 import { Crash, Loss } from "./screens";
 
 const FPS = 60;
@@ -16,6 +17,8 @@ export class Game {
   private tickLength = 1000 / FPS;
 
   private input;
+
+  private mouse;
 
   score = 0;
 
@@ -37,6 +40,8 @@ export class Game {
     this.ctx = ctx;
     this.input = new Input();
     this.input.addListeners();
+    this.mouse = new Mouse(ctx.canvas);
+    this.mouse.addListeners();
     this.collectibles = [];
     this.bucket = new Bucket(this.ctx);
     this.hud = new HUD(this);
@@ -44,7 +49,7 @@ export class Game {
     this.crash = new Crash(this.ctx);
   }
 
-  start = () => {
+  start = (): void => {
     const { loop } = this;
 
     this.lastTick = window.performance.now();
@@ -98,12 +103,13 @@ export class Game {
   };
 
   private update = () => {
-    const { numTicks, ctx, input, bucket, collectibles } = this;
-
+    const { numTicks, ctx, input, bucket, collectibles, mouse } = this;
     if (input.keys.left) {
-      bucket.move(true);
+      bucket.move({ direction: "left" });
     } else if (input.keys.right) {
-      bucket.move();
+      bucket.move({ direction: "right" });
+    } else if (mouse.events.x) {
+      bucket.move({ dx: mouse.events.x });
     }
 
     collectibles.forEach(({ isOnScreen, intersectsWithObject, dangerous, move }, index) => {
@@ -154,12 +160,13 @@ export class Game {
   };
 
   destroy() {
-    const { input } = this;
+    const { input, mouse } = this;
 
     if (this.requestedFrame) {
       window.cancelAnimationFrame(this.requestedFrame);
     }
 
     input.removeListeners();
+    mouse.removeListeners();
   }
 }
