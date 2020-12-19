@@ -5,7 +5,7 @@
 
 import React from "react";
 import { renderToStaticMarkup, renderToString } from "react-dom/server";
-import { StaticRouter } from "react-router";
+import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 /** TODO: Пока используем готовый пакет, но лучше написать свою утилиту */
 import isObject from "is-object";
@@ -89,6 +89,7 @@ export const handleRender: RequestHandler = ({ url }, res) => {
       ...res.locals.auth,
     },
   });
+
   const preloadedState = store.getState();
 
   const content = renderToString(

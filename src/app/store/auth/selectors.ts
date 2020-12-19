@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { IUserRequest } from "app/utils/request/types";
+import { IUser } from "app/types/models/user";
 import type { IRootState } from "app/store";
 
 export const getIsAuthenticated = (state: IRootState) => state.auth.isAuthenticated;
@@ -7,12 +7,12 @@ export const getError = (state: IRootState) => state.auth.error;
 export const getToken = (state: IRootState) => state.auth.yaToken;
 export const getUser = (state: IRootState) => state.auth.user;
 export const getAvatar = createSelector(getUser, (user) => user?.avatar);
-export const getSettings = createSelector(getUser, (user) =>
+export const getUserSettings = createSelector(getUser, (user) =>
   user
-    ? <IUserRequest>{
-        first_name: user?.first_name,
-        second_name: user?.second_name,
-        display_name: user?.display_name,
+    ? <IUser>{
+        firstName: user?.firstName,
+        secondName: user?.secondName,
+        displayName: user?.displayName,
         login: user?.login,
         email: user?.email,
         phone: user?.phone,

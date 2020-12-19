@@ -5,20 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { TEXT } from "app/constants/text";
 import { Button, Input, Form, useForm, FormField } from "app/components/UI";
 import { ROUTES } from "app/constants/routes";
-import { authOperations, authSelectors, authActions } from "app/store/auth";
-import type { ISignupRequest } from "app/utils/request/types";
+import { authOperations, authSelectors } from "app/store/auth";
+import type { ISignupRequest } from "app/services/api/auth";
+import type { IUser } from "app/types/models/user";
 
-interface ISignupForm extends ISignupRequest {
-  password_confirm: string;
+interface ISignupForm
+  extends Required<Pick<IUser, "firstName" | "secondName" | "login" | "email" | "phone">> {
+  password: string;
+  passwordConfirm: string;
 }
 
 const initialValues: ISignupForm = {
-  first_name: "",
-  second_name: "",
+  firstName: "",
+  secondName: "",
   login: "",
   email: "",
   password: "",
-  password_confirm: "",
+  passwordConfirm: "",
   phone: "",
 };
 
@@ -29,22 +32,30 @@ export const SignupForm: FC = () => {
 
   const onSubmit = useCallback(
     (values: ISignupForm) => {
-      dispatch(authOperations.signup(values));
+      const requestData: ISignupRequest = {
+        first_name: values.firstName,
+        second_name: values.secondName,
+        login: values.login,
+        email: values.email,
+        password: values.password,
+        phone: values.phone,
+      };
+      dispatch(authOperations.signupRequest(requestData));
     },
     [dispatch]
   );
 
   const onSigninButtonClick = useCallback(() => {
-    dispatch(authActions.clearError());
+    dispatch(authOperations.clearError());
   }, [dispatch]);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>
       <FormField>
-        <Input {...fieldProps("first_name")} placeholder={TEXT.SIGNUP.FIRST_NAME} />
+        <Input {...fieldProps("firstName")} placeholder={TEXT.SIGNUP.FIRST_NAME} />
       </FormField>
       <FormField>
-        <Input {...fieldProps("second_name")} placeholder={TEXT.SIGNUP.SECOND_NAME} />
+        <Input {...fieldProps("secondName")} placeholder={TEXT.SIGNUP.SECOND_NAME} />
       </FormField>
       <FormField>
         <Input {...fieldProps("login")} placeholder={TEXT.SIGNUP.LOGIN} />
@@ -60,7 +71,7 @@ export const SignupForm: FC = () => {
       </FormField>
       <FormField>
         <Input
-          {...fieldProps("password_confirm")}
+          {...fieldProps("passwordConfirm")}
           type="password"
           placeholder={TEXT.SIGNUP.PASSWORD_CONFIRM}
         />

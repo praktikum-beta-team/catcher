@@ -6,7 +6,7 @@ export const KEYS = <const>{
 
 type Keys = typeof KEYS[keyof typeof KEYS];
 
-export class Input {
+export class Keyboard {
   keys: {
     [P in Keys]: boolean;
   };

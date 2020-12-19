@@ -27,9 +27,9 @@ export const TEXT = {
     TITLE: "Вход",
     LOGIN: "Введите логин",
     PASSWORD: "Введите пароль",
-    SUBMIT: "Войти",
-    SIGNUP: "Зарегистрироваться",
-    OAUTH_YANDEX: "Войти через Яндекс",
+    BUTTON_SIGNIN: "Войти",
+    BUTTON_SIGNUP: "Зарегистрироваться",
+    BUTTON_SIGNIN_YANDEX: "Войти через Яндекс",
   },
   SIGNUP: {
     TITLE: "Регистрация",
@@ -46,5 +46,6 @@ export const TEXT = {
   GAME: {
     RESTART: "Пробел, чтобы начать сначала",
     ERROR: "Что-то пошло не так",
+    ERROR_POINTER_LOCK_API: "Браузер не поддерживает pointer-lock",
   },
 } as const;

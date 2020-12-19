@@ -11,7 +11,7 @@ export const Logout: FC = () => {
   const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
 
   useEffect(() => {
-    dispatch(authOperations.logout());
+    dispatch(authOperations.logoutRequest());
   }, [dispatch]);
 
   return isAuthenticated ? <Loading /> : <Redirect to={ROUTES.SIGNIN} />;
