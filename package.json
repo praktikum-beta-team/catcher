@@ -10,7 +10,6 @@
     "cookie-parser": "1.4.5",
     "express": "4.17.1",
     "http-proxy-middleware": "1.0.6",
-    "lightcookie": "1.0.24",
     "memory-fs": "0.5.0",
     "morgan": "1.10.0",
     "open": "7.3.0",
@@ -105,7 +104,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "docker:build": "docker build -t catcher .",
-    "docker:run": "docker run -it --rm -p 8080:8000 -e PORT=8000 catcher"
+    "docker:run": "docker run -it --rm -p 8080:8000 -e PORT=8000 catcher",
+    "ssl:dev": "cd config/ssl && openssl req -x509 -out localhost.crt -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config 'openssl.cnf'"
   },
   "repository": {
     "type": "git",

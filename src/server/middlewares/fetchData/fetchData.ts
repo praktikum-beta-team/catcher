@@ -1,12 +1,13 @@
 import type { RequestHandler } from "express";
 import axios from "axios";
-import cookie from "lightcookie";
+
+import { serialize } from "server/utils/cookie";
 
 export const fetchData: RequestHandler = ({ cookies }, res, next) => {
   axios
     .get("https://ya-praktikum.tech/api/v2/auth/user", {
       withCredentials: true,
-      headers: { Cookie: cookie.serialize(cookies) },
+      headers: { Cookie: serialize(cookies) },
     })
     .then(({ data }) => {
       console.log(data);
