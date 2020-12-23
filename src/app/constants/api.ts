@@ -1,4 +1,4 @@
-export const BASE_DOMAIN = "http://localhost:3001/";
+export const BASE_DOMAIN = "https://localhost:3001/";
 export const BASE_URL = `${BASE_DOMAIN}api/v2`;
 export const AUTH_SIGNIN = "/auth/signin";
 export const AUTH_SIGNUP = "/auth/signup";
