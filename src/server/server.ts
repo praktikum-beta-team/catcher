@@ -15,8 +15,8 @@ import { fetchData } from "server/middlewares/fetchData";
 import TEXT from "server/constants/text";
 import { IS_DEVELOPMENT, PORT } from "config/vars";
 
-const key = fs.readFileSync(path.resolve("./src/server/ssl/localhost-key.pem"));
-const cert = fs.readFileSync(path.resolve("./src/server/ssl/localhost.pem"));
+const key = fs.readFileSync(path.resolve("./config/ssl/localhost.key"));
+const cert = fs.readFileSync(path.resolve("./config/ssl/localhost.crt"));
 
 const app = express();
 const server = https.createServer({ key, cert }, app);
