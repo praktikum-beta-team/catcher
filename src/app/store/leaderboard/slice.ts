@@ -8,7 +8,7 @@ export interface ILeaderboardSliceState {
   error: null | string;
 }
 
-const initialState: ILeaderboardSliceState = {
+export const initialState: ILeaderboardSliceState = {
   entries: [],
   pending: false,
   error: null,

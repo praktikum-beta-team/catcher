@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import isObject from "is-object";
 
 import { App } from "app/components/App";
-import { createStore, PreloadedState } from "app/store";
+import { createStore, getInitialState, PreloadedState } from "app/store";
 import { RequestHandler, Response } from "express";
 
 import { IS_DEVELOPMENT } from "config/vars";
@@ -80,15 +80,9 @@ const renderFullPage = (
 };
 
 export const handleRender: RequestHandler = ({ url }, res) => {
-  const store = createStore({
-    auth: {
-      isAuthenticated: false,
-      error: null,
-      user: null,
-      yaToken: null,
-      ...res.locals.auth,
-    },
-  });
+  const initialState = getInitialState();
+
+  const store = createStore(Object.assign(initialState, res.locals.auth));
 
   const preloadedState = store.getState();
 

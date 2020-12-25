@@ -11,7 +11,7 @@ export interface IAuthSliceState {
   yaToken: null | string;
 }
 
-const initialState: IAuthSliceState = {
+export const initialState: IAuthSliceState = {
   isAuthenticated: false,
   error: null,
   user: null,
