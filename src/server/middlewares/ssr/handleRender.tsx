@@ -82,7 +82,11 @@ const renderFullPage = (
 export const handleRender: RequestHandler = ({ url }, res) => {
   const initialState = getInitialState();
 
-  const store = createStore(Object.assign(initialState, res.locals.auth));
+  const store = createStore(
+    Object.assign(initialState, {
+      auth: res.locals.auth,
+    })
+  );
 
   const preloadedState = store.getState();
 
