@@ -7,7 +7,8 @@ export const serialize = (cookies: Record<string, string>) => {
       encodeURIComponent(cookieKey) +
       (cookies[cookieKey] === null
         ? ""
-        : `=${encodeURIComponent(cookies[cookieKey])}${index < cookieKeys.length - 1 ? ";" : ""}`)
+        : `=${encodeURIComponent(cookies[cookieKey])}${index < cookieKeys.length - 1 ? ";" : ""}`),
+    ""
   );
 
   return serializedCookie;
