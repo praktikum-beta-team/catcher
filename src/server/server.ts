@@ -13,7 +13,7 @@ import { apiProxy } from "server/middlewares/apiProxy";
 import { fetchData } from "server/middlewares/fetchData";
 
 import TEXT from "server/constants/text";
-import { IS_DEVELOPMENT, PORT } from "config/vars";
+import { isDevelopment, port } from "config/vars";
 
 const key = fs.readFileSync(path.resolve("./config/ssl/localhost.key"));
 const cert = fs.readFileSync(path.resolve("./config/ssl/localhost.crt"));
@@ -30,7 +30,7 @@ app
   .use(ssr)
   .use(morgan("tiny"));
 
-server.listen(PORT, () => {
-  console.log(`${TEXT.SERVER_RUNNING_MESSAGE} ${PORT}`);
-  if (IS_DEVELOPMENT) open(`https://localhost:${PORT}`);
+server.listen(port, () => {
+  console.log(`${TEXT.SERVER_RUNNING_MESSAGE} ${port}`);
+  if (isDevelopment) open(`https://localhost:${port}`);
 });

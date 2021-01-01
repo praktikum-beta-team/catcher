@@ -1,9 +1,14 @@
-import path from "path";
+export const DEFAULT_SETTINGS = {
+  BASE_URL: "https://localhost",
+  PORT: 3001,
+};
 
-export const rootDir = path.resolve(__dirname, "..");
+const baseUrl = process.env.BASE_URL ?? DEFAULT_SETTINGS.BASE_URL;
+const port = process.env.PORT ?? DEFAULT_SETTINGS.PORT;
 
-const { NODE_ENV = "development", PORT = 3001 } = process.env;
+const environment = process.env.NODE_ENV ?? "development";
+const isDevelopment = environment === "development";
 
-export const IS_DEVELOPMENT = NODE_ENV === "development";
+const apiBaseUrl = "https://ya-praktikum.tech";
 
-export { PORT };
+export { isDevelopment, baseUrl, port, apiBaseUrl };

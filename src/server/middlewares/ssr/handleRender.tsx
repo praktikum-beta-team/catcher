@@ -14,7 +14,7 @@ import { App } from "app/components/App";
 import { createStore, getInitialState, PreloadedState } from "app/store";
 import { RequestHandler, Response } from "express";
 
-import { IS_DEVELOPMENT } from "config/vars";
+import { isDevelopment } from "config/vars";
 import TEXT from "server/constants/text";
 
 type AssetPaths = Record<string, string>;
@@ -98,7 +98,7 @@ export const handleRender: RequestHandler = ({ url }, res) => {
     </StaticRouter>
   );
 
-  const assetsByChunkName = IS_DEVELOPMENT
+  const assetsByChunkName = isDevelopment
     ? getAssetsFromDevMiddleware(res)
     : getAssetsFromCompiledBundle();
 

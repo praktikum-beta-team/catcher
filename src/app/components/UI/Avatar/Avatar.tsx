@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes, isValidElement, cloneElement, ReactElement } from "react";
 
-import { BASE_DOMAIN } from "app/constants/api";
+import { apiBaseUrl } from "config/vars";
 import { cn } from "app/helpers/classname";
 
 import "./Avatar.css";
@@ -28,7 +28,7 @@ export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props)
   const { src, size, className, children, container, ...restAvatarProps } = props;
 
   // С бэкенда возвращается адрес изображения относительно корня сервера
-  const fullSrc = src ? `${BASE_DOMAIN}${src}` : src;
+  const fullSrc = src ? `${apiBaseUrl}/${src}` : src;
 
   return cloneElement(
     isValidElement(container) ? container : <div />,

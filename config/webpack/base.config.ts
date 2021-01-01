@@ -1,13 +1,16 @@
 import path from "path";
 import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import { EnvironmentPlugin } from "webpack";
 import type { Configuration } from "webpack";
 
-import { rootDir } from "../vars";
+import { DEFAULT_SETTINGS } from "../vars";
+
+const { BASE_URL, PORT } = DEFAULT_SETTINGS;
 
 const config: Configuration = {
   entry: ["./src/app/index.tsx"],
   output: {
-    path: path.join(rootDir, "dist"),
+    path: path.resolve("dist"),
     filename: "[name].[fullhash].bundle.js",
   },
   resolve: {
@@ -22,6 +25,12 @@ const config: Configuration = {
       },
     ],
   },
+  plugins: [
+    new EnvironmentPlugin({
+      BASE_URL,
+      PORT,
+    }),
+  ],
 };
 
 export default config;
