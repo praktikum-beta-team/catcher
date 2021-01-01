@@ -1,7 +1,7 @@
 import { RequestHandler } from "express";
 
 import { getPasportInfo, getToken } from "app/services/api/yandexOAuth";
-import { YANDEX } from "app/constants/oAuth";
+import { CLIENT_ID, CLIENT_SECRET } from "app/constants/yandexOAuth";
 
 import { IUser } from "app/types/models/user";
 
@@ -38,8 +38,8 @@ const getTokenYandex = async (code: string) => {
       {
         grant_type: "authorization_code",
         code,
-        client_id: YANDEX.CLIENT_ID,
-        client_secret: YANDEX.CLIENT_SECRET,
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
       },
       ({ data }) => {
         resolve(data.access_token);

@@ -6,7 +6,7 @@ import { TEXT } from "app/constants/text";
 import { Form, useForm, FormField, Input, Button } from "app/components/UI";
 import { authOperations, authSelectors } from "app/store/auth";
 import type { ISigninRequest } from "app/services/api/auth";
-import { YANDEX } from "app/constants/oAuth";
+import { AUTH_URL } from "app/constants/yandexOAuth";
 import { ROUTES } from "app/constants/routes";
 
 const defaultValues: ISigninRequest = {
@@ -50,9 +50,7 @@ export const SigninForm: FC = () => {
           type="button"
           container={
             // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
-            <a
-              href={`https://oauth.yandex.ru/authorize?response_type=code&client_id=${YANDEX.CLIENT_ID}&redirect_uri=http://localhost:3001${ROUTES.OAUTH}`}
-            />
+            <a href={AUTH_URL} />
           }
         >
           {TEXT.SIGNIN.BUTTON_SIGNIN_YANDEX}
