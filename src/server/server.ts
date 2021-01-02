@@ -20,14 +20,13 @@ const cert = fs.readFileSync(path.resolve("./config/ssl/localhost.crt"));
 const app = express();
 const server = https.createServer({ key, cert }, app);
 
+const middlewares = [cookieParser(), fetchData, ...ssr, morgan("tiny")];
+
 app
   .use(express.static("./dist"))
   .use("/api", apiProxy)
   .get(ROUTES.OAUTH, yandexOAuth)
-  .use(cookieParser())
-  .use(fetchData)
-  .use(ssr)
-  .use(morgan("tiny"));
+  .use(middlewares);
 
 server.listen(port, () => {
   console.log(`${TEXT.SERVER_RUNNING_MESSAGE} ${port}`);

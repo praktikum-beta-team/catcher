@@ -1,12 +1,16 @@
-import type { RequestHandler } from "express";
-import axios, { AxiosResponse } from "axios";
+import { RequestHandler } from "express";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 import { serialize } from "server/utils/cookie";
 import { IUser } from "app/types/models/user";
 import { IUserResponse } from "app/services/api/auth";
 import { IAuthSliceState } from "app/store/auth";
 
+import type { IBadRequestError } from "app/utils/request/request";
+
 export const fetchData: RequestHandler = ({ cookies }, res, next) => {
+  if (!cookies.authCookie) return;
+
   axios
     .get("https://ya-praktikum.tech/api/v2/auth/user", {
       withCredentials: true,
@@ -27,10 +31,19 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
         isAuthenticated: true,
         user,
       };
-      next();
     })
-    .catch((error) => {
-      console.log(error);
-      next();
-    });
+    .catch(({ message, response }: AxiosError<IBadRequestError>) => {
+      const setCookie = response?.headers["set-cookie"];
+
+      if (setCookie) {
+        res.setHeader("set-cookie", setCookie);
+      }
+
+      res.locals.auth = <IAuthSliceState>{
+        isAuthenticated: false,
+      };
+
+      console.log(message);
+    })
+    .finally(next);
 };

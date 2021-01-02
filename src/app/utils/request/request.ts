@@ -3,7 +3,7 @@ import qs from "qs";
 
 import { BASE_URL } from "app/constants/api";
 
-interface IBadRequestError {
+export interface IBadRequestError {
   /**
    * В сваггере структура возвращаемых ошибок другая.
    * {
