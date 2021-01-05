@@ -87,7 +87,10 @@
     ],
 
     //Отключает запрет использования _
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+
+    //Отключает необходимость явно указывать тип возвращаемого функцией значения
+    "@typescript-eslint/explicit-function-return-type": "off"
   },
   "overrides": [
     {
