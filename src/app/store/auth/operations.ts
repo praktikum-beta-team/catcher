@@ -1,10 +1,8 @@
 import { ThunkAction } from "redux-thunk";
 import type { Action } from "redux";
 
-import { signin, signup, logout, fetchUserData } from "app/services/api/auth";
-import { changeUserProfile, changeUserAvatar } from "app/services/api/users";
-import type { ISigninRequest, ISignupRequest } from "app/services/api/auth";
-import type { IUserRequest } from "app/services/api/users";
+import { api } from "app/services/api";
+import type { ISignupRequest, ISigninRequest, IUserRequest } from "app/services/api";
 
 import { actions } from "./slice";
 
@@ -19,92 +17,94 @@ const {
   setYaToken,
 } = actions;
 
-const fetchUserDataRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
-  fetchUserData(
-    null,
-    ({ data }) => {
-      dispatch(fetchUserDataSuccess(data));
-    },
-    ({ message, response }) => {
-      const errorMessage = response ? response.data.reason : message;
-      /**
-       * TODO: обработать сетевую ошибку отлично от ошибки апи
-       */
-      dispatch(authFailure(errorMessage));
-    }
-  );
-};
-
-const signinRequest = (params: ISigninRequest): ThunkAction<void, unknown, null, Action> => (
+const signupRequest = (data: ISignupRequest): ThunkAction<void, unknown, null, Action> => (
   dispatch
 ) => {
-  signin(
-    params,
-    () => {
-      dispatch(authSuccess());
-      // dispatch(fetchUserDataRequest());
-    },
-    ({ message, response }) => {
+  api
+    .signup({ data })
+    .then(() => {
+      dispatch(actions.authSuccess());
+    })
+    .catch(({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
+
+      dispatch(actions.authFailure(errorMessage));
+    });
+};
+
+const signinRequest = (data: ISigninRequest): ThunkAction<void, unknown, null, Action> => (
+  dispatch
+) => {
+  api
+    .signin({ data })
+    .then(() => {
+      dispatch(authSuccess());
+    })
+    .catch(({ message, response }) => {
+      const errorMessage = response ? response.data.reason : message;
+
       dispatch(authFailure(errorMessage));
-    }
-  );
+    });
+};
+
+const fetchUserDataRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
+  api
+    .fetchUserData()
+    .then(({ data }) => {
+      dispatch(fetchUserDataSuccess(data));
+    })
+    .catch(({ message, response }) => {
+      const errorMessage = response ? response.data.reason : message;
+
+      dispatch(authFailure(errorMessage));
+    });
+};
+
+const changeUserDataRequest = (data: IUserRequest): ThunkAction<void, unknown, null, Action> => (
+  dispatch
+) => {
+  api
+    .changeUserData({ data })
+    .then(() => {
+      dispatch(changeUserDataSuccess(data));
+    })
+    .catch(({ response, message }) => {
+      const errorMessage = response ? response.data.reason : message;
+
+      dispatch(changeUserDataFailure(errorMessage));
+    });
+};
+
+const changeUserAvatarRequest = (data: FormData): ThunkAction<void, unknown, null, Action> => (
+  dispatch
+) => {
+  api
+    .changeUserAvatar({ data })
+    .then(() => {
+      dispatch(fetchUserDataRequest());
+    })
+    .catch(({ message, response }) => {
+      const errorMessage = response ? response.data.reason : message;
+
+      console.error(errorMessage);
+    });
 };
 
 const logoutRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
-  logout(
-    null,
-    () => {
+  api
+    .logout()
+    .then(() => {
       dispatch(actions.logoutSuccess());
-    },
-    ({ message, response }) => {
+    })
+    .catch(({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
+
+      /**
+       * TODO: разлогинить пользователя
+       */
+
       console.error(errorMessage);
-    }
-  );
-};
-
-const signupRequest = (params: ISignupRequest): ThunkAction<void, unknown, null, Action> => (
-  dispatch
-) => {
-  signup(
-    params,
-    () => {
-      dispatch(actions.authSuccess());
-    },
-    ({ message, response }) => {
-      const error = response ? response.data.reason : message;
-      dispatch(actions.authFailure(error));
-    }
-  );
-};
-
-const changeUserDataRequest = (params: IUserRequest): ThunkAction<void, unknown, null, Action> => (
-  dispatch
-) => {
-  changeUserProfile(
-    params,
-    () => dispatch(actions.changeUserDataSuccess(params)),
-    ({ response, message }) => {
-      const errorMessage = response ? response.data.reason : message;
-      dispatch(actions.changeUserDataFailure(errorMessage));
-    }
-  );
-};
-
-const changeUserAvatarRequest = (params: FormData): ThunkAction<void, unknown, null, Action> => (
-  dispatch
-) => {
-  changeUserAvatar(
-    params,
-    () => {
-      dispatch(fetchUserDataRequest());
-    },
-    ({ message, response }) => {
-      const errorMessage = response ? response.data.reason : message;
-      console.error(errorMessage);
-    }
-  );
+    });
 };
 
 export {

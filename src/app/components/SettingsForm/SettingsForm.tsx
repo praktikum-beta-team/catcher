@@ -5,7 +5,7 @@ import { TEXT } from "app/constants/text";
 import { useForm } from "app/components/UI/Form/useForm";
 import { Form, Input, Button, FormField } from "app/components/UI";
 import { authOperations, authSelectors } from "app/store/auth";
-import type { IUserRequest } from "app/services/api/users";
+import type { IUserRequest } from "app/services/api";
 import { IUser } from "app/types/models/user";
 
 type UserSettings = Required<

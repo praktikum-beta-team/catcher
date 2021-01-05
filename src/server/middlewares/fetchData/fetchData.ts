@@ -3,13 +3,13 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 
 import { serialize } from "server/utils/cookie";
 import { IUser } from "app/types/models/user";
-import { IUserResponse } from "app/services/api/auth";
 import { IAuthSliceState } from "app/store/auth";
 
 import type { IBadRequestError } from "app/utils/request/request";
+import type { IUserResponse } from "app/services/api";
 
 export const fetchData: RequestHandler = ({ cookies }, res, next) => {
-  if (!cookies.authCookie) return;
+  if (!cookies.authCookie) next();
 
   axios
     .get("https://ya-praktikum.tech/api/v2/auth/user", {
@@ -31,6 +31,7 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
         isAuthenticated: true,
         user,
       };
+      next();
     })
     .catch(({ message, response }: AxiosError<IBadRequestError>) => {
       const setCookie = response?.headers["set-cookie"];
@@ -44,6 +45,6 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
       };
 
       console.log(message);
-    })
-    .finally(next);
+      next();
+    });
 };

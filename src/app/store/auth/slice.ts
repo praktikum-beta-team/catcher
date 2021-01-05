@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import type { IUser } from "app/types/models/user";
-import type { IUserRequest } from "app/services/api/users";
-import type { IUserResponse } from "app/services/api/auth";
+
+import type { IUserRequest, IUserResponse } from "app/services/api";
 
 export interface IAuthSliceState {
   isAuthenticated: boolean;

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { TEXT } from "app/constants/text";
 import { Form, useForm, FormField, Input, Button } from "app/components/UI";
 import { authOperations, authSelectors } from "app/store/auth";
-import type { ISigninRequest } from "app/services/api/auth";
+import type { ISigninRequest } from "app/services/api";
 import { AUTH_URL } from "app/constants/yandexOAuth";
 import { ROUTES } from "app/constants/routes";
 

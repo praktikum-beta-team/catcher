@@ -1,7 +1,7 @@
 import axios, { Method, AxiosResponse, AxiosError } from "axios";
 import qs from "qs";
 
-import { BASE_URL } from "app/constants/api";
+import { baseURL } from "app/constants/api";
 
 export interface IBadRequestError {
   /**
@@ -17,7 +17,7 @@ export interface IBadRequestError {
 export function request<T = null, R = Record<string, unknown>, E = IBadRequestError>(
   endpoint: string,
   method: Method = "post",
-  reqBaseURL = BASE_URL,
+  reqBaseURL = baseURL,
   stringify = false
 ) {
   return async (

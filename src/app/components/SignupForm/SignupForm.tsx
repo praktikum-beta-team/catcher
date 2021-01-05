@@ -6,7 +6,7 @@ import { TEXT } from "app/constants/text";
 import { Button, Input, Form, useForm, FormField } from "app/components/UI";
 import { ROUTES } from "app/constants/routes";
 import { authOperations, authSelectors } from "app/store/auth";
-import type { ISignupRequest } from "app/services/api/auth";
+import type { ISignupRequest } from "app/services/api";
 import type { IUser } from "app/types/models/user";
 
 interface ISignupForm

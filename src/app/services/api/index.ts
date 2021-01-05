@@ -1,1 +1,2 @@
-export * from "./leaderboard/leaderboard";
+export * from "./api";
+export * from "./types";
