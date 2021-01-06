@@ -5,7 +5,7 @@ import React, { ComponentType } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { ROUTES } from "constants/routes";
-import { Signin, Signup, Settings, LeaderboardView, NotFound, GameScreen } from "views";
+import { Signin, Signup, Settings, LeaderboardView, NotFound, GameView } from "views";
 import { PrivateRoute, ErrorBoundary, Logout, OAuth } from "components";
 
 import "styles/main.css";
@@ -21,7 +21,7 @@ const componentMap: IComponentMap = [
   { path: ROUTES.SIGNIN, Component: Signin, exact: true },
   { path: ROUTES.SIGNUP, Component: Signup },
   { path: ROUTES.SETTINGS, Component: Settings, isPrivate: true },
-  { path: ROUTES.GAME, Component: GameScreen },
+  { path: ROUTES.GAME, Component: GameView },
   { path: ROUTES.LOGOUT, Component: Logout, isPrivate: true },
   { path: ROUTES.NOT_FOUND, Component: NotFound },
   { path: ROUTES.LEADERBOARD, Component: LeaderboardView },

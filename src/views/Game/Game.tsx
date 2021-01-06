@@ -1,16 +1,12 @@
 import React, { FC, useEffect, useRef } from "react";
 
 import { Game } from "lib/game";
-import { cn } from "helpers/classname";
-
-import "./GameScreen.css";
+import { Layout, Layout__Body } from "components/UI";
 
 const WIDTH = 320;
 const HEIGHT = 480;
 
-const cnGameScreen = cn("game-screen");
-
-export const GameScreen: FC = () => {
+export const GameView: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -26,8 +22,10 @@ export const GameScreen: FC = () => {
   }, []);
 
   return (
-    <div className={cnGameScreen()}>
-      <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} />
-    </div>
+    <Layout>
+      <Layout__Body>
+        <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} />
+      </Layout__Body>
+    </Layout>
   );
 };
