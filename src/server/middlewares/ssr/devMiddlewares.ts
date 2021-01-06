@@ -2,13 +2,13 @@
 
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
-import webpackHotmiddleware from "webpack-hot-middleware";
+import webpackHotMiddleware from "webpack-hot-middleware";
 
 import webpackConfig from "config/webpack/app.dev.config";
 
 const compiler = webpack(webpackConfig);
 
 export = [
-  webpackHotmiddleware(compiler),
+  webpackHotMiddleware(compiler),
   webpackDevMiddleware(compiler, { serverSideRender: true }),
 ];
