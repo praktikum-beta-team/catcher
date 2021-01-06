@@ -1,14 +1,11 @@
-.board {
+.leaderboard {
   width: 100%;
   border-collapse: collapse;
-  @mixin border-bottom;
 
   /* Элементы */
 
   &__header {
-    border-width: 1px 0;
-    border-color: var(--common-border);
-    border-style: solid;
+    @mixin border-bottom;
   }
 
   &__cell {
@@ -22,5 +19,14 @@
     &_score {
       font-weight: bold;
     }
+  }
+
+  &__action {
+    margin-top: 40px;
+  }
+
+  &__error {
+    display: block;
+    color: var(--common-alert);
   }
 }

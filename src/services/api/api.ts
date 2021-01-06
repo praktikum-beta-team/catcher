@@ -1,3 +1,4 @@
+import type { AxiosPromise } from "axios";
 import axios from "helpers/configure-axios";
 import type { IRequestConfig } from "helpers/configure-axios";
 
@@ -8,6 +9,7 @@ import type {
   IUserResponse,
   ILeaderboardRequest,
   ILeaderboardNewLeaderRequest,
+  LeaderboardResponse,
 } from "./types";
 
 const signup = (config: IRequestConfig<ISignupRequest>) => axios("/auth/signup", config);
@@ -23,8 +25,9 @@ const changeUserAvatar = (config: IRequestConfig<FormData>) =>
 
 const logout = (config?: IRequestConfig) => axios("/auth/logout", config);
 
-const featchLeaders = (config: IRequestConfig<ILeaderboardRequest>) =>
-  axios("/leaderboard/all", config);
+const featchLeaders = (
+  config: IRequestConfig<ILeaderboardRequest>
+): AxiosPromise<LeaderboardResponse> => axios("/leaderboard/all", config);
 
 const addUserToLeaderboard = (config: IRequestConfig<ILeaderboardNewLeaderRequest>) =>
   axios("/leaderboard", config);

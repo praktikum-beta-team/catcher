@@ -2,18 +2,15 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import type { DeepPartial } from "redux";
 
 import auth, { IAuthSliceState } from "store/auth";
-import leaderboard, { ILeaderboardSliceState } from "store/leaderboard";
 
 export interface IRootState {
   auth: IAuthSliceState;
-  leaderboard: ILeaderboardSliceState;
 }
 
 export type PreloadedState = DeepPartial<IRootState>;
 
 const reducer = {
   auth,
-  leaderboard,
 };
 
 const middleware = getDefaultMiddleware({

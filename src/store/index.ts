@@ -1,2 +1,2 @@
-export * from "./configureStore";
-export * from "./getInitialState";
+export * from "./configure-store";
+export * from "./get-initial-state";

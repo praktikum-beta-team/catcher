@@ -53,6 +53,10 @@ export interface ILeaderboardRequest {
   limit: number;
 }
 
+export type LeaderboardResponse = {
+  data: ILeaderboardEntry;
+}[];
+
 export interface ILeaderboardNewLeaderRequest {
   data: ILeaderboardEntry;
   /**
