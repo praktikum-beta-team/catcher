@@ -1,5 +1,5 @@
 {
-  "watch": ["src/server"],
+  "watch": ["server"],
   "ext": "ts",
-  "exec": "ts-node --transpile-only --require tsconfig-paths/register --require ignore-styles src/server/server.ts"
+  "exec": "ts-node --transpile-only --require tsconfig-paths/register --require ignore-styles server/app.ts"
 }

@@ -8,7 +8,7 @@ import { DEFAULT_SETTINGS } from "../vars";
 const { BASE_URL, PORT } = DEFAULT_SETTINGS;
 
 const config: Configuration = {
-  entry: ["./src/app/index.tsx"],
+  entry: ["./src"],
   output: {
     path: path.resolve("dist"),
     filename: "[name].[fullhash].bundle.js",

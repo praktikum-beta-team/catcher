@@ -2,10 +2,11 @@
   "compilerOptions": {
     "strict": true,
     "noImplicitAny": true,
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "app/*": ["./src/app/*"],
-      "server/*": ["./src/server/*"],
+      "*": ["src/*"],
+      "server/*": ["server/*"],
+      "config/*": ["config/*"]
     },
     "outDir": "./dist/",
     "module": "commonjs",

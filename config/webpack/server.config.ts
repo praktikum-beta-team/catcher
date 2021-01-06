@@ -7,7 +7,7 @@ import base from "./base.config";
 module.exports = merge(base, {
   mode: "production",
   target: "node",
-  entry: "./src/server/server.ts",
+  entry: "./server/app.ts",
   output: {
     filename: "server.js",
   },

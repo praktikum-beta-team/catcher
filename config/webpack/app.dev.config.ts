@@ -1,4 +1,4 @@
-import { HotModuleReplacementPlugin, EnvironmentPlugin } from "webpack";
+import { HotModuleReplacementPlugin } from "webpack";
 import { merge } from "webpack-merge";
 import type { Configuration } from "webpack";
 
