@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import { Loading, Button } from "components/UI";
 import { api, LeaderboardResponse } from "services/api";
@@ -17,6 +18,8 @@ export const Leaderboard: FC = () => {
   const [entries, setEntries] = useState<LeaderboardResponse>([]);
 
   const fetchLeaderboard = () => {
+    const signal = axios.CancelToken.source();
+
     api
       .featchLeaders({
         data: {
@@ -24,6 +27,7 @@ export const Leaderboard: FC = () => {
           cursor: 0,
           limit: 10,
         },
+        cancelToken: signal.token,
       })
       .then(({ data }) => {
         setEntries(data);
@@ -36,6 +40,8 @@ export const Leaderboard: FC = () => {
         setError(TEXT.LEADERBOARD.ERROR);
         setPending(false);
       });
+
+    return signal.cancel;
   };
 
   useEffect(fetchLeaderboard, []);
