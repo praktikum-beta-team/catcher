@@ -22,6 +22,7 @@ export const TEXT = {
     NEW_PASSWORD: "Введите новый пароль",
     NEW_PASSWORD_CONFIRM: "Повторите новый пароль",
     SUBMIT: "Сохранить",
+    LOGOUT: "Выйти",
   },
   SIGNIN: {
     TITLE: "Вход",

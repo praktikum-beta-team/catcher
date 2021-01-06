@@ -7,6 +7,8 @@ import { Form, Input, Button, FormField } from "components/UI";
 import { authOperations, authSelectors } from "store/auth";
 import type { IUserRequest } from "services/api";
 import { IUser } from "types/models/user";
+import { Link } from "react-router-dom";
+import { ROUTES } from "constants/routes";
 
 type UserSettings = Required<
   Pick<IUser, "firstName" | "secondName" | "displayName" | "login" | "email" | "phone">
@@ -62,6 +64,11 @@ export const SettingsForm: FC = () => {
       <FormField>
         <Button view="action" width="max">
           {TEXT.SETTINGS.SUBMIT}
+        </Button>
+      </FormField>
+      <FormField>
+        <Button type="button" view="pseudo" width="max" container={<Link to={ROUTES.LOGOUT} />}>
+          {TEXT.SETTINGS.LOGOUT}
         </Button>
       </FormField>
     </Form>
