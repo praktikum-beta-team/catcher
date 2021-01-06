@@ -14,7 +14,7 @@ export const b_ = cn("leaderboard");
 
 export const Leaderboard: FC = () => {
   const [pending, setPending] = useState(true);
-  const [error, setError] = useState<null | string>(null);
+  const [error, setError] = useState(false);
   const [entries, setEntries] = useState<LeaderboardResponse>([]);
 
   const fetchLeaderboard = () => {
@@ -37,7 +37,7 @@ export const Leaderboard: FC = () => {
         const errorMessage = response ? response.data.reason : message;
 
         console.error(errorMessage);
-        setError(TEXT.LEADERBOARD.ERROR);
+        setError(true);
         setPending(false);
       });
 
@@ -75,7 +75,7 @@ export const Leaderboard: FC = () => {
           </tbody>
         </table>
       )}
-      {!pending && error && <span className={b_("error")}>{error}</span>}
+      {error && <span className={b_("error")}>{TEXT.LEADERBOARD.ERROR}</span>}
       <Button view="action" className={b_("action")} container={<Link to={ROUTES.GAME} />}>
         {TEXT.LEADERBOARD.CALL_TO_ACTION}
       </Button>
