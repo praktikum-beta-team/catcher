@@ -11,6 +11,6 @@ const axiosConfig: AxiosRequestConfig = {
 
 export default axios.create(axiosConfig);
 
-export type IRequestConfig<T = any> = Partial<AxiosRequestConfig> & {
-  data: T;
-};
+export interface IRequestConfig<T = any> extends Omit<AxiosRequestConfig, "data"> {
+  data?: T;
+}

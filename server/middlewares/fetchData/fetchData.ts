@@ -1,22 +1,20 @@
 import { RequestHandler } from "express";
-import axios, { AxiosError, AxiosResponse } from "axios";
 
 import { serialize } from "server/utils/cookie";
 import { IUser } from "types/models/user";
 import { IAuthSliceState } from "store/auth";
-
-import type { IUserResponse } from "services/api";
+import { api } from "services/api";
 
 export const fetchData: RequestHandler = ({ cookies }, res, next) => {
   if (!cookies.authCookie) {
     next();
   } else {
-    axios
-      .get("https://ya-praktikum.tech/api/v2/auth/user", {
-        withCredentials: true,
+    api
+      .fetchUserData({
+        baseURL: "https://ya-praktikum.tech/api/v2",
         headers: { Cookie: serialize(cookies) },
       })
-      .then(({ data }: AxiosResponse<IUserResponse>) => {
+      .then(({ data }) => {
         const user = <IUser>{
           id: data.id,
           firstName: data.first_name,
@@ -33,7 +31,7 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
         };
         next();
       })
-      .catch(({ message, response }: AxiosError<unknown>) => {
+      .catch(({ response }) => {
         const setCookie = response?.headers["set-cookie"];
 
         if (setCookie) {
@@ -44,7 +42,6 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
           isAuthenticated: false,
         };
 
-        console.log(message);
         next();
       });
   }
