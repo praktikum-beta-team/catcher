@@ -69,6 +69,7 @@
     "lint-staged": "10.4.1",
     "mini-css-extract-plugin": "1.0.0",
     "nock": "13.0.4",
+    "nodemon": "2.0.6",
     "null-loader": "4.0.1",
     "postcss-custom-properties": "10.0.0",
     "postcss-loader": "4.0.4",
@@ -83,7 +84,7 @@
     "terser-webpack-plugin": "5.0.0",
     "ts-jest": "26.4.1",
     "ts-loader": "8.0.5",
-    "ts-node-dev": "1.1.1",
+    "ts-node": "9.1.1",
     "tsconfig-paths": "3.9.0",
     "tsconfig-paths-webpack-plugin": "3.3.0",
     "typescript": "4.0.3",
@@ -95,7 +96,7 @@
     "webpack-node-externals": "2.5.2"
   },
   "scripts": {
-    "develop": "NODE_ENV=development ts-node-dev --respawn --transpile-only --require tsconfig-paths/register --require ignore-styles src/server/server.ts",
+    "develop": "NODE_ENV=development nodemon",
     "build:app": "webpack --config config/webpack/app.prod.config.ts --json=dist/compilation-stats.json",
     "build:server": "webpack --config config/webpack/server.config.ts",
     "build": "npm run build:app && npm run build:server",
