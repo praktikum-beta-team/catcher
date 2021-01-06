@@ -9,42 +9,44 @@ import type { IBadRequestError } from "app/utils/request/request";
 import type { IUserResponse } from "app/services/api";
 
 export const fetchData: RequestHandler = ({ cookies }, res, next) => {
-  if (!cookies.authCookie) next();
+  if (!cookies.authCookie) {
+    next();
+  } else {
+    axios
+      .get("https://ya-praktikum.tech/api/v2/auth/user", {
+        withCredentials: true,
+        headers: { Cookie: serialize(cookies) },
+      })
+      .then(({ data }: AxiosResponse<IUserResponse>) => {
+        const user = <IUser>{
+          id: data.id,
+          firstName: data.first_name,
+          secondName: data.second_name,
+          displayName: data.display_name,
+          login: data.login,
+          email: data.email,
+          phone: data.phone,
+          avatar: data.avatar,
+        };
+        res.locals.auth = <IAuthSliceState>{
+          isAuthenticated: true,
+          user,
+        };
+        next();
+      })
+      .catch(({ message, response }: AxiosError<IBadRequestError>) => {
+        const setCookie = response?.headers["set-cookie"];
 
-  axios
-    .get("https://ya-praktikum.tech/api/v2/auth/user", {
-      withCredentials: true,
-      headers: { Cookie: serialize(cookies) },
-    })
-    .then(({ data }: AxiosResponse<IUserResponse>) => {
-      const user = <IUser>{
-        id: data.id,
-        firstName: data.first_name,
-        secondName: data.second_name,
-        displayName: data.display_name,
-        login: data.login,
-        email: data.email,
-        phone: data.phone,
-        avatar: data.avatar,
-      };
-      res.locals.auth = <IAuthSliceState>{
-        isAuthenticated: true,
-        user,
-      };
-      next();
-    })
-    .catch(({ message, response }: AxiosError<IBadRequestError>) => {
-      const setCookie = response?.headers["set-cookie"];
+        if (setCookie) {
+          res.setHeader("set-cookie", setCookie);
+        }
 
-      if (setCookie) {
-        res.setHeader("set-cookie", setCookie);
-      }
+        res.locals.auth = <IAuthSliceState>{
+          isAuthenticated: false,
+        };
 
-      res.locals.auth = <IAuthSliceState>{
-        isAuthenticated: false,
-      };
-
-      console.log(message);
-      next();
-    });
+        console.log(message);
+        next();
+      });
+  }
 };
