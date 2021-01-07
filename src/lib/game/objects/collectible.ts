@@ -1,8 +1,8 @@
 import type { IGameObject } from "../types";
 
-interface ICollectibleParams {
+export interface ICollectibleParams {
   speed?: number;
-  dangerous?: boolean;
+  isDangerous?: boolean;
 }
 
 const SPEED = 4;
@@ -14,17 +14,19 @@ export class Collectible implements IGameObject {
 
   y = 0;
 
-  height = 20;
+  height = 24;
 
-  width = 20;
+  width = 24;
 
   speed;
 
-  dangerous;
+  isDangerous;
 
-  constructor(ctx: CanvasRenderingContext2D, { dangerous, speed }: ICollectibleParams = {}) {
+  sprite = new Image();
+
+  constructor(ctx: CanvasRenderingContext2D, { isDangerous, speed }: ICollectibleParams = {}) {
     this.ctx = ctx;
-    this.dangerous = dangerous ?? false;
+    this.isDangerous = isDangerous ?? false;
     this.speed = speed ?? SPEED;
 
     const { width: canvasWidth } = ctx.canvas;
@@ -33,10 +35,9 @@ export class Collectible implements IGameObject {
   }
 
   draw = () => {
-    const { ctx } = this;
+    const { ctx, x, y, height, width, sprite } = this;
 
-    ctx.fillStyle = this.dangerous ? "red" : "green";
-    ctx.fillRect(this.x, this.y, this.height, this.width);
+    ctx.drawImage(sprite, x, y, height, width);
   };
 
   move = () => {

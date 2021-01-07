@@ -1,9 +1,11 @@
-import { Bucket, Collectible } from "./objects";
+import { Bucket } from "./objects";
+import type { Collectible } from "./objects";
 import { HUD } from "./hud";
 import { Keyboard, KEYS } from "./keyboard";
 import { Pointer } from "./pointer";
 import { Crash, Loss } from "./screens";
 import { Backdrop } from "./backdrop";
+import { CollectibleFactrory } from "./objects/collectible-factory";
 
 const FPS = 60;
 const LIVES = 3;
@@ -39,6 +41,8 @@ export class Game {
 
   private backdrop;
 
+  private collectibleFactory;
+
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
     this.keyboard = new Keyboard();
@@ -51,12 +55,14 @@ export class Game {
     this.loss = new Loss(this);
     this.crash = new Crash(this.ctx);
     this.backdrop = new Backdrop(this.ctx);
+    this.collectibleFactory = new CollectibleFactrory();
   }
 
   load = async () => {
     const { bucket, backdrop } = this;
     await bucket.load();
     await backdrop.load();
+    await this.collectibleFactory.load();
   };
 
   start = (): void => {
@@ -124,10 +130,10 @@ export class Game {
       bucket.move({ dx: pointer.events.x });
     }
 
-    collectibles.forEach(({ isOnScreen, intersectsWithObject, dangerous, move }, index) => {
+    collectibles.forEach(({ isOnScreen, intersectsWithObject, isDangerous, move }, index) => {
       if (isOnScreen) {
         if (intersectsWithObject(bucket)) {
-          if (dangerous) {
+          if (isDangerous) {
             this.lives -= 1;
           } else {
             this.score += 1;
@@ -136,7 +142,7 @@ export class Game {
         }
         move();
       } else {
-        if (!dangerous) {
+        if (!isDangerous) {
           this.lives -= 1;
         }
         collectibles.splice(index, 1);
@@ -144,16 +150,18 @@ export class Game {
     });
 
     if (numTicks % 75 === 0) {
-      collectibles.push(new Collectible(ctx));
+      const collectible = this.collectibleFactory.create(ctx);
+
+      collectibles.push(collectible);
     }
 
     if (numTicks % 50 === 0) {
-      collectibles.push(
-        new Collectible(ctx, {
-          dangerous: true,
-          speed: 6,
-        })
-      );
+      const collectible = this.collectibleFactory.create(ctx, {
+        isDangerous: true,
+        speed: 6,
+      });
+
+      collectibles.push(collectible);
     }
   };
 
