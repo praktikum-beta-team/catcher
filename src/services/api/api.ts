@@ -18,10 +18,14 @@ const signin = (config: IRequestConfig<ISigninRequest>) => axios("/auth/signin",
 
 const fetchUserData = (config?: IRequestConfig) => axios.get<IUserResponse>("/auth/user", config);
 
-const changeUserData = (config: IRequestConfig<IUserRequest>) => axios.put("user/profile", config);
+const changeUserData = (config: IRequestConfig<IUserRequest>) =>
+  axios("/user/profile", {
+    ...config,
+    method: "PUT",
+  });
 
 const changeUserAvatar = (config: IRequestConfig<FormData>) =>
-  axios.put("user/profile/avatar", config);
+  axios("/user/profile/avatar", { ...config, method: "PUT" });
 
 const logout = (config?: IRequestConfig) => axios("/auth/logout", config);
 
