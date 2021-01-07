@@ -49,6 +49,10 @@ export class Game {
     this.crash = new Crash(this.ctx);
   }
 
+  load = async () => {
+    await this.bucket.load();
+  };
+
   start = (): void => {
     const { loop } = this;
 

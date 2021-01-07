@@ -17,7 +17,9 @@ export const Game: FC = () => {
 
     if (ctx) {
       game = new _Game(ctx);
-      game.start();
+      const { load, start } = game;
+
+      load().then(start);
     }
 
     return () => game && game.destroy();

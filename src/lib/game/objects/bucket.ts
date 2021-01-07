@@ -1,4 +1,8 @@
+import { loadImage } from "helpers/load-image";
 import type { IGameObject } from "../types";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Texture = require("../textures/bucket.svg");
 
 const SPEED = 4;
 
@@ -9,20 +13,28 @@ export class Bucket implements IGameObject {
 
   y;
 
-  height = 20;
+  height = 55;
 
-  width = 50;
+  width = 100;
+
+  textures = {
+    bucket: new Image(),
+  };
 
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
     this.y = ctx.canvas.height - this.height;
+    this.load = this.load.bind(this);
   }
 
-  draw(): void {
+  async load() {
+    this.textures.bucket.src = await loadImage(Texture);
+  }
+
+  draw() {
     const { ctx, width, height } = this;
 
-    ctx.fillStyle = "white";
-    ctx.fillRect(this.x, this.y, width, height);
+    ctx.drawImage(this.textures.bucket, this.x, this.y, width, height);
   }
 
   move(position: { direction?: "left" | "right"; dx?: number }): void {
