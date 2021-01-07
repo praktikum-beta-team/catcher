@@ -13,7 +13,7 @@ export class Bucket implements IGameObject {
 
   y;
 
-  height = 55;
+  height = 56;
 
   width = 100;
 
