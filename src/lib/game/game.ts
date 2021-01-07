@@ -3,6 +3,7 @@ import { HUD } from "./hud";
 import { Keyboard, KEYS } from "./keyboard";
 import { Pointer } from "./pointer";
 import { Crash, Loss } from "./screens";
+import { Backdrop } from "./backdrop";
 
 const FPS = 60;
 const LIVES = 3;
@@ -36,6 +37,8 @@ export class Game {
 
   private crash;
 
+  private backdrop;
+
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
     this.keyboard = new Keyboard();
@@ -47,10 +50,13 @@ export class Game {
     this.hud = new HUD(this);
     this.loss = new Loss(this);
     this.crash = new Crash(this.ctx);
+    this.backdrop = new Backdrop(this.ctx);
   }
 
   load = async () => {
-    await this.bucket.load();
+    const { bucket, backdrop } = this;
+    await bucket.load();
+    await backdrop.load();
   };
 
   start = (): void => {
@@ -107,11 +113,13 @@ export class Game {
   };
 
   private update = () => {
-    const { numTicks, ctx, keyboard, bucket, collectibles, pointer } = this;
+    const { numTicks, ctx, keyboard, bucket, collectibles, pointer, backdrop } = this;
     if (keyboard.keys.left) {
       bucket.move({ direction: "left" });
+      backdrop.move("right");
     } else if (keyboard.keys.right) {
       bucket.move({ direction: "right" });
+      backdrop.move("left");
     } else if (pointer.events.x) {
       bucket.move({ dx: pointer.events.x });
     }
@@ -150,11 +158,12 @@ export class Game {
   };
 
   private draw = () => {
-    const { ctx, bucket, hud, collectibles } = this;
+    const { ctx, bucket, hud, collectibles, backdrop } = this;
     const { width, height } = ctx.canvas;
 
     ctx.clearRect(0, 0, width, height);
 
+    backdrop.draw();
     bucket.draw();
     hud.draw();
 
