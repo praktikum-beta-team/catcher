@@ -18,6 +18,10 @@
     text-decoration: none;
     color: var(--link-color-secondary);
 
+    &_active {
+      color: var(--link-color-hover);
+    }
+
     &:hover {
       color: var(--link-color-hover);
     }
