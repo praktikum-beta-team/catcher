@@ -1,8 +1,7 @@
 import { loadImage } from "helpers/load-image";
 import type { IGameObject } from "../types";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Texture = require("../textures/bucket.svg");
+import Texture from "../textures/bucket.svg";
 
 const SPEED = 4;
 

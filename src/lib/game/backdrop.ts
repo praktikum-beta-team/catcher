@@ -1,7 +1,6 @@
 import { loadImage } from "helpers/load-image";
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Pattern = require("./textures/background.svg");
+import Pattern from "./textures/background.svg";
 
 const HORIZONTAL_SPEED = 1.25;
 const VERTICAL_SPEED = 1;
