@@ -17,6 +17,19 @@ const {
   setYaToken,
 } = actions;
 
+const fetchUserDataRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
+  api
+    .fetchUserData()
+    .then(({ data }) => {
+      dispatch(fetchUserDataSuccess(data));
+    })
+    .catch(({ message, response }) => {
+      const errorMessage = response ? response.data.reason : message;
+
+      dispatch(authFailure(errorMessage));
+    });
+};
+
 const signupRequest = (data: ISignupRequest): ThunkAction<void, unknown, null, Action> => (
   dispatch
 ) => {
@@ -24,6 +37,7 @@ const signupRequest = (data: ISignupRequest): ThunkAction<void, unknown, null, A
     .signup({ data })
     .then(() => {
       dispatch(actions.authSuccess());
+      dispatch(fetchUserDataRequest());
     })
     .catch(({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
@@ -39,19 +53,7 @@ const signinRequest = (data: ISigninRequest): ThunkAction<void, unknown, null, A
     .signin({ data })
     .then(() => {
       dispatch(authSuccess());
-    })
-    .catch(({ message, response }) => {
-      const errorMessage = response ? response.data.reason : message;
-
-      dispatch(authFailure(errorMessage));
-    });
-};
-
-const fetchUserDataRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
-  api
-    .fetchUserData()
-    .then(({ data }) => {
-      dispatch(fetchUserDataSuccess(data));
+      dispatch(fetchUserDataRequest());
     })
     .catch(({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
