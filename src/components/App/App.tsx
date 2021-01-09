@@ -24,7 +24,7 @@ const componentMap: IComponentMap = [
   { path: ROUTES.GAME, Component: GameView },
   { path: ROUTES.LOGOUT, Component: Logout, isPrivate: true },
   { path: ROUTES.NOT_FOUND, Component: NotFound },
-  { path: ROUTES.LEADERBOARD, Component: LeaderboardView },
+  { path: ROUTES.LEADERBOARD, Component: LeaderboardView, isPrivate: true },
   { path: ROUTES.OAUTH, Component: OAuth },
 ];
 
