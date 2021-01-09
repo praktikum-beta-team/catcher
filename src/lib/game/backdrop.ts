@@ -1,6 +1,6 @@
 import { loadImage } from "helpers/load-image";
 
-import Pattern from "./textures/background.svg";
+import BackdropPattern from "./assets/backdrop.svg";
 
 const HORIZONTAL_SPEED = 1.25;
 const VERTICAL_SPEED = 1;
@@ -8,13 +8,9 @@ const VERTICAL_SPEED = 1;
 export class Backdrop {
   private ctx;
 
-  textures = {
-    pattern: new Image(),
-  };
+  pattern: CanvasPattern | null;
 
   transform;
-
-  pattern: string | CanvasGradient | CanvasPattern | null;
 
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
@@ -24,8 +20,9 @@ export class Backdrop {
   }
 
   async load() {
-    this.textures.pattern.src = await loadImage(Pattern);
-    this.pattern = this.ctx.createPattern(this.textures.pattern, "repeat");
+    const pattern = new Image();
+    pattern.src = await loadImage(BackdropPattern);
+    this.pattern = this.ctx.createPattern(pattern, "repeat");
   }
 
   draw() {

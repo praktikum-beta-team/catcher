@@ -5,7 +5,7 @@ import { Keyboard, KEYS } from "./keyboard";
 import { Pointer } from "./pointer";
 import { Crash, Loss } from "./screens";
 import { Backdrop } from "./backdrop";
-import { CollectibleFactrory } from "./objects/collectible-factory";
+import { CollectibleFactory } from "./objects/collectible-factory";
 
 const FPS = 60;
 const LIVES = 3;
@@ -55,17 +55,16 @@ export class Game {
     this.loss = new Loss(this);
     this.crash = new Crash(this.ctx);
     this.backdrop = new Backdrop(this.ctx);
-    this.collectibleFactory = new CollectibleFactrory();
+    this.collectibleFactory = new CollectibleFactory();
   }
 
   load = async () => {
-    const { bucket, backdrop } = this;
-    await bucket.load();
-    await backdrop.load();
-    await this.collectibleFactory.load();
+    const { bucket, backdrop, collectibleFactory } = this;
+
+    await Promise.all([bucket.load(), backdrop.load(), collectibleFactory.load()]);
   };
 
-  start = (): void => {
+  start = () => {
     const { loop } = this;
 
     this.lastTick = window.performance.now();

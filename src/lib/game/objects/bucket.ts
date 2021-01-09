@@ -1,7 +1,7 @@
 import { loadImage } from "helpers/load-image";
 import type { IGameObject } from "../types";
 
-import Texture from "../textures/bucket.svg";
+import BucketSprite from "../assets/sprites/bucket.svg";
 
 const SPEED = 4;
 
@@ -27,7 +27,7 @@ export class Bucket implements IGameObject {
   }
 
   async load() {
-    this.textures.bucket.src = await loadImage(Texture);
+    this.textures.bucket.src = await loadImage(BucketSprite);
   }
 
   draw() {

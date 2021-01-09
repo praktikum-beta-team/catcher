@@ -3,10 +3,10 @@ import { loadImage } from "helpers/load-image";
 import { Collectible } from "./collectible";
 import type { ICollectibleParams } from "./collectible";
 
-import CollectibleNormalSprite from "../textures/collectible-normal.svg";
-import CollectibleDangerousSprite from "../textures/collectible-dangerous.svg";
+import CollectibleNormalSprite from "../assets/sprites/collectible-normal.svg";
+import CollectibleDangerousSprite from "../assets/sprites/collectible-dangerous.svg";
 
-export class CollectibleFactrory {
+export class CollectibleFactory {
   sprites = {
     normal: new Image(),
     dangerous: new Image(),
