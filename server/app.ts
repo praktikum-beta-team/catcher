@@ -32,3 +32,8 @@ app
 server.listen(port, () => {
   console.log(`${TEXT.SERVER.SERVER_RUNNING_MESSAGE} ${port}`);
 });
+
+/**
+ * TODO: можно попробовать на бою генерировать сертификат с помощью
+ * https://git.coolaj86.com/coolaj86/greenlock-express.js
+ */
