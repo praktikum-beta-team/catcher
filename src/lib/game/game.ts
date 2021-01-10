@@ -42,7 +42,9 @@ export class Game {
 
   private collectibleFactory;
 
-  constructor(ctx: CanvasRenderingContext2D) {
+  private onResult;
+
+  constructor(ctx: CanvasRenderingContext2D, onResult?: (score: number) => void) {
     ctx.canvas.height = CANVAS_HEIGHT;
     ctx.canvas.width = CANVAS_WIDTH;
 
@@ -58,12 +60,14 @@ export class Game {
     this.crash = new Crash(this.ctx);
     this.backdrop = new Backdrop(this.ctx);
     this.collectibleFactory = new CollectibleFactory();
+
+    this.onResult = onResult;
   }
 
   load = async () => {
     const { bucket, backdrop, collectibleFactory } = this;
 
-    await Promise.all([bucket.load(), backdrop.load(), collectibleFactory.load()]);
+    await Promise.all([backdrop.load(), bucket.load(), collectibleFactory.load()]);
   };
 
   start = () => {
@@ -90,11 +94,28 @@ export class Game {
   };
 
   private loop: FrameRequestCallback = (nextTick) => {
-    const { keyboard, enqueue, update, draw, restart, loss, crash, loop, tickLength, lives } = this;
+    const {
+      keyboard,
+      enqueue,
+      update,
+      draw,
+      restart,
+      loss,
+      crash,
+      loop,
+      tickLength,
+      lives,
+      onResult,
+      score,
+    } = this;
 
     if (!lives) {
       keyboard.on(KEYS.SPASEBAR, restart);
       enqueue(loss.draw);
+
+      if (onResult) {
+        onResult(score);
+      }
 
       return;
     }
@@ -181,7 +202,7 @@ export class Game {
     });
   };
 
-  destroy() {
+  destroy = () => {
     const { keyboard, pointer } = this;
 
     if (this.requestedFrame) {
@@ -190,5 +211,5 @@ export class Game {
 
     keyboard.removeListeners();
     pointer.removeListeners();
-  }
+  };
 }
