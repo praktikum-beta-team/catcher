@@ -2,5 +2,7 @@
   display: block;
   margin: 0 auto;
   height: 80vh;
+  width: auto;
+  max-height: 100%;
   background-color: var(--space);
 }
