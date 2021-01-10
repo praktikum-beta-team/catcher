@@ -12,6 +12,8 @@ const config: Configuration = {
   output: {
     path: path.resolve("dist"),
     filename: "[name].[fullhash].bundle.js",
+    assetModuleFilename: "images/[hash][ext][query]",
+    publicPath: "/",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx", ".json"],

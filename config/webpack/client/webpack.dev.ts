@@ -2,7 +2,7 @@ import { HotModuleReplacementPlugin } from "webpack";
 import { merge } from "webpack-merge";
 import type { Configuration } from "webpack";
 
-import base from "./base.config";
+import base from "../webpack.base";
 
 const config: Configuration = merge(base, {
   entry: ["webpack-hot-middleware/client?path=__webpack_hmr&reload=true"],

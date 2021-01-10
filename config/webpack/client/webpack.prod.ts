@@ -4,7 +4,7 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 
-import base from "./base.config";
+import base from "../webpack.base";
 
 const config = merge(base, {
   mode: "production",
