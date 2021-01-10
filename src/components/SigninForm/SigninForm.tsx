@@ -67,6 +67,11 @@ export const SigninForm: FC = () => {
           {TEXT.SIGNIN.BUTTON_SIGNUP}
         </Button>
       </FormField>
+      <FormField>
+        <Button view="plain" width="max" type="button" container={<Link to={ROUTES.GAME} />}>
+          {TEXT.SIGNIN.BUTTON_PLAY}
+        </Button>
+      </FormField>
     </Form>
   );
 };

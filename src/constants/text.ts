@@ -31,6 +31,7 @@ export const TEXT = {
     BUTTON_SIGNIN: "Войти",
     BUTTON_SIGNUP: "Зарегистрироваться",
     BUTTON_SIGNIN_YANDEX: "Войти через Яндекс",
+    BUTTON_PLAY: "Играть без авторизации",
   },
   SIGNUP: {
     TITLE: "Регистрация",
