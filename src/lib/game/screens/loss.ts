@@ -12,7 +12,7 @@ export class Loss {
     const { ctx, score } = this.game;
     const { width, height } = ctx.canvas;
 
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "#c82540";
     ctx.fillRect(0, 0, width, height);
 
     ctx.textBaseline = "bottom";
