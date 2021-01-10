@@ -1,5 +1,16 @@
 .signin {
   @mixin flex-centered;
   min-height: 100vh;
-  background-color: #222;
+  background-color: var(--space);
+  background-image: url('../../lib/game/assets/backdrop.svg');
+  background-size: 50%;
+
+  &__layout {
+    display: flex;
+    width: 100%;
+    max-width: 720px;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 }

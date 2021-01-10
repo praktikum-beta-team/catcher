@@ -2,5 +2,5 @@
   display: block;
   margin: 0 auto;
   height: 80vh;
-  background-color: #313247;
+  background-color: var(--space);
 }
