@@ -12,9 +12,9 @@ export class Bucket implements IGameObject {
 
   y;
 
-  height = 56;
+  height = 76;
 
-  width = 100;
+  width = 136;
 
   textures = {
     bucket: new Image(),

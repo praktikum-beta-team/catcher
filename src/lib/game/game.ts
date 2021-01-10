@@ -1,3 +1,5 @@
+import { CANVAS_HEIGHT, CANVAS_WIDTH, FPS, LIVES } from "constants/game";
+
 import { Bucket } from "./objects";
 import type { Collectible } from "./objects";
 import { HUD } from "./hud";
@@ -6,9 +8,6 @@ import { Pointer } from "./pointer";
 import { Crash, Loss } from "./screens";
 import { Backdrop } from "./backdrop";
 import { CollectibleFactory } from "./objects/collectible-factory";
-
-const FPS = 60;
-const LIVES = 3;
 
 export class Game {
   ctx;
@@ -44,6 +43,9 @@ export class Game {
   private collectibleFactory;
 
   constructor(ctx: CanvasRenderingContext2D) {
+    ctx.canvas.height = CANVAS_HEIGHT;
+    ctx.canvas.width = CANVAS_WIDTH;
+
     this.ctx = ctx;
     this.keyboard = new Keyboard();
     this.keyboard.addListeners();

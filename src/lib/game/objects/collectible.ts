@@ -14,9 +14,9 @@ export class Collectible implements IGameObject {
 
   y = 0;
 
-  height = 24;
+  height = 32;
 
-  width = 24;
+  width = 32;
 
   speed;
 

@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useRef } from "react";
 
 import { Game as _Game } from "lib/game";
-import { HEIGHT, WIDTH } from "constants/game";
 import { cn } from "helpers/classname";
 
 import "./Game.css";
@@ -25,5 +24,5 @@ export const Game: FC = () => {
     return () => game && game.destroy();
   }, []);
 
-  return <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} className={b_()} />;
+  return <canvas ref={canvasRef} className={b_()} />;
 };
