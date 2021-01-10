@@ -13,7 +13,6 @@
   /* TODO: отрефакторить */
   a&__user {
     display: block;
-    padding: 0 16px;
     text-decoration: none;
     color: var(--link-color-secondary);
 
