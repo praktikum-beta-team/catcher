@@ -1,7 +1,6 @@
 import { merge } from "webpack-merge";
 import nodeExternals from "webpack-node-externals";
 import webpack from "webpack";
-import { resolve } from "path";
 const NodemonPlugin = require("nodemon-webpack-plugin");
 
 import base from "../webpack.base";
@@ -11,7 +10,7 @@ module.exports = merge(base, {
   watch: true,
   watchOptions: {
     aggregateTimeout: 600,
-    ignored: /node_modules/,
+    ignored: /(node_modules|src)/,
   },
   target: "node",
   entry: "./server",
@@ -28,9 +27,7 @@ module.exports = merge(base, {
     ],
   },
   plugins: [
-    new NodemonPlugin({
-      watch: resolve("./dist"),
-    }),
+    new NodemonPlugin(),
     new webpack.ProvidePlugin({
       // TODO: Здесь хорошо бы замокать window, local storage и пр.
     }),
