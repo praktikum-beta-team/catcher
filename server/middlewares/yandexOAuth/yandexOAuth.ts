@@ -23,7 +23,12 @@ export const yandexOAuth: RequestHandler = async (req, res, next) => {
           displayName: data.real_name,
           login: data.login,
           email: data.default_email,
-          avatar: `https://avatars.yandex.net/get-yapic/${data.default_avatar_id}/islands-50`,
+          avatar: {
+            base: `https://avatars.yandex.net/get-yapic/${data.default_avatar_id}/islands-`,
+            s: "50",
+            m: "100",
+            xl: "200",
+          },
         };
 
         res.locals.auth = <IAuthSliceState>{

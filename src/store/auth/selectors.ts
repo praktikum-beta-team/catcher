@@ -6,7 +6,12 @@ export const getIsAuthenticated = (state: IRootState) => state.auth.isAuthentica
 export const getError = (state: IRootState) => state.auth.error;
 export const getToken = (state: IRootState) => state.auth.yaToken;
 export const getUser = (state: IRootState) => state.auth.user;
-export const getAvatar = createSelector(getUser, (user) => user?.avatar);
+export const getAvatar = (size: "s" | "xl") =>
+  createSelector(getUser, (user) => {
+    const avatar = user?.avatar;
+    return `${avatar?.base || ""}${avatar?.[size] || ""}`;
+  });
+
 export const getUserSettings = createSelector(getUser, (user) =>
   user
     ? <IUser>{

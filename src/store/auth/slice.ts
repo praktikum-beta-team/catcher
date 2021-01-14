@@ -43,7 +43,7 @@ const authSlice = createSlice({
         login: payload.login,
         email: payload.email,
         phone: payload.phone,
-        avatar: payload.avatar,
+        avatar: { base: payload.avatar },
       };
       state.user = user;
     },

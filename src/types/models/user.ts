@@ -6,5 +6,10 @@ export interface IUser {
   login: string;
   email: string;
   phone?: string;
-  avatar?: string;
+  avatar?: {
+    base?: string;
+    s?: string;
+    m?: string;
+    xl?: string;
+  };
 }
