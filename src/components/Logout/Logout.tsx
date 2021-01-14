@@ -9,10 +9,11 @@ import { Loading } from "components/UI";
 export const Logout: FC = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
+  const authType = useSelector(authSelectors.getAuthType);
 
   useEffect(() => {
-    dispatch(authOperations.logoutRequest());
-  }, [dispatch]);
+    dispatch(authType === "API" ? authOperations.logoutRequest() : authOperations.logoutSuccess());
+  }, [authType, dispatch]);
 
   return isAuthenticated ? <Loading /> : <Redirect to={ROUTES.SIGNIN} />;
 };

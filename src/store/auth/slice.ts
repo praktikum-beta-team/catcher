@@ -4,10 +4,13 @@ import type { IUser } from "types/models/user";
 
 import type { IUserRequest, IUserResponse } from "services/api";
 
+type authType = "API" | "OAUTH";
+
 export interface IAuthSliceState {
   isAuthenticated: boolean;
   error: null | string;
   user: null | IUser;
+  type: null | authType;
   yaToken: null | string;
 }
 
@@ -15,6 +18,7 @@ export const initialState: IAuthSliceState = {
   isAuthenticated: false,
   error: null,
   user: null,
+  type: null,
   yaToken: null,
 };
 
@@ -22,16 +26,19 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    authSuccess: (state) => {
+    authSuccess: (state, { payload: type }: PayloadAction<authType>) => {
       state.isAuthenticated = true;
       state.error = null;
+      state.type = type;
     },
     authFailure: (state, { payload: error }: PayloadAction<string>) => {
       state.isAuthenticated = false;
+      state.type = null;
       state.error = error;
     },
     logoutSuccess: (state) => {
       state.isAuthenticated = false;
+      state.type = null;
       state.user = null;
     },
     fetchUserDataSuccess: (state, { payload }: PayloadAction<IUserResponse>) => {

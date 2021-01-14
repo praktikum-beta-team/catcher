@@ -33,11 +33,11 @@ export const yandexOAuth: RequestHandler = async (req, res, next) => {
 
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: true,
+          type: "OAUTH",
           user,
         };
       })
       .catch(({ message, response, statusText }) => {
-        // console.log(message, response, statusText);
         const errorMessage =
           response?.data?.error_description || message || statusText || "ошибка авторизации";
         res.locals.auth = <IAuthSliceState>{

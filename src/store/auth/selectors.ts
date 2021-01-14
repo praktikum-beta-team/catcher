@@ -3,6 +3,7 @@ import { IUser } from "types/models/user";
 import type { IRootState } from "store";
 
 export const getIsAuthenticated = (state: IRootState) => state.auth.isAuthenticated;
+export const getAuthType = (state: IRootState) => state.auth.type;
 export const getError = (state: IRootState) => state.auth.error;
 export const getToken = (state: IRootState) => state.auth.yaToken;
 export const getUser = (state: IRootState) => state.auth.user;

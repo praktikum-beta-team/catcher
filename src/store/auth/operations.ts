@@ -36,7 +36,7 @@ const signupRequest = (data: ISignupRequest): ThunkAction<void, unknown, null, A
   api
     .signup({ data })
     .then(() => {
-      dispatch(actions.authSuccess());
+      dispatch(actions.authSuccess("API"));
       dispatch(fetchUserDataRequest());
     })
     .catch(({ message, response }) => {
@@ -52,7 +52,7 @@ const signinRequest = (data: ISigninRequest): ThunkAction<void, unknown, null, A
   api
     .signin({ data })
     .then(() => {
-      dispatch(authSuccess());
+      dispatch(authSuccess("API"));
       dispatch(fetchUserDataRequest());
     })
     .catch(({ message, response }) => {
