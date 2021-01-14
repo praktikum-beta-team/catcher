@@ -15,7 +15,7 @@ export const yandexOAuth: RequestHandler = async (req, res, next) => {
     next();
   } else {
     getToken(code.toString()) /** TODO: тут можно использовать toString? */
-      .then(({ data }) => getPasportInfo(data))
+      .then(({ data: { access_token } }) => getPasportInfo(access_token))
       .then(({ data }) => {
         const user = <IUser>{
           firstName: data.first_name,
@@ -23,9 +23,6 @@ export const yandexOAuth: RequestHandler = async (req, res, next) => {
           displayName: data.real_name,
           login: data.login,
           email: data.default_email,
-          /**
-           * TODO: Может быть получится получить реальный аватар пользователя?
-           */
           avatar: `https://avatars.yandex.net/get-yapic/${data.default_avatar_id}/islands-50`,
         };
 
@@ -34,13 +31,13 @@ export const yandexOAuth: RequestHandler = async (req, res, next) => {
           user,
         };
       })
-      .catch(({ message, response }) => {
-        const errorMessage = response ? response.data.error_description : message;
-
-        console.error(errorMessage);
-
+      .catch(({ message, response, statusText }) => {
+        // console.log(message, response, statusText);
+        const errorMessage =
+          response?.data?.error_description || message || statusText || "ошибка авторизации";
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: false,
+          error: errorMessage,
         };
       })
       .finally(next);
