@@ -7,7 +7,7 @@ export const getAuthType = (state: IRootState) => state.auth.type;
 export const getError = (state: IRootState) => state.auth.error;
 export const getToken = (state: IRootState) => state.auth.yaToken;
 export const getUser = (state: IRootState) => state.auth.user;
-export const getAvatar = (size: "s" | "xl") =>
+export const getAvatar = (size: "s" | "m" | "xl") =>
   createSelector(getUser, (user) => {
     const avatar = user?.avatar;
     return `${avatar?.base || ""}${avatar?.[size] || ""}`;
