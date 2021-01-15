@@ -98,7 +98,7 @@
     "dev": "webpack --config config/webpack/server/webpack.dev.ts",
     "build:client": "webpack --config config/webpack/client/webpack.prod.ts --json=dist/compilation-stats.json",
     "build:server": "webpack --config config/webpack/server/webpack.prod.ts",
-    "build": "npm run build:app && npm run build:server",
+    "build": "npm run build:client && npm run build:server",
     "start": "NODE_ENV=production node dist/server",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
