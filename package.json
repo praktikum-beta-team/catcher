@@ -103,7 +103,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "docker:build": "docker build -t catcher .",
-    "docker:run": "docker run -it --rm -p 8080:8000 -e PORT=8000 catcher",
+    "docker:run": "docker run -it --rm -e PORT=8000 -p 8000:8000/tcp catcher",
     "ssl:dev": "cd config/ssl && openssl req -x509 -out localhost.crt -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config 'openssl.cnf'"
   },
   "repository": {

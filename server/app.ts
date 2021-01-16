@@ -27,7 +27,7 @@ app
  */
 
 if (require.main === module) {
-  app.listen(port);
+  app.listen(port, () => console.log(`✅ ${port}`));
 }
 
 module.exports = app;
