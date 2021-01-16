@@ -10,7 +10,7 @@ export const defaults = {
   publicPath: "/",
 };
 
-export const settings: typeof defaults = _defaults(settingsEnv, defaults);
+export const settings: typeof defaults = _defaults(defaults, settingsEnv);
 
 export const yandexOAuthSettings = {
   /**
