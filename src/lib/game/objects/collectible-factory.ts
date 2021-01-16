@@ -21,12 +21,12 @@ export class CollectibleFactory {
   create = (ctx: CanvasRenderingContext2D, params: ICollectibleParams = {}) => {
     const { isDangerous } = params;
     const collectible = new Collectible(ctx, params);
-    const {
-      sprites: { normal, dangerous },
-    } = this;
+    const { sprites } = this;
 
-    if (normal && dangerous) {
-      collectible.sprites.collectible = isDangerous ? dangerous : normal;
+    if (sprites.normal && sprites.dangerous) {
+      collectible.sprites.collectible = isDangerous
+        ? <HTMLImageElement>sprites.dangerous
+        : <HTMLImageElement>sprites.normal;
     }
 
     return collectible;

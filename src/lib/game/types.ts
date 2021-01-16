@@ -1,4 +1,4 @@
-export type Sprite = HTMLImageElement | null;
+export type Sprite = HTMLImageElement | CanvasPattern | null;
 
 export interface IGameObject {
   x: number;

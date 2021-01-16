@@ -40,7 +40,7 @@ export class Collectible implements IGameObject {
     const { ctx, x, y, height, width, sprites } = this;
 
     if (sprites.collectible) {
-      ctx.drawImage(sprites.collectible, x, y, height, width);
+      ctx.drawImage(<HTMLImageElement>sprites.collectible, x, y, height, width);
     }
   };
 
