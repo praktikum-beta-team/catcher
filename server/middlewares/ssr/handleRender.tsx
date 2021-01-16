@@ -7,8 +7,7 @@ import React from "react";
 import { renderToStaticMarkup, renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-/** TODO: Пока используем готовый пакет, но лучше написать свою утилиту */
-import isObject from "is-object";
+import { isPlainObject } from "lodash/fp";
 
 import App from "components/App";
 import { createStore, getInitialState, PreloadedState } from "store";
@@ -38,7 +37,7 @@ const getAssetsFromCompiledBundle = () => {
 };
 
 const normalizeAssets = (assets: AssetPaths) => {
-  if (isObject(assets)) {
+  if (isPlainObject(assets)) {
     return Object.values(assets);
   }
 
