@@ -8,7 +8,7 @@ import TerserPlugin from "terser-webpack-plugin";
 import base from "../webpack.base";
 import { defaults } from "../../settings";
 
-const { baseUrl, port, publicPath } = defaults;
+const { baseDomain, port, publicPath } = defaults;
 
 const config = merge(base, {
   mode: "production",
@@ -38,7 +38,7 @@ const config = merge(base, {
       filename: "style.[fullhash].min.css",
     }),
     new EnvironmentPlugin({
-      BASE_URL: baseUrl,
+      BASE_DOMAIN: baseDomain,
       PORT: port,
       PUBLIC_PATH: publicPath,
     }),

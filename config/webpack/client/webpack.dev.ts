@@ -5,7 +5,7 @@ import type { Configuration } from "webpack";
 import base from "../webpack.base";
 import { defaults } from "../../settings";
 
-const { baseUrl, port, publicPath } = defaults;
+const { baseDomain, port, publicPath } = defaults;
 
 const config: Configuration = merge(base, {
   entry: ["webpack-hot-middleware/client?path=__webpack_hmr&reload=true"],
@@ -28,7 +28,7 @@ const config: Configuration = merge(base, {
   plugins: [
     new HotModuleReplacementPlugin(),
     new EnvironmentPlugin({
-      BASE_URL: baseUrl,
+      BASE_DOMAIN: baseDomain,
       PORT: port,
       PUBLIC_PATH: publicPath,
     }),
