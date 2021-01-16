@@ -20,8 +20,7 @@ export class Backdrop {
   }
 
   async load() {
-    const pattern = new Image();
-    pattern.src = await loadImage(BackdropPattern);
+    const pattern = await loadImage(BackdropPattern);
     this.pattern = this.ctx.createPattern(pattern, "repeat");
   }
 
@@ -29,7 +28,7 @@ export class Backdrop {
     const { ctx, transform, pattern } = this;
     const { width, height } = ctx.canvas;
 
-    if (pattern !== null) {
+    if (pattern) {
       transform.translateSelf(0, -VERTICAL_SPEED);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

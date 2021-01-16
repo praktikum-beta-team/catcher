@@ -5,22 +5,29 @@ import type { ICollectibleParams } from "./collectible";
 
 import CollectibleNormalSprite from "../assets/sprites/collectible-normal.svg";
 import CollectibleDangerousSprite from "../assets/sprites/collectible-dangerous.svg";
+import type { Sprite } from "../types";
 
 export class CollectibleFactory {
-  sprites = {
-    normal: new Image(),
-    dangerous: new Image(),
+  sprites: Record<string, Sprite> = {
+    normal: null,
+    dangerous: null,
   };
 
   load = async () => {
-    this.sprites.normal.src = await loadImage(CollectibleNormalSprite);
-    this.sprites.dangerous.src = await loadImage(CollectibleDangerousSprite);
+    this.sprites.normal = await loadImage(CollectibleNormalSprite);
+    this.sprites.dangerous = await loadImage(CollectibleDangerousSprite);
   };
 
   create = (ctx: CanvasRenderingContext2D, params: ICollectibleParams = {}) => {
     const { isDangerous } = params;
     const collectible = new Collectible(ctx, params);
-    collectible.sprite = isDangerous ? this.sprites.dangerous : this.sprites.normal;
+    const {
+      sprites: { normal, dangerous },
+    } = this;
+
+    if (normal && dangerous) {
+      collectible.sprites.collectible = isDangerous ? dangerous : normal;
+    }
 
     return collectible;
   };

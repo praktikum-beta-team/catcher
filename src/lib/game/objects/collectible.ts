@@ -1,4 +1,4 @@
-import type { IGameObject } from "../types";
+import type { IGameObject, Sprite } from "../types";
 
 export interface ICollectibleParams {
   speed?: number;
@@ -22,7 +22,9 @@ export class Collectible implements IGameObject {
 
   isDangerous;
 
-  sprite = new Image();
+  sprites: Record<string, Sprite> = {
+    collectible: null,
+  };
 
   constructor(ctx: CanvasRenderingContext2D, { isDangerous, speed }: ICollectibleParams = {}) {
     this.ctx = ctx;
@@ -35,9 +37,11 @@ export class Collectible implements IGameObject {
   }
 
   draw = () => {
-    const { ctx, x, y, height, width, sprite } = this;
+    const { ctx, x, y, height, width, sprites } = this;
 
-    ctx.drawImage(sprite, x, y, height, width);
+    if (sprites.collectible) {
+      ctx.drawImage(sprites.collectible, x, y, height, width);
+    }
   };
 
   move = () => {

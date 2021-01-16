@@ -68,6 +68,8 @@ export class Game {
     const { bucket, backdrop, collectibleFactory } = this;
 
     await Promise.all([backdrop.load(), bucket.load(), collectibleFactory.load()]);
+
+    console.log("ready");
   };
 
   start = () => {

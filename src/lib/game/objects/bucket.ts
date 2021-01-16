@@ -1,5 +1,5 @@
 import { loadImage } from "helpers/load-image";
-import type { IGameObject } from "../types";
+import type { IGameObject, Sprite } from "../types";
 
 import BucketSprite from "../assets/sprites/bucket.svg";
 
@@ -16,8 +16,8 @@ export class Bucket implements IGameObject {
 
   width = 136;
 
-  textures = {
-    bucket: new Image(),
+  sprites: Record<string, Sprite> = {
+    bucket: null,
   };
 
   constructor(ctx: CanvasRenderingContext2D) {
@@ -27,13 +27,15 @@ export class Bucket implements IGameObject {
   }
 
   async load() {
-    this.textures.bucket.src = await loadImage(BucketSprite);
+    this.sprites.bucket = await loadImage(BucketSprite);
   }
 
   draw() {
-    const { ctx, width, height } = this;
+    const { ctx, width, height, sprites } = this;
 
-    ctx.drawImage(this.textures.bucket, this.x, this.y, width, height);
+    if (sprites.bucket) {
+      ctx.drawImage(<HTMLImageElement>sprites.bucket, this.x, this.y, width, height);
+    }
   }
 
   move(position: { direction?: "left" | "right"; dx?: number }): void {
