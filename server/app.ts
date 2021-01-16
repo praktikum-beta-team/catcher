@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
-import { port } from "config/vars";
+import { settings } from "config/settings";
 import { ROUTES } from "constants/routes";
 import ssr from "server/middlewares/ssr";
 import { yandexOAuth } from "server/middlewares/yandexOAuth";
@@ -27,7 +27,7 @@ app
  */
 
 if (require.main === module) {
-  app.listen(port, () => console.log(`✅ ${port}`));
+  app.listen(settings.port, () => console.log(`✅ ${settings.port}`));
 }
 
 module.exports = app;

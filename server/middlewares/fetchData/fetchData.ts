@@ -5,7 +5,7 @@ import { IUser } from "types/models/user";
 import { IAuthSliceState } from "store/auth";
 import { api } from "services/api";
 
-import { apiBaseUrl } from "config/vars";
+import { settings } from "config/settings";
 
 export const fetchData: RequestHandler = ({ cookies }, res, next) => {
   if (!cookies.authCookie) {
@@ -25,7 +25,7 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
           login: data.login,
           email: data.email,
           phone: data.phone,
-          avatar: data.avatar && `${apiBaseUrl}/${data.avatar}`,
+          avatar: data.avatar && `${settings.apiBaseUrl}/${data.avatar}`,
         };
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: true,

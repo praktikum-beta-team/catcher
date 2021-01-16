@@ -1,10 +1,13 @@
-import { baseUrl, port, isDevelopment } from "config/vars";
+import { settings } from "config/settings";
+import { environment } from "config/vars";
 import { ROUTES } from "constants/routes";
+
+const { baseUrl, port } = settings;
 
 /**
  * TODO: ключи нельзя хранить в репозитории
  */
 export const CLIENT_ID = "3bd97dc79c8a4398aecda914461a2c2a";
 export const CLIENT_SECRET = "caee736bc0d2469f9ce683b424293f22";
-const redirectUri = `${baseUrl}${isDevelopment && `:${port}`}${ROUTES.OAUTH}`;
+const redirectUri = `${baseUrl}${environment === "development" && `:${port}`}${ROUTES.OAUTH}`;
 export const AUTH_URL = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${redirectUri}`;

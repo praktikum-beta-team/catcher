@@ -3,13 +3,15 @@ import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 
 import type { Configuration } from "webpack";
 
+import { settings } from "../settings";
+
 const config: Configuration = {
   entry: ["./src"],
   output: {
     path: path.resolve("dist"),
     filename: "[name].[fullhash].bundle.js",
     assetModuleFilename: "images/[hash][ext][query]",
-    publicPath: "/",
+    publicPath: settings.publicPath,
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx", ".json"],

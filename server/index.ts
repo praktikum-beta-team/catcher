@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 import https from "https";
 
-import { port } from "config/vars";
+import { settings } from "config/settings";
 import { TEXT } from "constants/text";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -13,6 +13,6 @@ const cert = readFileSync(resolve("./config/ssl/localhost.crt"));
 
 const server = https.createServer({ key, cert }, app);
 
-server.listen(port, () => {
-  console.log(`${TEXT.SERVER.SERVER_RUNNING_MESSAGE} ${port}`);
+server.listen(settings.port, () => {
+  console.log(`${TEXT.SERVER.SERVER_RUNNING_MESSAGE} ${settings.port}`);
 });

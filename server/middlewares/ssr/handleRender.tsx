@@ -14,7 +14,7 @@ import App from "components/App";
 import { createStore, getInitialState, PreloadedState } from "store";
 import { RequestHandler, Response } from "express";
 
-import { isDevelopment } from "config/vars";
+import { environment } from "config/vars";
 import { TEXT } from "constants/text";
 
 type AssetPaths = Record<string, string>;
@@ -100,9 +100,8 @@ export const handleRender: RequestHandler = ({ url }, res) => {
     </StaticRouter>
   );
 
-  const assetsByChunkName = isDevelopment
-    ? getAssetsFromDevMiddleware(res)
-    : getAssetsFromCompiledBundle();
+  const assetsByChunkName =
+    environment === "development" ? getAssetsFromDevMiddleware(res) : getAssetsFromCompiledBundle();
 
   res.send(renderFullPage(content, preloadedState, assetsByChunkName));
 };

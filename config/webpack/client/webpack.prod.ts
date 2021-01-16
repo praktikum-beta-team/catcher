@@ -6,9 +6,9 @@ import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 
 import base from "../webpack.base";
-import { DEFAULT_SETTINGS } from "../../vars";
+import { defaults } from "../../settings";
 
-const { BASE_URL, PORT } = DEFAULT_SETTINGS;
+const { baseUrl, port, publicPath } = defaults;
 
 const config = merge(base, {
   mode: "production",
@@ -38,8 +38,9 @@ const config = merge(base, {
       filename: "style.[fullhash].min.css",
     }),
     new EnvironmentPlugin({
-      BASE_URL,
-      PORT,
+      BASE_URL: baseUrl,
+      PORT: port,
+      PUBLIC_PATH: publicPath,
     }),
   ],
 });
