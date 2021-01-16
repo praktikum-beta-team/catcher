@@ -1,10 +1,12 @@
-import type { AxiosResponse } from "axios";
 import qs from "qs";
 import axios from "helpers/configure-axios";
 import type { IRequestConfig } from "helpers/configure-axios";
-import { CLIENT_ID, CLIENT_SECRET } from "constants/yandexOAuth";
+
+import { yandexOAuthSettings } from "config/settings";
 
 import type { IYandexPasportRequest, IYandexPasportResponse, IYandexTokenRequest } from "./types";
+
+const { clientId, clientSecret } = yandexOAuthSettings;
 
 export const getToken = (code: string) => {
   const config: IRequestConfig<IYandexTokenRequest> = {
@@ -13,8 +15,8 @@ export const getToken = (code: string) => {
     data: {
       grant_type: <const>"authorization_code",
       code,
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
+      client_id: clientId,
+      client_secret: clientSecret,
     },
   };
   return axios("/token", { ...config, data: qs.stringify(config.data) });
