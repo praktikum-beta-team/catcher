@@ -1,3 +1,4 @@
+import { EnvironmentPlugin } from "webpack";
 import { merge } from "webpack-merge";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
@@ -5,6 +6,9 @@ import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 
 import base from "../webpack.base";
+import { DEFAULT_SETTINGS } from "../../vars";
+
+const { BASE_URL, PORT } = DEFAULT_SETTINGS;
 
 const config = merge(base, {
   mode: "production",
@@ -32,6 +36,10 @@ const config = merge(base, {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: "style.[fullhash].min.css",
+    }),
+    new EnvironmentPlugin({
+      BASE_URL,
+      PORT,
     }),
   ],
 });
