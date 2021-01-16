@@ -12,7 +12,6 @@
     "express": "4.17.1",
     "http-proxy-middleware": "1.0.6",
     "is-object": "1.0.2",
-    "memory-fs": "0.5.0",
     "morgan": "1.10.0",
     "qs": "6.9.4",
     "react": "16.14.0",
