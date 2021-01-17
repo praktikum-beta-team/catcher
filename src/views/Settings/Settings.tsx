@@ -3,9 +3,8 @@ import { useSelector } from "react-redux";
 
 import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
-import { Layout, Loading } from "components/UI";
-import { SettingsForm } from "components/SettingsForm";
-import { SettingsAvatar } from "components/SettingsAvatar";
+import { Loading } from "components/UI";
+import { SettingsForm, SettingsAvatar, StandardLayout } from "components";
 import { authSelectors } from "store/auth";
 
 import "./Settings.css";
@@ -16,7 +15,7 @@ export const Settings: FC = () => {
   const user = useSelector(authSelectors.getUser);
 
   return user ? (
-    <Layout>
+    <StandardLayout>
       <div className={b_()}>
         <h1 className={b_("title")}>{TEXT.SETTINGS.TITLE}</h1>
         <div className={b_("layout")}>
@@ -28,7 +27,7 @@ export const Settings: FC = () => {
           </div>
         </div>
       </div>
-    </Layout>
+    </StandardLayout>
   ) : (
     <Loading />
   );

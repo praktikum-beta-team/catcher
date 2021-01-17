@@ -6,4 +6,3 @@ export * from "./Modal";
 export * from "./Avatar";
 export * from "../Header";
 export * from "./Loading";
-export * from "../Layout";

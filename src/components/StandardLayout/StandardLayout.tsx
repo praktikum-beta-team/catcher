@@ -2,16 +2,16 @@ import React, { FC } from "react";
 
 import { cn } from "helpers/classname";
 
-import { Header } from "../Header";
+import { Header } from "components/UI";
 
-export const b_ = cn("layout");
+const b_ = cn("standard-layout");
 
-export const Layout: FC = (props) => {
+export const StandardLayout: FC = (props) => {
   const { children } = props;
 
   return (
     <div className={b_()}>
-      <Header />
+      <Header className={b_("header")} />
       {children}
     </div>
   );

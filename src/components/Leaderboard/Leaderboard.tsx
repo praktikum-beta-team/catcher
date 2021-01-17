@@ -10,7 +10,7 @@ import { cn } from "helpers/classname";
 
 import "./Leaderboard.css";
 
-export const b_ = cn("leaderboard");
+const b_ = cn("leaderboard");
 
 export const Leaderboard: FC = () => {
   const [pending, setPending] = useState(true);
