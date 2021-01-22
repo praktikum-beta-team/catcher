@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { TEXT } from "constants/text";
-import { Button, Input, Form, useForm, FormField } from "components/UI";
+import { Button, Input, Form, useForm, Form__Field } from "components/UI";
 import { ROUTES } from "constants/routes";
 import { authOperations, authSelectors } from "store/auth";
 import type { ISignupRequest } from "services/api";
@@ -51,37 +51,37 @@ export const SignupForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} error={error}>
-      <FormField>
+      <Form__Field>
         <Input {...fieldProps("firstName")} placeholder={TEXT.SIGNUP.FIRST_NAME} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("secondName")} placeholder={TEXT.SIGNUP.SECOND_NAME} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("login")} placeholder={TEXT.SIGNUP.LOGIN} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("email")} placeholder={TEXT.SIGNUP.EMAIL} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("phone")} placeholder={TEXT.SIGNUP.PHONE} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("password")} type="password" placeholder={TEXT.SIGNUP.PASSWORD} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input
           {...fieldProps("passwordConfirm")}
           type="password"
           placeholder={TEXT.SIGNUP.PASSWORD_CONFIRM}
         />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Button view="action" width="max">
           {TEXT.SIGNUP.SUBMIT}
         </Button>
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Button
           view="pseudo"
           width="max"
@@ -91,7 +91,7 @@ export const SignupForm: FC = () => {
         >
           {TEXT.SIGNUP.SIGNIN}
         </Button>
-      </FormField>
+      </Form__Field>
     </Form>
   );
 };

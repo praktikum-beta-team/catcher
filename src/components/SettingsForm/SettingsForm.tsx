@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { TEXT } from "constants/text";
 import { useForm } from "components/UI/Form/useForm";
-import { Form, Input, Button, FormField } from "components/UI";
+import { Form, Input, Button, Form__Field } from "components/UI";
 import { authOperations, authSelectors } from "store/auth";
 import type { IUserRequest } from "services/api";
 import { IUser } from "types/models/user";
@@ -46,31 +46,31 @@ export const SettingsForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmit(handleSettingsFormSubmit)} error={error}>
-      <FormField>
+      <Form__Field>
         <Input {...fieldProps("firstName")} placeholder={TEXT.SETTINGS.FIRST_NAME} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("secondName")} placeholder={TEXT.SETTINGS.SECOND_NAME} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("displayName")} placeholder={TEXT.SETTINGS.DISPLAY_NAME} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("email")} placeholder={TEXT.SETTINGS.EMAIL} type="text" />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input {...fieldProps("phone")} placeholder={TEXT.SETTINGS.PHONE} type="tel" />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Button view="action" width="max">
           {TEXT.SETTINGS.SUBMIT}
         </Button>
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Button type="button" view="pseudo" width="max" container={<Link to={ROUTES.LOGOUT} />}>
           {TEXT.SETTINGS.LOGOUT}
         </Button>
-      </FormField>
+      </Form__Field>
     </Form>
   );
 };

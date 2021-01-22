@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { TEXT } from "constants/text";
-import { Form, useForm, FormField, Input, Button } from "components/UI";
+import { Form, useForm, Form__Field, Input, Button } from "components/UI";
 import { authOperations, authSelectors } from "store/auth";
 import type { ISigninRequest } from "services/api";
 import { AUTH_URL } from "constants/yandexOAuth";
@@ -32,18 +32,18 @@ export const SigninForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmit(handleSigninFormSybmit)} error={error}>
-      <FormField>
+      <Form__Field>
         <Input placeholder={TEXT.SIGNIN.LOGIN} {...fieldProps("login")} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Input placeholder={TEXT.SIGNIN.PASSWORD} type="password" {...fieldProps("password")} />
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Button view="action" width="max">
           {TEXT.SIGNIN.BUTTON_SIGNIN}
         </Button>
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Button
           view="pseudo"
           width="max"
@@ -55,8 +55,8 @@ export const SigninForm: FC = () => {
         >
           {TEXT.SIGNIN.BUTTON_SIGNIN_YANDEX}
         </Button>
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Button
           view="pseudo"
           width="max"
@@ -66,12 +66,12 @@ export const SigninForm: FC = () => {
         >
           {TEXT.SIGNIN.BUTTON_SIGNUP}
         </Button>
-      </FormField>
-      <FormField>
+      </Form__Field>
+      <Form__Field>
         <Button view="plain" width="max" type="button" container={<Link to={ROUTES.GAME} />}>
           {TEXT.SIGNIN.BUTTON_PLAY}
         </Button>
-      </FormField>
+      </Form__Field>
     </Form>
   );
 };

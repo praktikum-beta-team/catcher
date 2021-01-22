@@ -11,7 +11,7 @@ interface IFormProps {
   error: null | string;
 }
 
-const b_ = cn("form");
+export const b_ = cn("form");
 
 export const Form: FC<IFormProps & HTMLProps<HTMLFormElement>> = (props) => {
   const { error, children, className, ...restFormProps } = props;
