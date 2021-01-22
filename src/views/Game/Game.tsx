@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 
-import { StandardLayout, Game } from "components";
+import { GameLayout, Game } from "components";
 
 export const GameView: FC = () => (
-  <StandardLayout>
+  <GameLayout>
     <Game />
-  </StandardLayout>
+  </GameLayout>
 );

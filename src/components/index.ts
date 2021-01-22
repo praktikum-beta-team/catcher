@@ -9,3 +9,4 @@ export * from "./TrimBox";
 export * from "./SettingsAvatar";
 export * from "./SettingsForm";
 export * from "./StandardLayout";
+export * from "./GameLayout";
