@@ -6,7 +6,7 @@ export const defaults = {
   baseDomain: "localhost",
   port: 3001,
   apiBaseUrl: "https://ya-praktikum.tech",
-  apiBase: "/api",
+  apiBase: "/api/v2",
   publicPath: "/",
 };
 

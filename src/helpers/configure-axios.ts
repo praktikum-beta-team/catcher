@@ -1,10 +1,12 @@
 import axios from "axios";
 import type { AxiosRequestConfig } from "axios";
 
-import { baseURL } from "constants/api";
+import { settings } from "config/settings";
+
+const { apiBase } = settings;
 
 const axiosConfig: AxiosRequestConfig = {
-  baseURL,
+  baseURL: apiBase,
   withCredentials: true,
   method: "POST",
 };

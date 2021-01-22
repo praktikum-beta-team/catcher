@@ -9,7 +9,7 @@ import { yandexOAuth } from "server/middlewares/yandexOAuth";
 import { apiProxy } from "server/middlewares/apiProxy";
 import { fetchData } from "server/middlewares/fetchData";
 
-import { baseURL } from "constants/api";
+const { port, apiBase } = settings;
 
 const app = express();
 
@@ -17,7 +17,7 @@ const middlewares = [morgan("tiny"), cookieParser(), fetchData, ...ssr];
 
 app
   .use(express.static("./dist"))
-  .use(baseURL, apiProxy)
+  .use(apiBase, apiProxy)
   .get(ROUTES.OAUTH, yandexOAuth)
   .use(middlewares);
 
@@ -27,7 +27,7 @@ app
  */
 
 if (require.main === module) {
-  app.listen(settings.port, () => console.log(`✅ ${settings.port}`));
+  app.listen(port, () => console.log(`✅ ${port}`));
 }
 
 module.exports = app;
