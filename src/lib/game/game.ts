@@ -8,6 +8,7 @@ import { Pointer } from "./pointer";
 import { Crash, Loss } from "./screens";
 import { Backdrop } from "./backdrop";
 import { CollectibleFactory } from "./objects/collectible-factory";
+import { Events, GameEvent } from "./events";
 
 export class Game {
   ctx;
@@ -42,9 +43,9 @@ export class Game {
 
   private collectibleFactory;
 
-  private onResult;
+  events;
 
-  constructor(ctx: CanvasRenderingContext2D, onResult?: (score: number) => void) {
+  constructor(ctx: CanvasRenderingContext2D) {
     ctx.canvas.height = CANVAS_HEIGHT;
     ctx.canvas.width = CANVAS_WIDTH;
 
@@ -60,16 +61,13 @@ export class Game {
     this.crash = new Crash(this.ctx);
     this.backdrop = new Backdrop(this.ctx);
     this.collectibleFactory = new CollectibleFactory();
-
-    this.onResult = onResult;
+    this.events = new Events();
   }
 
   load = async () => {
     const { bucket, backdrop, collectibleFactory } = this;
 
     await Promise.all([backdrop.load(), bucket.load(), collectibleFactory.load()]);
-
-    console.log("ready");
   };
 
   start = () => {
@@ -107,17 +105,15 @@ export class Game {
       loop,
       tickLength,
       lives,
-      onResult,
       score,
+      events,
     } = this;
 
     if (!lives) {
       keyboard.on(KEYS.SPASEBAR, restart);
       enqueue(loss.draw);
 
-      if (onResult) {
-        onResult(score);
-      }
+      events.emit(GameEvent.GameOver, score);
 
       return;
     }

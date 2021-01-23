@@ -1,46 +1,48 @@
-import React, { FC, useCallback, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 
-import { Game as _Game } from "lib/game";
+import { Game as _Game, GameEvent } from "lib/game";
+import { api } from "services/api";
+import { getUser } from "store/auth/selectors";
 import { cn } from "helpers/classname";
 
 import "./Game.css";
-import { api } from "services/api";
-import { useSelector } from "react-redux";
-import { getUser } from "store/auth/selectors";
 
 const b_ = cn("game");
 
+const addUserToLeaderboard = (name: string) => (score: number) => {
+  api.addUserToLeaderboard({
+    data: {
+      data: {
+        name,
+        score,
+      },
+      ratingFieldName: "score",
+    },
+  });
+};
+
 export const Game: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
   const user = useSelector(getUser);
-
-  const addToLeaderboard = useCallback(() => {
-    if (user) {
-      const { firstName, displayName } = user;
-
-      return (score: number) => {
-        api.addUserToLeaderboard({
-          data: {
-            data: {
-              name: displayName ?? firstName,
-              score,
-            },
-            ratingFieldName: "score",
-          },
-        });
-      };
-    }
-
-    return undefined;
-  }, [user]);
 
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d");
 
     if (ctx) {
-      const game = new _Game(ctx, addToLeaderboard());
-      const { load, start, destroy } = game;
+      const game = new _Game(ctx);
+      const {
+        load,
+        start,
+        destroy,
+        events: { on },
+      } = game;
+
+      if (user) {
+        const { firstName, displayName } = user;
+
+        on(GameEvent.GameOver, addUserToLeaderboard(displayName ?? firstName));
+      }
 
       load().then(start);
 
@@ -48,7 +50,7 @@ export const Game: FC = () => {
     }
 
     return undefined;
-  }, [addToLeaderboard]);
+  }, [user]);
 
   return <canvas ref={canvasRef} className={b_()} />;
 };
