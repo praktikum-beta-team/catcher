@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-import { authSelectors } from "store/auth";
+import { getUser } from "store/auth/selectors";
 import { cn } from "helpers/classname";
 import { SigninForm } from "components/SigninForm";
 import { Modal } from "components/UI";
@@ -15,8 +15,8 @@ import * as PromoImage from "./Signin__PromoImage.svg";
 const b_ = cn("signin");
 
 export const Signin: FC = () => {
-  const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
-  return isAuthenticated ? (
+  const user = useSelector(getUser);
+  return user ? (
     <Redirect to={ROUTES.GAME} />
   ) : (
     <div className={b_()}>

@@ -6,7 +6,7 @@ import { TEXT } from "constants/text";
 import { cn } from "helpers/classname";
 import { Modal } from "components/UI";
 import { SignupForm } from "components/SignupForm";
-import { authSelectors } from "store/auth";
+import { getUser } from "store/auth/selectors";
 
 import "./Signup.css";
 import { ROUTES } from "constants/routes";
@@ -14,9 +14,9 @@ import { ROUTES } from "constants/routes";
 const b_ = cn("signup");
 
 export const Signup: FC = () => {
-  const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
+  const user = useSelector(getUser);
 
-  return isAuthenticated ? (
+  return user ? (
     <Redirect to={ROUTES.GAME} />
   ) : (
     <div className={b_()}>
