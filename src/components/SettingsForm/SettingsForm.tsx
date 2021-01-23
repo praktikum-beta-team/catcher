@@ -6,15 +6,11 @@ import { useForm } from "components/UI/Form/useForm";
 import { Form, Input, Button, Form__Field } from "components/UI";
 import { authOperations, authSelectors } from "store/auth";
 import type { IUserRequest } from "services/api";
-import { IUser } from "types/models/user";
 import { Link } from "react-router-dom";
 import { ROUTES } from "constants/routes";
+import { defaults } from "lodash/fp";
 
-type UserSettings = Required<
-  Pick<IUser, "firstName" | "secondName" | "displayName" | "login" | "email" | "phone">
->;
-
-const defaultValues: UserSettings = {
+const defaultValues = {
   firstName: "",
   secondName: "",
   displayName: "",
@@ -24,22 +20,26 @@ const defaultValues: UserSettings = {
 };
 
 export const SettingsForm: FC = () => {
-  const settings = useSelector(authSelectors.getUserSettings);
-  const [handleSubmit, fieldProps] = useForm({ ...defaultValues, ...settings });
+  const userSettings = useSelector(authSelectors.getUserSettings);
+
+  const [handleSubmit, fieldProps] = useForm(defaults(defaultValues, userSettings));
   const error = useSelector(authSelectors.getError);
   const dispatch = useDispatch();
 
   const handleSettingsFormSubmit = useCallback(
-    (values: UserSettings) => {
-      const data: IUserRequest = {
-        first_name: values.firstName,
-        second_name: values.secondName,
-        display_name: values.displayName,
-        login: values.login,
-        email: values.email,
-        phone: values.phone,
+    (values: typeof defaultValues) => {
+      const { firstName, secondName, displayName, login, email, phone } = values;
+
+      const preparedData: IUserRequest = {
+        first_name: firstName,
+        second_name: secondName,
+        display_name: displayName,
+        login,
+        email,
+        phone,
       };
-      dispatch(authOperations.changeUserDataRequest(data));
+
+      dispatch(authOperations.changeUserDataRequest(preparedData));
     },
     [dispatch]
   );

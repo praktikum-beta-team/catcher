@@ -2,6 +2,11 @@ import { createSelector } from "@reduxjs/toolkit";
 import { IUser } from "types/models/user";
 import type { IRootState } from "store";
 
+type UserSettings = Pick<
+  IUser,
+  "firstName" | "secondName" | "displayName" | "login" | "email" | "phone"
+>;
+
 export const getIsAuthenticated = (state: IRootState) => state.auth.isAuthenticated;
 export const getAuthType = (state: IRootState) => state.auth.type;
 export const getError = (state: IRootState) => state.auth.error;
@@ -12,10 +17,9 @@ export const getAvatar = (size: "s" | "m" | "xl") =>
     const avatar = user?.avatar;
     return `${avatar?.base || ""}${avatar?.[size] || ""}`;
   });
-
 export const getUserSettings = createSelector(getUser, (user) =>
   user
-    ? <IUser>{
+    ? <UserSettings>{
         firstName: user?.firstName,
         secondName: user?.secondName,
         displayName: user?.displayName,
