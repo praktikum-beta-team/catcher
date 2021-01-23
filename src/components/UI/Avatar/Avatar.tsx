@@ -4,7 +4,7 @@ import { cn } from "helpers/classname";
 
 import "./Avatar.css";
 
-const DEFAULT_SRC = "https://api.adorable.io/avatars/220/abott@adorable.png"; // В дальнейшем заменим на собственное изображение
+import defaultSrc from "./assets/default.jpg";
 
 interface IAvatarProps {
   /**
@@ -32,7 +32,7 @@ export const Avatar: FC<IAvatarProps & HTMLAttributes<HTMLDivElement>> = (props)
       role: "img",
       className: b_({ size }, [className]),
       style: {
-        backgroundImage: `url(${src ?? DEFAULT_SRC})`,
+        backgroundImage: `url(${src || defaultSrc})`,
       },
       ...restAvatarProps,
     },
