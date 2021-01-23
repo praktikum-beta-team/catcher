@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
-import { Game as _Game, GameEvent } from "lib/game";
+import { Game, GameEvent } from "lib/game";
 import { api } from "services/api";
 import { getUser } from "store/auth/selectors";
 import { cn } from "helpers/classname";
 
-import "./Game.css";
+import "./GameContainer.css";
 
 const b_ = cn("game");
 
@@ -22,7 +22,7 @@ const addUserToLeaderboard = (name: string) => (score: number) => {
   });
 };
 
-export const Game: FC = () => {
+export const GameContainer: FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const user = useSelector(getUser);
 
@@ -30,7 +30,7 @@ export const Game: FC = () => {
     const ctx = canvasRef.current?.getContext("2d");
 
     if (ctx) {
-      const game = new _Game(ctx);
+      const game = new Game(ctx);
       const {
         load,
         start,
@@ -39,9 +39,7 @@ export const Game: FC = () => {
       } = game;
 
       if (user) {
-        const { firstName, displayName } = user;
-
-        on(GameEvent.GameOver, addUserToLeaderboard(displayName ?? firstName));
+        on(GameEvent.GameOver, addUserToLeaderboard(user.displayName));
       }
 
       load().then(start);

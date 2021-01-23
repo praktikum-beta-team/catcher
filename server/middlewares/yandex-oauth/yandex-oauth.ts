@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 
-import { getPasportInfo, getToken } from "services/yandexOAuth";
+import { getPasportInfo, getToken } from "services/yandex-oauth";
 
 import { IUser } from "types/models/user";
 import { IAuthSliceState } from "store/auth";

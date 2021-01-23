@@ -5,9 +5,9 @@ import cookieParser from "cookie-parser";
 import { settings } from "config/settings";
 import { ROUTES } from "constants/routes";
 import ssr from "server/middlewares/ssr";
-import { yandexOAuth } from "server/middlewares/yandexOAuth";
-import { apiProxy } from "server/middlewares/apiProxy";
-import { fetchData } from "server/middlewares/fetchData";
+import { yandexOAuth } from "server/middlewares/yandex-oauth";
+import { apiProxy } from "server/middlewares/api-proxy";
+import { fetchData } from "server/middlewares/fetch-data";
 
 const { port, apiBase } = settings;
 

@@ -3,7 +3,7 @@ export * from "./ErrorBoundary";
 export * from "./Logout";
 export * from "./OAuth";
 export * from "./Leaderboard";
-export * from "./Game";
+export * from "./GameContainer";
 export * from "./Nav";
 export * from "./TrimBox";
 export * from "./SettingsAvatar";

@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 
-import { GameLayout, Game } from "components";
+import { GameLayout, GameContainer } from "components";
 
 export const GameView: FC = () => (
   <GameLayout>
-    <Game />
+    <GameContainer />
   </GameLayout>
 );

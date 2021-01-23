@@ -2,9 +2,9 @@
 
 import { environment } from "config/vars";
 
-import { handleRender } from "./handleRender";
+import { handleRender } from "./render";
 
 export default [
-  ...(environment === "development" ? require("./devMiddlewares") : []),
+  ...(environment === "development" ? require("./dev-middlewares") : []),
   handleRender,
 ];
