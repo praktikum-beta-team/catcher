@@ -29,7 +29,6 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
         };
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: true,
-          type: "API",
           user,
         };
         next();
@@ -43,7 +42,6 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
 
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: false,
-          type: null,
         };
 
         next();

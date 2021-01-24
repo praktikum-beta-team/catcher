@@ -14,7 +14,7 @@ const {
   changeUserDataSuccess,
   changeUserDataFailure,
   clearError,
-  setYaToken,
+  getYandexOAuthTokenSuccess,
 } = actions;
 
 const fetchUserDataRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
@@ -36,13 +36,13 @@ const signupRequest = (data: ISignupRequest): ThunkAction<void, unknown, null, A
   api
     .signup({ data })
     .then(() => {
-      dispatch(actions.authSuccess("API"));
+      dispatch(authSuccess());
       dispatch(fetchUserDataRequest());
     })
     .catch(({ message, response }) => {
       const errorMessage = response ? response.data.reason : message;
 
-      dispatch(actions.authFailure(errorMessage));
+      dispatch(authFailure(errorMessage));
     });
 };
 
@@ -52,7 +52,7 @@ const signinRequest = (data: ISigninRequest): ThunkAction<void, unknown, null, A
   api
     .signin({ data })
     .then(() => {
-      dispatch(authSuccess("API"));
+      dispatch(authSuccess());
       dispatch(fetchUserDataRequest());
     })
     .catch(({ message, response }) => {
@@ -122,6 +122,6 @@ export {
   changeUserDataSuccess,
   changeUserDataFailure,
   clearError,
-  setYaToken,
+  getYandexOAuthTokenSuccess,
   changeUserAvatarRequest,
 };

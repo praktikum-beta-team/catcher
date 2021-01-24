@@ -1,6 +1,7 @@
 import qs from "qs";
 import axios from "helpers/configure-axios";
 import type { IRequestConfig } from "helpers/configure-axios";
+import type { AxiosPromise } from "axios";
 
 import { yandexOAuthSettings } from "config/settings";
 
@@ -19,10 +20,11 @@ export const getToken = (code: string) => {
       client_secret: clientSecret,
     },
   };
+
   return axios("/token", { ...config, data: qs.stringify(config.data) });
 };
 
-export const getPasportInfo = (token: string) => {
+export const fetchUserData = (token: string) => {
   const config: IRequestConfig<IYandexPasportRequest> = {
     baseURL: "https://login.yandex.ru",
     data: {
@@ -33,5 +35,5 @@ export const getPasportInfo = (token: string) => {
     },
   };
 
-  return axios.get<IYandexPasportResponse>("/info", config);
+  return axios.get<IYandexPasportResponse & { yandexOAuthToken: string }>("/info", config);
 };

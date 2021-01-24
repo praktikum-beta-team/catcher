@@ -8,9 +8,8 @@ type UserSettings = Pick<
 >;
 
 export const getIsAuthenticated = (state: IRootState) => state.auth.isAuthenticated;
-export const getAuthType = (state: IRootState) => state.auth.type;
 export const getError = (state: IRootState) => state.auth.error;
-export const getToken = (state: IRootState) => state.auth.yaToken;
+export const getYabdexOAuthToken = (state: IRootState) => state.auth.yandexOAuthToken;
 export const getUser = (state: IRootState) => state.auth.user;
 export const getAvatar = (size: "s" | "m" | "xl") =>
   createSelector(getUser, (user) => {

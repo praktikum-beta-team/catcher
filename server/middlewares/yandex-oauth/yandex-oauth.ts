@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 
-import { getPasportInfo, getToken } from "services/yandex-oauth";
+import { fetchUserData, getToken } from "services/yandex-oauth";
 
 import { IUser } from "types/models/user";
 import { IAuthSliceState } from "store/auth";
@@ -14,8 +14,15 @@ export const yandexOAuth: RequestHandler = async (req, res, next) => {
     res.locals.auth.error = error_description || "Ошибка авторизации";
     next();
   } else {
-    getToken(code.toString()) /** TODO: тут можно использовать toString? */
-      .then(({ data: { access_token } }) => getPasportInfo(access_token))
+    const {
+      data: { access_token: yandexOAuthToken },
+    } = await getToken(code.toString());
+
+    /**
+     * TODO: установить куку с токеном Яндекс.OAuth
+     */
+
+    fetchUserData(yandexOAuthToken)
       .then(({ data }) => {
         const user = <IUser>{
           firstName: data.first_name,
@@ -33,7 +40,6 @@ export const yandexOAuth: RequestHandler = async (req, res, next) => {
 
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: true,
-          type: "OAUTH",
           user,
         };
       })

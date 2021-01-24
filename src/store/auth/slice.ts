@@ -4,41 +4,33 @@ import type { IUser } from "types/models/user";
 
 import type { IUserRequest, IUserResponse } from "services/api";
 
-type authType = "API" | "OAUTH";
-
 export interface IAuthSliceState {
   isAuthenticated: boolean;
-  error: null | string;
-  user: null | IUser;
-  type: null | authType;
-  yaToken: null | string;
+  error: string | null;
+  user: IUser | null;
+  yandexOAuthToken?: string;
 }
 
 export const initialState: IAuthSliceState = {
   isAuthenticated: false,
   error: null,
   user: null,
-  type: null,
-  yaToken: null,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    authSuccess: (state, { payload: type }: PayloadAction<authType>) => {
+    authSuccess: (state) => {
       state.isAuthenticated = true;
       state.error = null;
-      state.type = type;
     },
     authFailure: (state, { payload: error }: PayloadAction<string>) => {
       state.isAuthenticated = false;
-      state.type = null;
       state.error = error;
     },
     logoutSuccess: (state) => {
       state.isAuthenticated = false;
-      state.type = null;
       state.user = null;
     },
     fetchUserDataSuccess: (state, { payload }: PayloadAction<IUserResponse>) => {
@@ -63,8 +55,8 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
-    setYaToken: (state, { payload: token }: PayloadAction<string>) => {
-      state.yaToken = token;
+    getYandexOAuthTokenSuccess: (state, { payload: token }: PayloadAction<string>) => {
+      state.yandexOAuthToken = token;
     },
   },
 });
