@@ -1,6 +1,4 @@
-// prettier-ignore
-
-import { throttle } from 'lodash';
+import { throttle } from "lodash";
 
 import { TEXT } from "constants/text";
 
@@ -49,6 +47,7 @@ export class PointerLock {
       handleChangePointerLock,
       handleMouseButtonPress,
       handlePointerLockError,
+      handlePointerMove,
     } = this;
 
     ["pointerlockchange", "mozpointerlockchange", "webkitpointerlockchange"].forEach((event) => {
@@ -61,6 +60,7 @@ export class PointerLock {
 
     canvas.removeEventListener("click", requestPointerLock);
     document.addEventListener("mouseup", handleMouseButtonPress);
+    document.removeEventListener("mousemove", handlePointerMove);
   }
 
   private requestPointerLock = () => {
