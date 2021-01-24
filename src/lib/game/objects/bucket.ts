@@ -3,7 +3,7 @@ import type { IGameObject, Sprite } from "../types";
 
 import BucketSprite from "../assets/sprites/bucket.svg";
 
-const SPEED = 4;
+const SPEED = 6;
 
 export class Bucket implements IGameObject {
   private ctx;
@@ -38,15 +38,28 @@ export class Bucket implements IGameObject {
     }
   }
 
-  move(position: { direction?: "left" | "right"; dx?: number }): void {
-    const { direction, dx = 0 } = position;
+  move(movement: "left" | "right" | boolean | number = false) {
     const { ctx, width } = this;
     const { width: canvasWidth } = ctx.canvas;
-    const ddx = dx === 0 ? 1 : Math.abs(dx);
-    if ((direction === "left" || dx < 0) && this.x > 0) {
-      this.x -= ddx * SPEED;
-    } else if ((position.direction === "right" || dx > 0) && this.x < canvasWidth - width) {
-      this.x += ddx * SPEED;
+    const offset = canvasWidth - width;
+    let movementX = this.x;
+
+    switch (movement) {
+      case true:
+      case "left":
+        movementX -= SPEED;
+        break;
+      case false:
+      case "right":
+        movementX += SPEED;
+        break;
+      default:
+        movementX += movement;
     }
+
+    if (movementX > offset) movementX = offset;
+    if (movementX < 0) movementX = 0;
+
+    this.x = movementX;
   }
 }

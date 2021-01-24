@@ -4,11 +4,11 @@ import { Bucket } from "./objects";
 import type { Collectible } from "./objects";
 import { HUD } from "./hud";
 import { Keyboard, KEYS } from "./keyboard";
-import { Pointer } from "./pointer";
 import { Crash, Loss } from "./screens";
 import { Backdrop } from "./backdrop";
 import { CollectibleFactory } from "./objects/collectible-factory";
 import { Events, GameEvent } from "./events";
+import { PointerLock } from "./pointer-lock";
 
 export class Game {
   ctx;
@@ -20,8 +20,6 @@ export class Game {
   private tickLength = 1000 / FPS;
 
   private keyboard;
-
-  private pointer;
 
   score = 0;
 
@@ -43,6 +41,8 @@ export class Game {
 
   private collectibleFactory;
 
+  private pointerLock;
+
   events;
 
   constructor(ctx: CanvasRenderingContext2D) {
@@ -52,8 +52,6 @@ export class Game {
     this.ctx = ctx;
     this.keyboard = new Keyboard();
     this.keyboard.addListeners();
-    this.pointer = new Pointer(ctx.canvas);
-    this.pointer.addListeners();
     this.collectibles = [];
     this.bucket = new Bucket(this.ctx);
     this.hud = new HUD(this);
@@ -62,7 +60,20 @@ export class Game {
     this.backdrop = new Backdrop(this.ctx);
     this.collectibleFactory = new CollectibleFactory();
     this.events = new Events();
+    this.pointerLock = new PointerLock(this.ctx.canvas);
+    this.pointerLock.init();
   }
+
+  destroy = () => {
+    const { keyboard, pointerLock } = this;
+
+    if (this.requestedFrame) {
+      window.cancelAnimationFrame(this.requestedFrame);
+    }
+
+    keyboard.removeListeners();
+    pointerLock.destroy();
+  };
 
   load = async () => {
     const { bucket, backdrop, collectibleFactory } = this;
@@ -139,15 +150,19 @@ export class Game {
   };
 
   private update = () => {
-    const { numTicks, ctx, keyboard, bucket, collectibles, pointer, backdrop } = this;
+    const { numTicks, ctx, keyboard, bucket, collectibles, backdrop, pointerLock } = this;
+
     if (keyboard.keys.left) {
-      bucket.move({ direction: "left" });
+      bucket.move("left");
       backdrop.move("right");
     } else if (keyboard.keys.right) {
-      bucket.move({ direction: "right" });
+      bucket.move("right");
       backdrop.move("left");
-    } else if (pointer.events.x) {
-      bucket.move({ dx: pointer.events.x });
+    } else if (pointerLock.movementX) {
+      /**
+       * TODO: двигать задник
+       */
+      bucket.move(pointerLock.movementX);
     }
 
     collectibles.forEach(({ isOnScreen, intersectsWithObject, isDangerous, move }, index) => {
@@ -198,16 +213,5 @@ export class Game {
     collectibles.forEach((collectible) => {
       collectible.draw();
     });
-  };
-
-  destroy = () => {
-    const { keyboard, pointer } = this;
-
-    if (this.requestedFrame) {
-      window.cancelAnimationFrame(this.requestedFrame);
-    }
-
-    keyboard.removeListeners();
-    pointer.removeListeners();
   };
 }
