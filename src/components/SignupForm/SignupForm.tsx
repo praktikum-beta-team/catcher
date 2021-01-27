@@ -7,10 +7,10 @@ import { Button, Input, Form, useForm, Form__Field } from "components/UI";
 import { ROUTES } from "constants/routes";
 import { authOperations, authSelectors } from "store/auth";
 import type { ISignupRequest } from "services/api";
-import type { IUser } from "types/models/user";
+import type { IUserData } from "store/auth/slice";
 
 interface ISignupForm
-  extends Required<Pick<IUser, "firstName" | "secondName" | "login" | "email" | "phone">> {
+  extends Required<Pick<IUserData, "firstName" | "secondName" | "login" | "email" | "phone">> {
   password: string;
   passwordConfirm: string;
 }

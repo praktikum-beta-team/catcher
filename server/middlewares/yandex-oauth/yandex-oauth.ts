@@ -2,8 +2,8 @@ import { RequestHandler } from "express";
 
 import { fetchUserData, getToken } from "services/yandex-oauth";
 
-import { IUser } from "types/models/user";
-import { IAuthSliceState } from "store/auth";
+import type { IUserData } from "store/auth/slice";
+import type { IAuthSliceState } from "store/auth";
 
 export const yandexOAuth: RequestHandler = async (req, res, next) => {
   const { code, error_description } = req.query;
@@ -24,7 +24,7 @@ export const yandexOAuth: RequestHandler = async (req, res, next) => {
 
     fetchUserData(yandexOAuthToken)
       .then(({ data }) => {
-        const user = <IUser>{
+        const user = <IUserData>{
           firstName: data.first_name,
           secondName: data.last_name,
           displayName: data.real_name,

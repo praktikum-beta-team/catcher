@@ -1,11 +1,10 @@
 import { RequestHandler } from "express";
 
 import { serialize } from "server/utils/cookie";
-import { IUser } from "types/models/user";
-import { IAuthSliceState } from "store/auth";
 import { api } from "services/api";
-
 import { settings } from "config/settings";
+import type { IUserData } from "store/auth/slice";
+import type { IAuthSliceState } from "store/auth";
 
 export const fetchData: RequestHandler = ({ cookies }, res, next) => {
   if (!cookies.authCookie) {
@@ -17,7 +16,7 @@ export const fetchData: RequestHandler = ({ cookies }, res, next) => {
         headers: { Cookie: serialize(cookies) },
       })
       .then(({ data }) => {
-        const user = <IUser>{
+        const user = <IUserData>{
           id: data.id,
           firstName: data.first_name,
           secondName: data.second_name,

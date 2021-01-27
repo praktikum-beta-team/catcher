@@ -1,13 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import type { IUser } from "types/models/user";
-
 import type { IUserRequest, IUserResponse } from "services/api";
+
+export interface IUserData {
+  id: number;
+  firstName: string;
+  secondName: string;
+  displayName: string;
+  login: string;
+  email: string;
+  phone?: string;
+  avatar?: {
+    base?: string;
+    s?: string;
+    m?: string;
+    xl?: string;
+  };
+}
 
 export interface IAuthSliceState {
   isAuthenticated: boolean;
   error: string | null;
-  user: IUser | null;
+  user: IUserData | null;
   yandexOAuthToken?: string;
 }
 
@@ -34,7 +48,7 @@ const authSlice = createSlice({
       state.user = null;
     },
     fetchUserDataSuccess: (state, { payload }: PayloadAction<IUserResponse>) => {
-      const user: IUser = {
+      const user: IUserData = {
         id: payload.id,
         firstName: payload.first_name,
         secondName: payload.second_name,

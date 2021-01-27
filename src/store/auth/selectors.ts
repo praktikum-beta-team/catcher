@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { IUser } from "types/models/user";
 import type { IRootState } from "store";
+import type { IUserData } from "./slice";
 
 type UserSettings = Pick<
-  IUser,
+  IUserData,
   "firstName" | "secondName" | "displayName" | "login" | "email" | "phone"
 >;
 
