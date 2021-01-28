@@ -1,30 +1,43 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { render } from "@testing-library/react";
 
 import { ErrorBoundary } from "./ErrorBoundary";
 
-describe("ErrorBoundary", () => {
-  const Child = () => null;
+beforeAll(() => {
+  jest.spyOn(ErrorBoundary.prototype, "componentDidCatch");
+  jest.spyOn(console, "error").mockImplementation(() => {});
+});
 
-  it("выводит дочерние компоненты, если исключение не выброшено", () => {
-    const wrapper = shallow(
+afterAll(() => {
+  (console.error as jest.Mock).mockRestore();
+  (ErrorBoundary.prototype.componentDidCatch as jest.Mock).mockRestore();
+});
+
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+const BrokenComponent = ({ shouldThrow }: { shouldThrow?: boolean }) => {
+  if (shouldThrow) {
+    throw new Error();
+  } else {
+    return null;
+  }
+};
+
+describe("Error Boundary", () => {
+  it("работает", () => {
+    const { rerender } = render(
       <ErrorBoundary>
-        <Child />
+        <BrokenComponent />
       </ErrorBoundary>
     );
 
-    expect(wrapper.find(Child).exists()).toBe(true);
-  });
-
-  it("вызывает componentDidCatch, если выброшено исключение", () => {
-    const wrapper = shallow(
+    rerender(
       <ErrorBoundary>
-        <Child />
+        <BrokenComponent shouldThrow />
       </ErrorBoundary>
     );
-
-    jest.spyOn(ErrorBoundary.prototype, "componentDidCatch");
-    wrapper.find(Child).simulateError(new Error());
 
     expect(ErrorBoundary.prototype.componentDidCatch).toHaveBeenCalledTimes(1);
   });
