@@ -9,12 +9,12 @@ import { fetchData } from "server/middlewares/fetch-data";
 import { session } from "server/middlewares/session";
 import { router } from "server/router";
 
-const { port, apiBase } = settings;
+const { port } = settings;
 
 const app = express();
-const middlewares = [morgan("tiny"), cookieParser(), fetchData, ...ssr];
+const middlewares = [apiProxy, session, morgan("tiny"), cookieParser(), fetchData, ...ssr];
 
-app.use(express.static("./dist")).use(router).use(apiBase, apiProxy).use(session).use(middlewares);
+app.use(express.static("./dist")).use(router).use(middlewares);
 
 /**
  * TODO: можно попробовать на бою генерировать сертификат с помощью
