@@ -12,9 +12,19 @@ import { router } from "server/router";
 const { port } = settings;
 
 const app = express();
-const middlewares = [apiProxy, session, morgan("tiny"), cookieParser(), fetchData, ...ssr];
 
-app.use(express.static("./dist")).use(router).use(middlewares);
+// prettier-ignore
+app
+  .use(express.static("./dist"))
+  .use([
+    morgan("tiny"),
+    session,
+    router,
+    apiProxy,
+    cookieParser(),
+    fetchData,
+     ...ssr
+  ]);
 
 /**
  * TODO: можно попробовать на бою генерировать сертификат с помощью

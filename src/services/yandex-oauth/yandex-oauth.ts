@@ -1,14 +1,20 @@
 import qs from "qs";
 import axios from "helpers/configure-axios";
+import type { AxiosPromise } from "axios";
 import type { IRequestConfig } from "helpers/configure-axios";
 
 import { yandexOAuthSettings } from "config/settings";
 
-import type { IYandexPasportRequest, IYandexPasportResponse, IYandexTokenRequest } from "./types";
+import type {
+  IYandexPasportRequest,
+  IYandexPasportResponse,
+  IYandexTokenRequest,
+  IYandexTokenResponse,
+} from "./types";
 
 const { clientId, clientSecret } = yandexOAuthSettings;
 
-export const getToken = (code: string) => {
+export const getToken = (code: string): AxiosPromise<IYandexTokenResponse> => {
   const config: IRequestConfig<IYandexTokenRequest> = {
     method: "POST",
     baseURL: "https://oauth.yandex.ru",
