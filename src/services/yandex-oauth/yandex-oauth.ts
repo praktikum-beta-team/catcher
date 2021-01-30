@@ -1,7 +1,6 @@
 import qs from "qs";
 import axios from "helpers/configure-axios";
 import type { IRequestConfig } from "helpers/configure-axios";
-import type { AxiosPromise } from "axios";
 
 import { yandexOAuthSettings } from "config/settings";
 

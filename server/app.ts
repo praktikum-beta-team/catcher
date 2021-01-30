@@ -8,6 +8,7 @@ import ssr from "server/middlewares/ssr";
 import { yandexOAuth } from "server/middlewares/yandex-oauth";
 import { apiProxy } from "server/middlewares/api-proxy";
 import { fetchData } from "server/middlewares/fetch-data";
+import { session } from "server/middlewares/session";
 
 const { port, apiBase } = settings;
 
@@ -18,6 +19,7 @@ const middlewares = [morgan("tiny"), cookieParser(), fetchData, ...ssr];
 app
   .use(express.static("./dist"))
   .use(apiBase, apiProxy)
+  .use(session)
   .get(ROUTES.OAUTH, yandexOAuth)
   .use(middlewares);
 
