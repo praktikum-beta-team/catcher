@@ -5,7 +5,7 @@ import { fetchUserData, getToken } from "services/yandex-oauth";
 import type { IUserData } from "store/auth/slice";
 import type { IAuthSliceState } from "store/auth";
 
-export const yandexOAuth: RequestHandler = async (req, res, next) => {
+export const yandexOAuthController: RequestHandler = async (req, res, next) => {
   const { code, error_description } = req.query;
 
   res.locals.auth = {};

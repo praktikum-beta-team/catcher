@@ -3,25 +3,18 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import { settings } from "config/settings";
-import { ROUTES } from "constants/routes";
 import ssr from "server/middlewares/ssr";
-import { yandexOAuth } from "server/middlewares/yandex-oauth";
 import { apiProxy } from "server/middlewares/api-proxy";
 import { fetchData } from "server/middlewares/fetch-data";
 import { session } from "server/middlewares/session";
+import { router } from "server/router";
 
 const { port, apiBase } = settings;
 
 const app = express();
-
 const middlewares = [morgan("tiny"), cookieParser(), fetchData, ...ssr];
 
-app
-  .use(express.static("./dist"))
-  .use(apiBase, apiProxy)
-  .use(session)
-  .get(ROUTES.OAUTH, yandexOAuth)
-  .use(middlewares);
+app.use(express.static("./dist")).use(router).use(apiBase, apiProxy).use(session).use(middlewares);
 
 /**
  * TODO: можно попробовать на бою генерировать сертификат с помощью
