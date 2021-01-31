@@ -1,54 +1,27 @@
 import { RequestHandler } from "express";
 
-import { serialize } from "server/utils/cookie";
-import { api } from "services/api";
-import * as yandexOAuth from "services/yandex-oauth";
+import { IUserResponse } from "services/api";
 import { settings } from "config/settings";
 import type { IUserData } from "store/auth/slice";
 import type { IAuthSliceState } from "store/auth";
+import { AxiosError, AxiosResponse } from "axios";
+import axios from "helpers/configure-axios";
 
-export const fetchData: RequestHandler = ({ cookies, session: { token } }, res, next) => {
-  res.locals.auth = {};
+export const fetchData: RequestHandler = (req, res, next) => {
+  const { cookies } = req;
 
-  if (token) {
-    yandexOAuth
-      .fetchUserData(token)
-      .then(({ data }) => {
-        const user = <IUserData>{
-          firstName: data.first_name,
-          secondName: data.last_name,
-          displayName: data.real_name,
-          login: data.login,
-          email: data.default_email,
-          avatar: {
-            base: `https://avatars.yandex.net/get-yapic/${data.default_avatar_id}/islands-`,
-            s: "50",
-            m: "100",
-            xl: "200",
-          },
-        };
+  console.log(req.headers.cookie);
 
-        res.locals.auth = <IAuthSliceState>{
-          isAuthenticated: true,
-          user,
-        };
-      })
-      .catch(({ message, response, statusText }) => {
-        const errorMessage =
-          response?.data?.error_description || message || statusText || "ошибка авторизации";
-        res.locals.auth = <IAuthSliceState>{
-          isAuthenticated: false,
-          error: errorMessage,
-        };
-      })
-      .finally(next);
-  } else if (cookies.authCookie) {
-    api
-      .fetchUserData({
+  if (cookies.authCookie) {
+    axios
+      .get("/auth/user", {
         baseURL: "https://ya-praktikum.tech/api/v2",
-        headers: { Cookie: serialize(cookies) },
+        headers: {
+          Cookie: req.headers.cookie,
+        },
+        forwardSetCookieTo: res,
       })
-      .then(({ data }) => {
+      .then(({ data }: AxiosResponse<IUserResponse>) => {
         const user = <IUserData>{
           id: data.id,
           firstName: data.first_name,
@@ -63,21 +36,17 @@ export const fetchData: RequestHandler = ({ cookies, session: { token } }, res, 
           isAuthenticated: true,
           user,
         };
-        next();
       })
-      .catch(({ response }) => {
-        const setCookie = response?.headers["set-cookie"];
+      .catch(({ message, response }: AxiosError) => {
+        const error = response?.data ?? message;
 
-        if (setCookie) {
-          res.setHeader("set-cookie", setCookie);
-        }
+        console.error(error);
 
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: false,
         };
-
-        next();
-      });
+      })
+      .finally(next);
   } else {
     next();
   }

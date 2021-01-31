@@ -4,18 +4,14 @@ import { settingsEnv } from "./vars";
 
 export const defaults = {
   baseDomain: "localhost",
-  port: 3001,
+  port: 5000,
   apiBaseUrl: "https://ya-praktikum.tech",
   apiBase: "/api/v2",
   publicPath: "/",
-};
-
-export const settings: typeof defaults = _defaults(defaults, settingsEnv);
-
-export const yandexOAuthSettings = {
   /**
    * TODO: ключи нельзя хранить в репозитории
    */
-  clientId: "3bd97dc79c8a4398aecda914461a2c2a",
-  clientSecret: "caee736bc0d2469f9ce683b424293f22",
+  yandexOAuthClientId: "243f5d3b0fa04e5aa9b8ff6508db3a64", // За этим ключом не хочется каждый раз ходить в API
 };
+
+export const settings: typeof defaults = _defaults(defaults, settingsEnv);

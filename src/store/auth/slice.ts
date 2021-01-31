@@ -69,9 +69,6 @@ const authSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
-    getYandexOAuthTokenSuccess: (state, { payload: token }: PayloadAction<string>) => {
-      state.yandexOAuthToken = token;
-    },
   },
 });
 

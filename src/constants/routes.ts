@@ -6,5 +6,5 @@ export const ROUTES = {
   GAME: "/game",
   LEADERBOARD: "/leaderboard",
   NOT_FOUND: "/404",
-  OAUTH: "/oAuth",
+  OAUTH: "/oauth",
 };

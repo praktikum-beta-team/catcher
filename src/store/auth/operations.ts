@@ -14,7 +14,6 @@ const {
   changeUserDataSuccess,
   changeUserDataFailure,
   clearError,
-  getYandexOAuthTokenSuccess,
 } = actions;
 
 const fetchUserDataRequest = (): ThunkAction<void, unknown, null, Action> => (dispatch) => {
@@ -122,6 +121,5 @@ export {
   changeUserDataSuccess,
   changeUserDataFailure,
   clearError,
-  getYandexOAuthTokenSuccess,
   changeUserAvatarRequest,
 };

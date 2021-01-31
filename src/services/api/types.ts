@@ -74,3 +74,7 @@ export interface IYandexPasportResponse {
   default_email: string;
   default_avatar_id: string;
 }
+
+export interface IYandexOAuthLoginRequest {
+  code: string;
+}

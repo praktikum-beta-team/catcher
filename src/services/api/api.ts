@@ -10,6 +10,7 @@ import type {
   ILeaderboardRequest,
   ILeaderboardNewLeaderRequest,
   LeaderboardResponse,
+  IYandexOAuthLoginRequest,
 } from "./types";
 
 const signup = (config: IRequestConfig<ISignupRequest>) => axios("/auth/signup", config);
@@ -36,6 +37,13 @@ const featchLeaders = (
 const addUserToLeaderboard = (config: IRequestConfig<ILeaderboardNewLeaderRequest>) =>
   axios("/leaderboard", config);
 
+const loginWithYandexOAuth = (config: IRequestConfig<IYandexOAuthLoginRequest>) =>
+  axios("/oauth/yandex", config);
+
+/**
+ * TODO: вынести роуты в константы
+ */
+
 export const api = {
   signup,
   signin,
@@ -45,4 +53,5 @@ export const api = {
   logout,
   featchLeaders,
   addUserToLeaderboard,
+  loginWithYandexOAuth,
 };

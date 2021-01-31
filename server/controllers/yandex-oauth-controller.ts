@@ -1,21 +1,27 @@
+import { AxiosError } from "axios";
 import { RequestHandler } from "express";
 
-import { getToken } from "services/yandex-oauth";
+import { api } from "services/api";
 
-export const yandexOAuthController: RequestHandler = (req, res, next) => {
-  const { code, error_description } = req.query;
+export const yandexOAuthController: RequestHandler = (req, res) => {
+  const { code } = req.query;
 
-  if (!code) {
-    res.locals.auth.error = error_description || "Ошибка авторизации";
-    next();
-  } else {
-    getToken(code.toString())
-      .then(({ data: { access_token } }) => {
-        req.session.token = access_token;
+  if (code) {
+    api
+      .loginWithYandexOAuth({
+        baseURL: "https://ya-praktikum.tech/api/v2",
+        data: {
+          code: code.toString(),
+        },
+        forwardSetCookieTo: res,
       })
-      /**
-       * TODO: возвращать ошибку
-       */
-      .finally(next);
+      .then(() => {
+        return res.redirect("/game");
+      })
+      .catch(({ message, response }: AxiosError) => {
+        const error = response?.data ?? message;
+
+        console.error(error);
+      });
   }
 };
