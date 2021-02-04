@@ -1,0 +1,28 @@
+.settings-avatar {
+  $this: &;
+  $hover-overlay-opacity: 0.45;
+
+  &__overlay {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, $hover-overlay-opacity);
+    backdrop-filter: blur(5px) saturate(70%);
+    cursor: pointer;
+  }
+
+  &:hover $(this)__overlay {
+    display: flex;
+  }
+
+  &__overlay-text {
+    display: inline-block;
+    max-width: 120px;
+    text-align: center;
+    line-height: 1.5;
+  }
+}

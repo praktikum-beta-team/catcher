@@ -1,0 +1,12 @@
+node_modules/
+*.md
+LICENSE
+
+.git/
+.gitignore
+
+.editorconfig
+
+Dockerfile
+
+heroku.yml

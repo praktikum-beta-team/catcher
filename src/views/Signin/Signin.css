@@ -1,0 +1,28 @@
+.signin {
+  @mixin flex-centered;
+  min-height: 100vh;
+  background-color: var(--space);
+  background-image: url('../../lib/game/assets/backdrop.svg');
+  background-size: 50%;
+  backdrop-position: 0;
+  animation: backdrop-scroll 100s infinite linear;
+
+  @keyframes backdrop-scroll {
+    from {
+      background-position: 0;
+    }
+
+    to {
+      background-position: 100%;
+    }
+  }
+
+  &__layout {
+    display: flex;
+    width: 100%;
+    max-width: 720px;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"],
+      "server/*": ["server/*"],
+      "config/*": ["config/*"]
+    },
+    "outDir": "./dist/",
+    "module": "commonjs",
+    "target": "es6",
+    "declaration": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+  },
+  "exclude": ["node_modules"]
+}
