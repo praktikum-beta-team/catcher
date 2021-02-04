@@ -9,7 +9,6 @@ export const yandexOAuthController: RequestHandler = (req, res) => {
   if (code) {
     api
       .loginWithYandexOAuth({
-        baseURL: "https://ya-praktikum.tech/api/v2",
         data: {
           code: code.toString(),
         },

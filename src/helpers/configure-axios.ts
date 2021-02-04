@@ -1,11 +1,12 @@
 import axios, { AxiosResponse } from "axios";
-import type { AxiosRequestConfig } from "axios";
 import { parse } from "set-cookie-parser";
+import type { AxiosRequestConfig } from "axios";
+import type { Response } from "express";
 
 import { settings } from "config/settings";
-import { Response } from "express";
+import { isBrowser } from "helpers/is-browser";
 
-const { apiBase } = settings;
+const { apiBase, apiBaseUrl } = settings;
 
 declare module "axios" {
   export interface AxiosRequestConfig {
@@ -14,7 +15,7 @@ declare module "axios" {
 }
 
 const axiosConfig: AxiosRequestConfig = {
-  baseURL: apiBase,
+  baseURL: isBrowser ? apiBase : `${apiBaseUrl}${apiBase}`,
   withCredentials: true,
   method: "POST",
 };

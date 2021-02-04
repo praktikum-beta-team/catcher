@@ -13,7 +13,6 @@ export const fetchData: RequestHandler = (req, res, next) => {
   if (cookies.authCookie) {
     axios
       .get("/auth/user", {
-        baseURL: "https://ya-praktikum.tech/api/v2",
         headers: {
           Cookie: req.headers.cookie,
         },
