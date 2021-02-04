@@ -18,7 +18,7 @@ export const yandexOAuthController: RequestHandler = (req, res) => {
         return res.redirect("/game");
       })
       .catch(({ message, response }: AxiosError) => {
-        const error = response?.data ?? message;
+        const error = response?.data?.reason ?? message;
 
         req.log.error(error);
       });
