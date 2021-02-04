@@ -56,7 +56,7 @@ export const TEXT = {
     ERROR_POINTER_LOCK_API: "Браузер не поддерживает pointer-lock",
   },
   SERVER: {
-    SERVER_RUNNING_MESSAGE: "SSR running on port",
+    SERVER_RUNNING_MESSAGE: "SSR running on %d",
     ERROR_NO_APP_BUNDLE: "Сan't find compiled app bundle",
   },
 } as const;

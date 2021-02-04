@@ -10,8 +10,6 @@ import axios from "helpers/configure-axios";
 export const fetchData: RequestHandler = (req, res, next) => {
   const { cookies } = req;
 
-  console.log(req.headers.cookie);
-
   if (cookies.authCookie) {
     axios
       .get("/auth/user", {

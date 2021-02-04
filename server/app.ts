@@ -1,27 +1,20 @@
 import express from "express";
-import morgan from "morgan";
-import cookieParser from "cookie-parser";
 
 import { settings } from "config/settings";
-import ssr from "server/middlewares/ssr";
-import { apiProxy } from "server/middlewares/api-proxy";
-import { fetchData } from "server/middlewares/fetch-data";
+import { apiProxy, logger } from "server/middlewares";
 import { router } from "server/router";
+import { TEXT } from "constants/text";
 
 const { port } = settings;
-
 const app = express();
 
 // prettier-ignore
 app
-  .use(express.static("./dist"))
-  .use(morgan("tiny"))
-  .use(router)
   .use([
+    express.static("./dist"),
+    logger,
     apiProxy,
-    cookieParser(),
-    fetchData,
-     ...ssr
+    router,
   ])
 
 /**
@@ -30,7 +23,9 @@ app
  */
 
 if (require.main === module) {
-  app.listen(port, () => console.log(`✅ ${port}`));
+  app.listen(port, () => {
+    console.info(TEXT.SERVER.SERVER_RUNNING_MESSAGE, port);
+  });
 }
 
 module.exports = app;
