@@ -1,7 +1,8 @@
 import express from "express";
+import pino from "express-pino-logger";
 
 import { settings } from "config/settings";
-import { apiProxy, logger } from "server/middlewares";
+import { apiProxy } from "server/middlewares";
 import { router } from "server/router";
 import { TEXT } from "constants/text";
 
@@ -12,7 +13,9 @@ const app = express();
 app
   .use([
     express.static("./dist"),
-    logger,
+    pino({
+      prettyPrint: true,
+    }),
     apiProxy,
     router,
   ])

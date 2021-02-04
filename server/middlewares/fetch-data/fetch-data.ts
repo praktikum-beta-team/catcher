@@ -38,7 +38,7 @@ export const fetchData: RequestHandler = (req, res, next) => {
       .catch(({ message, response }: AxiosError) => {
         const error = response?.data ?? message;
 
-        console.error(error);
+        req.log.error(error);
 
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: false,

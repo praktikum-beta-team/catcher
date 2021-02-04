@@ -21,7 +21,7 @@ export const yandexOAuthController: RequestHandler = (req, res) => {
       .catch(({ message, response }: AxiosError) => {
         const error = response?.data ?? message;
 
-        console.error(error);
+        req.log.error(error);
       });
   }
 };
