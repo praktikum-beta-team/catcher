@@ -65,16 +65,6 @@ export interface ILeaderboardNewLeaderRequest {
   ratingFieldName: keyof ILeaderboardEntry;
 }
 
-export interface IYandexPasportResponse {
-  id: number;
-  login: string;
-  first_name: string;
-  last_name: string;
-  real_name: string;
-  default_email: string;
-  default_avatar_id: string;
-}
-
 export interface IYandexOAuthLoginRequest {
   code: string;
 }
