@@ -105,7 +105,8 @@
     "test": "jest",
     "docker:build": "docker build -t catcher .",
     "docker:run": "docker run -it --rm -e PORT=8000 -p 8000:8000/tcp catcher",
-    "ssl:dev": "cd config/ssl && openssl req -x509 -out localhost.crt -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config 'openssl.cnf'"
+    "ssl:dev": "cd config/ssl && openssl req -x509 -out localhost.crt -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config 'openssl.cnf'",
+    "update-oauth-service-id": "curl -o config/yandex-oauth-service-id.json https://ya-praktikum.tech/api/v2/oauth/yandex/service-id"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,7 @@
 const _defaults = require("lodash/fp/defaults");
 
 import { settingsEnv } from "./vars";
+import { service_id as yandexOAuthServiceId } from "./yandex-oauth-service-id.json";
 
 export const defaults = {
   baseDomain: "localhost",
@@ -8,10 +9,7 @@ export const defaults = {
   apiBaseUrl: "https://ya-praktikum.tech",
   apiBase: "/api/v2",
   publicPath: "/",
-  /**
-   * TODO: ключи нельзя хранить в репозитории
-   */
-  yandexOAuthClientId: "243f5d3b0fa04e5aa9b8ff6508db3a64", // За этим ключом не хочется каждый раз ходить в API
+  yandexOAuthServiceId,
 };
 
 export const settings: typeof defaults = _defaults(defaults, settingsEnv);
