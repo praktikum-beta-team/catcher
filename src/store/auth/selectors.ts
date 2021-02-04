@@ -7,15 +7,11 @@ type UserSettings = Pick<
   "firstName" | "secondName" | "displayName" | "login" | "email" | "phone"
 >;
 
-export const getIsAuthenticated = (state: IRootState) => state.auth.isAuthenticated;
-export const getError = (state: IRootState) => state.auth.error;
-export const getUser = (state: IRootState) => state.auth.user;
-export const getAvatar = (size: "s" | "m" | "xl") =>
-  createSelector(getUser, (user) => {
-    const avatar = user?.avatar;
-    return `${avatar?.base || ""}${avatar?.[size] || ""}`;
-  });
-export const getUserSettings = createSelector(getUser, (user) =>
+const getIsAuthenticated = (state: IRootState) => state.auth.isAuthenticated;
+const getError = (state: IRootState) => state.auth.error;
+const getUser = (state: IRootState) => state.auth.user;
+const getAvatar = createSelector(getUser, (user) => user?.avatar);
+const getUserSettings = createSelector(getUser, (user) =>
   user
     ? <UserSettings>{
         firstName: user?.firstName,
@@ -27,3 +23,5 @@ export const getUserSettings = createSelector(getUser, (user) =>
       }
     : null
 );
+
+export { getIsAuthenticated, getError, getUser, getAvatar, getUserSettings };

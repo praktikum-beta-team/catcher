@@ -20,14 +20,13 @@ export const fetchData: RequestHandler = (req, res, next) => {
       })
       .then(({ data }: AxiosResponse<IUserResponse>) => {
         const user = <IUserData>{
-          id: data.id,
           firstName: data.first_name,
           secondName: data.second_name,
           displayName: data.display_name,
           login: data.login,
           email: data.email,
           phone: data.phone,
-          avatar: data.avatar && `${settings.apiBaseUrl}/${data.avatar}`,
+          avatar: data.avatar ? `${settings.apiBaseUrl}/${data.avatar}` : null,
         };
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: true,
@@ -38,9 +37,9 @@ export const fetchData: RequestHandler = (req, res, next) => {
         const error = response?.data ?? message;
 
         req.log.error(error);
-
         res.locals.auth = <IAuthSliceState>{
           isAuthenticated: false,
+          error,
         };
       })
       .finally(next);

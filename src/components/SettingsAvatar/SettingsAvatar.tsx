@@ -13,7 +13,7 @@ const MIME_TYPES = "image/*";
 const b_ = cn("settings-avatar");
 
 export const SettingsAvatar: FC = () => {
-  const src = useSelector(authSelectors.getAvatar("xl"));
+  const src = useSelector(authSelectors.getAvatar);
   const dispatch = useDispatch();
 
   const handleChange = useCallback(

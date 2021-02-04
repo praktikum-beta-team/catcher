@@ -3,19 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { IUserRequest, IUserResponse } from "services/api";
 
 export interface IUserData {
-  id: number;
   firstName: string;
   secondName: string;
   displayName: string;
   login: string;
   email: string;
   phone?: string;
-  avatar?: {
-    base?: string;
-    s?: string;
-    m?: string;
-    xl?: string;
-  };
+  avatar?: string;
 }
 
 export interface IAuthSliceState {
@@ -49,14 +43,13 @@ const authSlice = createSlice({
     },
     fetchUserDataSuccess: (state, { payload }: PayloadAction<IUserResponse>) => {
       const user: IUserData = {
-        id: payload.id,
         firstName: payload.first_name,
         secondName: payload.second_name,
         displayName: payload.display_name,
         login: payload.login,
         email: payload.email,
         phone: payload.phone,
-        avatar: { base: payload.avatar },
+        avatar: payload.avatar,
       };
       state.user = user;
     },
