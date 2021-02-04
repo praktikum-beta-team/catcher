@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <linearGradient id="a" x1="3.18" y1="17.31" x2="16.82" y2="2.69" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e3594c"/>
+      <stop offset="1" stop-color="#c82540"/>
+    </linearGradient>
+    <linearGradient id="b" x1="33.7" y1="-13.27" x2="38.75" y2="-18.88" gradientTransform="translate(-21.55 21.9)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b21d33"/>
+      <stop offset="1" stop-color="#dc4f48"/>
+    </linearGradient>
+    <linearGradient id="c" x1="32.34" y1="-18.18" x2="35.35" y2="-17.38" gradientTransform="translate(25.3 36.93) rotate(-90)" xlink:href="#b"/>
+    <linearGradient id="d" x1="22.47" y1="-10.16" x2="27.74" y2="-16.01" gradientTransform="translate(-19.39 26.82)" xlink:href="#b"/>
+  </defs>
+  <g>
+    <circle cx="10" cy="10" r="10" style="fill: url(#a)"/>
+    <ellipse cx="14.55" cy="5.97" rx="2.51" ry="4.54" transform="translate(-0.18 11.49) rotate(-42.87)" style="fill: url(#b)"/>
+    <ellipse cx="7.5" cy="3.17" rx="2.63" ry="1.45" transform="translate(-0.58 4.18) rotate(-30)" style="fill: url(#c)"/>
+    <ellipse cx="5.57" cy="13.89" rx="2.63" ry="4.75" transform="matrix(0.84, -0.54, 0.54, 0.84, -6.65, 5.25)" style="fill: url(#d)"/>
+  </g>
+</svg>

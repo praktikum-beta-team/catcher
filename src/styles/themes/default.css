@@ -1,0 +1,15 @@
+:root {
+  --common-background-primary: #fff;
+  --common-background-secondary: #ebebeb;
+  --common-color-primary: #000;
+  --common-color-secondary: #888;
+  --common-border: #ebebeb;
+  --common-alert: #df4b41;
+
+  --action-button-background: #ffdb4d;
+  --panel-background: #f5f5f5;
+  --link-color-secondary: #a5a5a5;
+  --link-color-hover: #f00;
+
+  --space: #313247;
+}

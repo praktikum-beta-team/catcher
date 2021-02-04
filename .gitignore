@@ -16,3 +16,7 @@ dist
 
 # eslint
 .eslintcache
+
+# ssl certificates
+config/ssl/localhost.crt
+config/ssl/localhost.key

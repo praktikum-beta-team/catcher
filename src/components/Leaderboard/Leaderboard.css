@@ -1,0 +1,32 @@
+.leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+
+  /* Элементы */
+
+  &__header {
+    @mixin border-bottom;
+  }
+
+  &__cell {
+    padding: 12px 8px;
+
+    &_header {
+      text-align: left;
+      font-weight: normal;
+    }
+
+    &_score {
+      font-weight: bold;
+    }
+  }
+
+  &__action {
+    margin-top: 40px;
+  }
+
+  &__error {
+    display: block;
+    color: var(--common-alert);
+  }
+}

@@ -1,0 +1,9 @@
+.game-layout {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: auto 1fr;
+
+  &__body {
+    min-height: 0;
+  }
+}
